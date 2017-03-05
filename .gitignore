@@ -6,8 +6,7 @@ __pycache__/
 # Temporary files
 *~
 
-# Idea and DS store
-.idea
+# DS store
 .DS_store
 
 # C extensions
