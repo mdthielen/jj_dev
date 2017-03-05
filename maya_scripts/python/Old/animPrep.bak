@@ -1,0 +1,113 @@
+import os
+import re
+os.environ["MAYA_LOCATION"] = "C:\Program Files\Autodesk\Maya2015"
+
+import maya.standalone 
+maya.standalone.initialize( name = 'python' )
+import maya.cmds as mc
+
+
+
+'''PROJECT INFO'''
+proj = r'C:\Users\robert\Documents\maya\projects\jibjab\sbtv'
+sea = 'season_01'
+ep = '101_rain'
+stage = '2_production'
+#seq = input('input full seq name (eg \"sq030_reindeer\"):')
+#if seq == '': 
+seq = 'sq100_downpour'
+seqPath = os.path.join(proj,sea,ep,stage,seq)
+animDir = r'03_maya\02_animation'
+
+
+allShots = [ x for x in os.listdir(seqPath) if 'sh_' in x ]
+def getlastanim():
+	lastAnimMAs = []
+	for shot in allShots:
+		maPath = os.path.join(seqPath,shot,animDir)
+		maFiles = [f for f in os.listdir(maPath) if '.ma' in f]
+		if maFiles: 
+			lastAnimMAs.append(os.path.join(maPath,maFiles[-1]))
+	return lastAnimMAs
+lastAnimMAs = getlastanim()
+
+ma = r'C:\Users\robert\Documents\maya\projects\jibjab\sbtv\season_01\101_rain\2_production\sq100_downpour\sh_020\03_maya\02_animation\sq100_020_downpour_anim_003.ma'
+#for ma in lastAnimMAs:
+def refName( currentFile = mc.file(q=1, l=1)[0] ):
+	print( currentFile )
+    ver = '_?\d+.ma$' #version syntax, in this case, to search for '###.ma'
+    refFile = re.split( ver, currentFile)[0] #remove version suffix
+	print( refFile )
+    refFile += r'PUBLISH.ma' #add PUBLISH suffix
+    return refFile
+
+def publish():
+	refFile = refName()
+    #export all as a .ma file, overwrite if existing.
+	#mc.file( rename = refFile)
+	#mc.file( save = True , force = True)
+	print refFile
+	#mc.file( refFile, force = 1, options= "v=0;", type= "mayaAscii", pr = 1, ea = 1) 
+publish()
+'''
+currentFile = mc.file( ma, force = True, open = True )
+print currentFile
+ver = '_?\d+.ma$' #version syntax, in this case, to search for '###.ma'
+refFile = re.split( ver, currentFile)[0] #remove version suffix
+print refFile
+refFile += r'PUBLISH.ma' #add PUBLISH suffix
+print refFile
+mc.file( rename = refFile)
+mc.file( save = True , force = True)
+print(mc.file( q=1, l=1)[0])
+'''
+#pipelineTools.publish()
+	
+'''
+def assignDefaultShader(fileToOpen):
+    # Start Maya in batch mode
+    maya.standalone.initialize(name='python')
+ 
+    # Open the file with the file command
+    mc.file(fileToOpen, force=True, open=True)
+ 
+    # Get all meshes in the scene
+    meshes = mc.ls(type="mesh", long=True)
+    for mesh in meshes:
+        # Assign the default shader to the mesh by adding the mesh to the
+        # default shader set.
+        mc.sets(mesh, edit=True, forceElement='initialShadingGroup')
+ 
+    # Save the file       
+    mc.file(save=True, force=True)	
+'''	
+	
+	
+'''	
+# The extension to search for
+exten = '.ma'
+# What will be logged
+results = str()
+myFiles = [] 
+for root, dirs, files in os.walk(seqPath):
+	for name in files:
+		if '\\02_animation' in root: print( name )
+		continue
+		if name.endswith(exten):
+			# Save to results string instead of printing
+			results = '%s' % os.path.join(root, name)
+			myFiles.append(name)
+'''
+
+
+'''
+for i in myFiles:
+	print i
+
+for i in myFiles:
+	mc.file(i, force=True, open=True)
+	# Get all meshes in the scene
+	mc.polySphere( n='mySphere', sx=5, sy=5, n="Youpi")
+	# Save the file	   
+	mc.file(save=True, force=True)
+'''

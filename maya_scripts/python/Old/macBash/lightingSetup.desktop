@@ -1,0 +1,10 @@
+[Desktop Entry]
+#Exec=bash -c '/home/rshowalter/maya/scripts/storybots/python/linuxTest/print.sh;echo $0;$SHELL'
+
+#import os; print os.environ['MAYA_BIN'];$SHELL'
+Exec=/usr/autodesk/maya2015-x64/bin/mayapy -i /home/rshowalter/maya/scripts/storybots/python/lightingSetup.py
+#Icon=/home/alex/Pictures/icon.png
+Terminal=true
+Type=Application
+Categories=Utility;Application;
+Name=lightingSetup

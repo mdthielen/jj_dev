@@ -1,0 +1,29 @@
+EPISODE 101 rain
+
+SEQ 090 tower
+SEQ 100 downpour
+
+EPISODE 102 fries
+
+SEQ 035 flies
+SEQ 060 song
+SEQ 090 spa
+
+EPISODE 103 bluesky
+
+SEQ 040 artist
+
+EPISODE 104 night
+
+
+EPISODE 105 teeth
+
+SEQ 070 brushy
+SEQ 080 showdown
+
+EPISODE 106 airplane
+
+SEQ 020 hollywood
+SEQ 030 smaug
+SEQ 050 birds
+SEQ 150 promoimages
