@@ -7,25 +7,24 @@
     
     Description:
         This is the core script for working within the storybot, aka "SBTV" project.
-		
-		It's purpose is retrieving sequence and shot data based on the project hierarchy.
-		
-		Many artist have been involved in this organic, and loosely regulated pipeline.
-		This script and others using it attempt to organize and make sense of the 
-		existing pipeline and, hopefully, iron out some inconsistencies.
+
+        It's purpose is retrieving sequence and shot data based on the project hierarchy.
+
+        Many artist have been involved in this organic, and loosely regulated pipeline.
+        This script and others using it attempt to organize and make sense of the
+        existing pipeline and, hopefully, iron out some inconsistencies.
     
     Example usage:
         import sbtvInfo
-		seqInfo = sbtvInfo.SeqInfo('101', '100')
-		seqInfo.allShots
-		#Returns:
-		#['sh_010', 'sh_020', 'sh_030', 'sh_040', 'sh_050', 'sh_060', 'sh_070', 'sh_080', 'sh_090', 'sh_100', 'sh_110', 'sh_120', 'sh_130', 'sh_140', 'sh_150']
-		
+        seqInfo = sbtvInfo.SeqInfo('101', '100')
+        seqInfo.allShots
+        #Returns:
+        #['sh_010', 'sh_020', 'sh_030', 'sh_040', 'sh_050', 'sh_060', 'sh_070', 'sh_080', 'sh_090', 'sh_100', 'sh_110', 'sh_120', 'sh_130', 'sh_140', 'sh_150']
+
 """
 
 
 import os
-import re
 import sys
 
 if sys.platform == 'darwin':
@@ -36,59 +35,60 @@ elif sys.platform == 'linux2':
     keyFile = r'/home/rshowalter/maya/scripts/storybots/python/sbtvKey.txt'
 else:
     print('couldn\'t recognize operating system')
-    import sys; sys.exit()
+    import sys
+    sys.exit()
 stage = '2_production'
 season = 'season_01'
 
 
 def readContents( keyFile ):
 
-		text = open(keyFile, 'r')	
-		fileContents = text.read().splitlines()	
-		text.close()
-		
-		return fileContents
-		
+        text = open(keyFile, 'r')
+        fileContents = text.read().splitlines()
+        text.close()
+
+        return fileContents
+
 
 def getEp( ep, fileContents):
 
-	for line in fileContents:
-	
-		if 'EPISODE' in line:
-		
-			if ep == line.split(' ')[1]:			
+    for line in fileContents:
 
-				epName = line.split(' ')[2]				
-				epID = '_'.join( [ep, epName] )
-				
-				return epID, epName
-				
-	raise NameError('Episode number not found, check key:\n%s'%keyFile)
-	
+        if 'EPISODE' in line:
+
+            if ep == line.split(' ')[1]:
+
+                epName = line.split(' ')[2]
+                epID = '_'.join( [ep, epName] )
+
+                return epID, epName
+
+    raise NameError('Episode number not found, check key:\n%s'%keyFile)
+
 
 def getSeq( seq, fileContents):
 
-	for line in fileContents:	
-	
-		if 'SEQ' in line:
-		
-			if seq == line.split(' ')[1]:	
-			
-				seqName = line.split(' ')[2]
-				seqID = '_'.join( [seq, seqName] )
-				
-				return seqID, seqName
-				
-	raise NameError('Seqence number not found, check input or update keyfile:\n    %s'%keyFile)
+    for line in fileContents:
+
+        if 'SEQ' in line:
+
+            if seq == line.split(' ')[1]:
+
+                seqName = line.split(' ')[2]
+                seqID = '_'.join( [seq, seqName] )
+
+                return seqID, seqName
+
+    raise NameError('Seqence number not found, check input or update keyfile:\n    %s'%keyFile)
 
 class Info():
-	
+
     def __init__(self, ep, seq, shot=''):
         self.ep = ep
         self.seq = seq
         self.shot = shot
-		
-		
+
+
         #import socket
         #systemCheck = socket.gethostname()
         
@@ -98,12 +98,12 @@ class Info():
             project = r'C:\Users\rshowalter\Documents\maya\projects\SBTV'
         elif sys.platform == 'linux2':
             project = r'/home/rshowalter/maya/projects/SBTV'
-		#expand this later for mac machines, though many other changes may be needed
+        #expand this later for mac machines, though many other changes may be needed
         else:
-			raise EnvironmentError('This system was not recognised')
-		
+            raise EnvironmentError('This system was not recognised')
+
         fileContents = readContents(keyFile)
-		
+
         self.epID, self.epName = getEp( self.ep, fileContents )
         self.seqID, self.seqName = getSeq( self.seq, fileContents )
         self.sequence = 'sq' + self.seqID		
@@ -114,8 +114,8 @@ class Info():
             self.allShots = [ x for x in os.listdir(self.seqPath) if unicode(x).isnumeric()]
         else:
             pass
-		
-		
+
+
 
     def getLastAnim(self):
         
@@ -129,7 +129,7 @@ class Info():
         '''    
         
         lastAnimMAs = []
-		
+
         for shot in self.allShots:
             shotDir = os.path.join(self.seqPath, shot )
             for x in os.listdir(shotDir):
@@ -140,23 +140,23 @@ class Info():
                     NameError('maya directory not found in...%s\n    '%shotDir)
   
             for dept in os.listdir(shotDirMaya):
-            	if 'animation' in dept: 
-            		animDir = os.path.join(shotDirMaya, dept)
-            	else: NameError('animation directory not found in...%s\n    '%shotDirMaya)
+                if 'animation' in dept:
+                    animDir = os.path.join(shotDirMaya, dept)
+                else: NameError('animation directory not found in...%s\n    '%shotDirMaya)
             print ('animDir: \n\t{}'.format(animDir))
             maPath = os.path.join(shotDirMaya,animDir)
             maFiles = [f for f in os.listdir(maPath) if '.ma' in f if not 'PUBLISH' in f]
             maFiles.sort()
-			
+
             if maFiles: 
                 lastAnimMAs.append(os.path.join(maPath,maFiles[-1]))
-				
+
         return lastAnimMAs#, shotDirMaya
 
-#SeqInfo('season_01', '101_rain', 'sq100_downpour')
+# SeqInfo('season_01', '101_rain', 'sq100_downpour')
 '''
 class ShotInfo():
-	pass
+    pass
 
 if __name__ == '__main__':
     print 'name = main'
