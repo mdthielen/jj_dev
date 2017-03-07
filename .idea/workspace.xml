@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="60660b26-05be-49d9-832a-fac41afd6d86" name="Default" comment="update">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jj_dev.iml" afterPath="$PROJECT_DIR$/.idea/jj_dev.iml" />
+    <list default="true" id="60660b26-05be-49d9-832a-fac41afd6d86" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_scripts/python/maya_initialize.py" afterPath="$PROJECT_DIR$/maya_scripts/python/maya_initialize.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_shelves/lighting/shelf_lightingTools.mel" afterPath="$PROJECT_DIR$/maya_shelves/lighting/shelf_lightingTools.mel" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shell/maya_initialize.command" afterPath="$PROJECT_DIR$/shell/maya_initialize.command" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,11 +31,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="maya_initialize.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="maya_initialize.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/maya_scripts/python/maya_initialize.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="990">
-              <caret line="66" column="12" lean-forward="false" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="12" />
+              <caret line="66" column="0" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="maya_initialize.command" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/shell/maya_initialize.command">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="7" lean-forward="false" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -96,6 +104,7 @@
         <option value="$USER_HOME$/Library/Preferences/Autodesk/maya/2017/Maya.env" />
         <option value="$USER_HOME$/Library/Preferences/Autodesk/maya/2017/prefs/pluginPrefs.mel" />
         <option value="$PROJECT_DIR$/maya_scripts/python/maya_initialize.py" />
+        <option value="$PROJECT_DIR$/shell/maya_initialize.command" />
       </list>
     </option>
   </component>
@@ -173,6 +182,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="shell" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jj_dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jj_dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maya_shelves" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lighting" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -509,7 +536,14 @@
       <option name="project" value="LOCAL" />
       <updated>1488857340103</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="creates userSetup.py if not exists&#10;edits userSetup.py&#10;creates Maya.env if not exists&#10;edits Maya.env with sbtvtools locations and keeps existing paths&#10;edits userPlugins.mel for vray plugin&#10;currently set to dev on which points to the jj_dev folder">
+      <created>1488925528695</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1488925528695</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
@@ -558,7 +592,8 @@
     <MESSAGE value="update shell command to run maya_initialize" />
     <MESSAGE value="header with docstring&#10;footer with credits" />
     <MESSAGE value="add header and footer&#10;fix plugin add VRay&#10;start Maya.env block" />
-    <option name="LAST_COMMIT_MESSAGE" value="add header and footer&#10;fix plugin add VRay&#10;start Maya.env block" />
+    <MESSAGE value="creates userSetup.py if not exists&#10;edits userSetup.py&#10;creates Maya.env if not exists&#10;edits Maya.env with sbtvtools locations and keeps existing paths&#10;edits userPlugins.mel for vray plugin&#10;currently set to dev on which points to the jj_dev folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="creates userSetup.py if not exists&#10;edits userSetup.py&#10;creates Maya.env if not exists&#10;edits Maya.env with sbtvtools locations and keeps existing paths&#10;edits userPlugins.mel for vray plugin&#10;currently set to dev on which points to the jj_dev folder" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -673,13 +708,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shell/maya_initialize.sh" />
-    <entry file="file://$PROJECT_DIR$/shell/maya_initialize.command">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/maya_scripts/python/sbtvKeyMaker.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
@@ -744,10 +772,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/maya_shelves/lighting/shelf_lightingTools.mel">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/maya_scripts/python/maya_initialize.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="990">
-          <caret line="66" column="12" lean-forward="false" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="12" />
+          <caret line="66" column="0" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shell/maya_initialize.command">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="7" lean-forward="false" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
           <folding />
         </state>
       </provider>
