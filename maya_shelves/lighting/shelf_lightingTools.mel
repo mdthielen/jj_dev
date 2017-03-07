@@ -14,6 +14,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Run animCleanup script" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "animCleanup" 
         -labelOffset 0
@@ -45,6 +46,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "publish animation or lighting file" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "Publish" 
         -labelOffset 0
@@ -76,6 +78,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "replace character rigs in the publish file with vray rigs" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "replace rigs" 
         -labelOffset 0
@@ -107,6 +110,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "create light elements for selectedl lights (select locators, not shapes)" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "Light elements" 
         -labelOffset 0
@@ -138,6 +142,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "add vray open subDiv to selection" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "addVrayOSD" 
         -labelOffset 0
@@ -169,6 +174,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "select alll osd" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "select openSubDiv" 
         -labelOffset 0
@@ -200,6 +206,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "toggle vray open subdiv on or off" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "toggle osd" 
         -labelOffset 0
@@ -231,6 +238,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Edit the references for the current scene" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "Reference Editor" 
         -labelOffset 0
@@ -262,6 +270,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Create a V-Ray Rect Light" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "V-Ray Rect Light" 
         -labelOffset 0
@@ -293,6 +302,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Apply vray object properties node to selection" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "Vray object properties" 
         -labelOffset 0
@@ -324,6 +334,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Edit the attributes of the selected object(s)" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "Attribute Spread Sheet" 
         -labelOffset 0
@@ -355,6 +366,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Edit set membership" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "Sets" 
         -labelOffset 0
@@ -386,6 +398,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Set render test resolution to 100%" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "Render Settings (1920x1080)" 
         -labelOffset 0
@@ -417,6 +430,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Set render test resolution to 50%" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "50% Settings (960x540)" 
         -labelOffset 0
@@ -448,6 +462,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Set render test resolution to 25%" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "25% Settings (480x270)" 
         -labelOffset 0
@@ -479,6 +494,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Show VRay Frame Buffer" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "vrayShowVFB();" 
         -labelOffset 0
@@ -510,6 +526,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Light Link Export (selected)" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "lightingSync export" 
         -labelOffset 0
@@ -541,6 +558,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Light Link Apply (selected)" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "lightingSync apply" 
         -labelOffset 0
@@ -572,6 +590,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Build Eye Lights" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "build eye lights" 
         -labelOffset 0
@@ -603,6 +622,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "light-link object-centric" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "Light-Centric" 
         -labelOffset 0
@@ -634,6 +654,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Light-links object centric" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "Object-Centric" 
         -labelOffset 0
@@ -665,6 +686,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Make light links between selected lights and selected objects" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "Make Light Links" 
         -labelOffset 0
@@ -696,6 +718,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Break light links between selected lights and selected objects" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "Break Light Links" 
         -labelOffset 0
@@ -727,6 +750,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Make shadow links between selected lights and selected objects" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "Make Shadow Links" 
         -labelOffset 0
@@ -758,6 +782,7 @@ global proc shelf_lightingTools () {
         -preventOverride 0
         -annotation "Break shadow links between selected lights and selected objects" 
         -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
         -label "Break Shadow Links" 
         -labelOffset 0
