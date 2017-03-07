@@ -33,7 +33,7 @@ def main():
         lines.append('\n')
         for seq in sorted(os.listdir(os.path.join(episode_folder, episode, stage))):
             if seq.startswith('sq'):
-                lines.append('SEQ ' + seq.split('_')[0][2:] + ' ' + seq.split('_')[1] + '\n')
+                lines.append('SEQ ' + seq.split('_')[0][2:] + ' ' + seq.split('_', 1)[1] + '\n')
         lines.append('\n\n')
 
     f = open(key_file, 'w')

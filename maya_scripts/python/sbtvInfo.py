@@ -28,15 +28,15 @@ import os
 
 
 def main():
-    dev = 0
+    dev = 1
     if dev:
-        seq_info = Info('101', '100')
-        anim_publish_files = seq_info.getLastAnim()
-        for publish in anim_publish_files:
-            print publish
+        seq_info = Info('200', '030')
+        anim_latest_files = seq_info.getLastAnim()
+        for anim_latest in anim_latest_files:
+            print anim_latest
 
-        for shot in seq_info.allShots:
-            print shot
+        # for shot in seq_info.allShots:
+        #    print shot
 
 def readContents( keyFile ):
 
@@ -56,13 +56,17 @@ def getEp( ep, fileContents):
                 return epID, epName
     raise NameError('Episode number not found, check key:\n%s'%keyFile)
 
-def getSeq( seq, fileContents):
+def getSeq( ep, seq, fileContents):
+    seq_found = False
     for line in fileContents:
-        if 'SEQ' in line:
-            if seq == line.split(' ')[1]:
-                seqName = line.split(' ')[2]
-                seqID = '_'.join( [seq, seqName] )
-                return seqID, seqName
+        if ep in line:
+            seq_found = True
+        elif seq_found:
+            if 'SEQ' in line:
+                if seq == line.split(' ')[1]:
+                    seqName = line.split(' ')[2]
+                    seqID = '_'.join( [seq, seqName] )
+                    return seqID, seqName
     raise NameError('Seqence number not found, check input or update keyfile:\n    %s'%keyFile)
 
 class Info():
@@ -117,14 +121,14 @@ class Info():
 
         fileContents = readContents(keyFile)
 
-        self.epID, self.epName = getEp( self.ep, fileContents )
-        self.seqID, self.seqName = getSeq( self.seq, fileContents )
+        self.epID, self.epName = getEp(self.ep, fileContents)
+        self.seqID, self.seqName = getSeq(self.ep + ' ' + self.epName, self.seq, fileContents)
         self.sequence = 'sq' + self.seqID		
-        self.seqPath = os.path.join(project_folder,self.epID,stage,self.sequence)
+        self.seqPath = os.path.join(project_folder, self.epID, stage, self.sequence)
         self.allShots = sorted([ x for x in os.listdir(self.seqPath) if 'sh_' in x])
         # added to fix shot folder naming inconsistencies
         if len(self.allShots)==0:
-            self.allShots = [ x for x in os.listdir(self.seqPath) if unicode(x).isnumeric()]
+            self.allShots = sorted([ x for x in os.listdir(self.seqPath) if unicode(x).isnumeric()])
         else:
             pass
 
@@ -141,14 +145,14 @@ class Info():
 
         for shot in self.allShots:
             shotDir = os.path.join(self.seqPath, shot )
-            for x in os.listdir(shotDir):
+            for x in sorted(os.listdir(shotDir)):
                 if 'maya' in x:
                     shotDirMaya = os.path.join( shotDir, x )
                     # print 'shotDirMaya:\n' + shotDirMaya
                 else:
                     NameError('maya directory not found in...%s\n    '%shotDir)
 
-            for dept in os.listdir(shotDirMaya):
+            for dept in sorted(os.listdir(shotDirMaya)):
                 if 'animation' in dept:
                     animDir = os.path.join(shotDirMaya, dept)
                     # print ('animDir:\n{}'.format(animDir))
@@ -157,8 +161,7 @@ class Info():
                     NameError('animation directory not found in...%s\n    '%shotDirMaya)
 
             maPath = os.path.join(shotDirMaya, animDir)
-            maFiles = [f for f in os.listdir(maPath) if '.ma' in f if not 'PUBLISH' in f]
-            maFiles.sort()
+            maFiles = sorted([f for f in os.listdir(maPath) if '.ma' in f if not 'PUBLISH' in f if not f.startswith('.') if f.startswith('sq')])
 
             if maFiles:
                 lastAnimMAs.append(os.path.join(maPath, maFiles[-1]))
