@@ -14,6 +14,7 @@ Todo:
     * setup Maya.env
     * setup pluginPrefs.mel
     * setup userSetup.py
+    * setup userPrefs.mel
 
 """
 
@@ -41,6 +42,11 @@ def main():
     replaced_usersetup_py = fixLineInFile(maya_prefs_path + 'userSetup.py', 'import maya.cmds as mc', 'import maya.cmds as mc')
     if replaced_usersetup_py:
         print('Updated userSetup.py')
+
+    # userPrefs.mel
+    replaced_userPrefs_mel = fixLineInFile(maya_prefs_path + 'prefs/userPrefs.mel', '"mayaBinary"', '"mayaAscii"', search_replace=True)
+    if replaced_userPrefs_mel:
+        print('Updated userPrefs.mel')
 
 def maya_env(filepath, dev = False):
     """Edits the Maya.env file to have the latest PYTHONPATH, MAYA_SCRIPTS_PATH, and MAYA_SHELF_PATH
@@ -180,7 +186,7 @@ def maya_env(filepath, dev = False):
         return False
 
 
-def fixLineInFile(filepath, line_keyword, newline):
+def fixLineInFile(filepath, line_keyword, newline, search_replace = False):
     """replace a line in a temporary file, then copy it over into the original file if everything goes well
     Attributes:
         filepath file to change
@@ -210,8 +216,10 @@ def fixLineInFile(filepath, line_keyword, newline):
                     lines_replaced.append(line.rstrip() + '\n')
                 elif line.startswith('#'):
                     lines_replaced.append(line.rstrip() + '\n')
-                elif line_keyword in line:
+                elif line_keyword in line and not search_replace:
                     found_plugin = True
+                elif line_keyword in line and search_replace:
+                    lines_replaced.append(line.replace(line_keyword, newline))
             if not found_plugin:
                 lines_replaced.append(newline)
                 written = True
