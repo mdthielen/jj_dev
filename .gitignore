@@ -5,6 +5,7 @@ __pycache__/
 
 # Temporary files
 *~
+.idea
 
 # DS store
 .DS_store
