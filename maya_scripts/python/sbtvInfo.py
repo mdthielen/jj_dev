@@ -28,7 +28,7 @@ import os
 
 
 def main():
-    dev = 1
+    dev = 0
     if dev:
         seq_info = Info('200', '030')
         anim_latest_files = seq_info.getLastAnim()
