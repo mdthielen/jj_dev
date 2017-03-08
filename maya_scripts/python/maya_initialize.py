@@ -34,7 +34,7 @@ def main():
         print('Added VRay plugin')
 
     # Maya.env
-    replaced_maya_env = maya_env(maya_prefs_path + maya_env_file, dev = True)
+    replaced_maya_env = maya_env(maya_prefs_path + maya_env_file, dev=True)
     if replaced_maya_env:
         print('Updated Maya.env')
 
@@ -48,7 +48,8 @@ def main():
     if replaced_userPrefs_mel:
         print('Updated userPrefs.mel')
 
-def maya_env(filepath, dev = False):
+
+def maya_env(filepath, dev=False):
     """Edits the Maya.env file to have the latest PYTHONPATH, MAYA_SCRIPTS_PATH, and MAYA_SHELF_PATH
 
     Attributes:
@@ -67,7 +68,8 @@ def maya_env(filepath, dev = False):
     # quick parameter checks
     try:
         assert os.path.exists(filepath)
-    except:
+    except IOError, ioe:  # if something bad happened.
+        print("ERROR", ioe)
         with open(filepath, 'w') as f:
             f.close()
 
@@ -121,7 +123,8 @@ def maya_env(filepath, dev = False):
                         lines_replaced.append(maya_script_path_var + maya_scripts_path + '\n')
                         maya_script_path_replaced = True
                     else:
-                        lines_replaced.append(maya_script_path_var + maya_scripts_path + ':' + maya_script_path_old + '\n')
+                        lines_replaced.append(maya_script_path_var + maya_scripts_path + ':' +
+                                              maya_script_path_old + '\n')
                         maya_script_path_replaced = True
 
                 # maya_shelf_path
@@ -140,7 +143,8 @@ def maya_env(filepath, dev = False):
                         lines_replaced.append(maya_shelf_path_var + maya_shelf_path + '\n')
                         maya_shelf_path_replaced = True
                     else:
-                        lines_replaced.append(maya_shelf_path_var + maya_shelf_path + ':' + maya_shelf_path_old.rstrip() + '\n')
+                        lines_replaced.append(maya_shelf_path_var + maya_shelf_path + ':' +
+                                              maya_shelf_path_old.rstrip() + '\n')
                         maya_shelf_path_replaced = True
 
                 # pythonpath
@@ -181,18 +185,17 @@ def maya_env(filepath, dev = False):
             if not pythonpath_replaced:
                 lines_replaced.insert(3, pythonpath_var + pythonpath + '\n')
 
-            with open(filepath, 'w') as f:
-                f.writelines(lines_replaced)
-                f.close()
+            with open(filepath, 'w') as f2:
+                f2.writelines(lines_replaced)
+                f2.close()
                 return True
 
-
     except IOError, ioe:
-        printf ("ERROR" , ioe)
+        print("ERROR", ioe)
         return False
 
 
-def fixLineInFile(filepath, line_keyword, newline, search_replace = False):
+def fixLineInFile(filepath, line_keyword, newline, search_replace=False):
     """replace a line in a temporary file, then copy it over into the original file if everything goes well
     Attributes:
         filepath file to change
@@ -203,14 +206,15 @@ def fixLineInFile(filepath, line_keyword, newline, search_replace = False):
     # quick parameter checks
     try:
         assert os.path.exists(filepath)
-    except:
+    except IOError, ioe:  # if something bad happened.
+        print("ERROR", ioe)
         with open(filepath, 'w') as f:
             f.close()
-    assert (line_keyword and str(line_keyword)) # is not empty and is a string
+    assert (line_keyword and str(line_keyword))  # is not empty and is a string
     assert (newline and str(newline))
 
     found_plugin = False
-    written  = False
+    written = False
 
     try:
         with open(filepath, 'r') as f:    # open for read/write -- alias to f
@@ -232,14 +236,13 @@ def fixLineInFile(filepath, line_keyword, newline, search_replace = False):
                 lines_replaced.append(newline)
                 written = True
             if written:
-                with open(filepath, 'w') as f:
-                    f.writelines(lines_replaced)
-                    f.close()
+                with open(filepath, 'w') as f2:
+                    f2.writelines(lines_replaced)
+                    f2.close()
                 return written
 
     except IOError, ioe:                 # if something bad happened.
-        printf ("ERROR" , ioe)
-        f.close()
+        print("ERROR", ioe)
         return False
 
     return written        # replacement happened with no errors = True
