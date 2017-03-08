@@ -28,35 +28,33 @@ import os
 
 
 def main():
-    dev = 0
+    dev = 1
     if dev:
         seq_info = Info('200', '030')
         anim_latest_files = seq_info.getLastAnim()
         for anim_latest in anim_latest_files:
             print anim_latest
 
-        # for shot in seq_info.allShots:
-        #    print shot
 
-def readContents( keyFile ):
+def readContents(keyFile):
 
         text = open(keyFile, 'r')
         fileContents = text.read().splitlines()
         text.close()
-
         return fileContents
 
 
-def getEp( ep, fileContents):
+def getEp(ep, fileContents):
     for line in fileContents:
         if 'EPISODE' in line:
             if ep == line.split(' ')[1]:
                 epName = line.split(' ')[2]
-                epID = '_'.join( [ep, epName] )
+                epID = '_'.join([ep, epName])
                 return epID, epName
-    raise NameError('Episode number not found, check key:\n%s'%keyFile)
+    raise NameError('Episode number not found, check key:\n%s' % fileContents)
 
-def getSeq( ep, seq, fileContents):
+
+def getSeq(ep, seq, fileContents):
     seq_found = False
     for line in fileContents:
         if ep in line:
@@ -65,22 +63,23 @@ def getSeq( ep, seq, fileContents):
             if 'SEQ' in line:
                 if seq == line.split(' ')[1]:
                     seqName = line.split(' ')[2]
-                    seqID = '_'.join( [seq, seqName] )
+                    seqID = '_'.join([seq, seqName])
                     return seqID, seqName
-    raise NameError('Seqence number not found, check input or update keyfile:\n    %s'%keyFile)
+    raise NameError('Seqence number not found, check input or update keyfile:\n    %s' % fileContents)
 
-class Info():
+
+class Info:
     def __init__(self, ep, seq, shot=''):
         import sys
         self.ep = ep
         self.seq = seq
         self.shot = shot
 
-        keyFile = None
-
         if sys.platform == 'darwin':
             keyFile = r'/Volumes/public/StoryBots/production/series/ask_the_storybots/03_shared_assets/01_cg/05_maya_tools/' \
                       r'jj_dev/maya_scripts/python/sbtvKey.txt'
+            if not os.path.exists(keyFile):
+                keyFile = os.path.expanduser('~/Documents/maya/scripts/JibJab/jj_dev/maya_scripts/python/sbtvKey.txt')
         elif sys.platform == 'win32':
             keyFile = r'~\Documents\maya\scripts\storybots\python\sbtvKey.txt'
         elif sys.platform == 'linux2':
@@ -92,15 +91,19 @@ class Info():
         if keyFile and os.path.exists(keyFile):
             print('Using keyfile: ' + keyFile)
         else:
-            print('Warning: missing keyfile --> sbtvKey.txt')
+            raise EnvironmentError('Warning: missing keyfile --> sbtvKey.txt')
 
-        # stage in production
-        # possible selections: 1_pre-preduction, 2_production, 3_distribution
-        # default = 2_production
+        fileContents = readContents(keyFile)
+
+        """
+        stage in production
+        possible selections: 1_pre-preduction, 2_production, 3_distribution
+        default = 2_production
+        """
         stage = '2_production'
 
         project_name = 'ask_the_storybots'
-        local_darwin_linux_folder = 'maya/projects/' + project_name
+        local_darwin_linux_folder = 'maya/projects/JibJab/' + project_name
 
         if sys.platform == 'darwin':
             public_mount = '/Volumes/public/StoryBots/production/series/' + project_name
@@ -111,6 +114,7 @@ class Info():
                 project_folder = local_mount
             else:
                 print 'No project exists'
+                sys.exit()
         elif sys.platform == 'win32':
             project_folder = os.path.join(os.path.expanduser('~\\Documents'), 'maya', 'projects', project_name)
         elif sys.platform == 'linux2':
@@ -119,38 +123,33 @@ class Info():
         else:
             raise EnvironmentError('This system was not recognised')
 
-        fileContents = readContents(keyFile)
-
         self.epID, self.epName = getEp(self.ep, fileContents)
         self.seqID, self.seqName = getSeq(self.ep + ' ' + self.epName, self.seq, fileContents)
         self.sequence = 'sq' + self.seqID		
         self.seqPath = os.path.join(project_folder, self.epID, stage, self.sequence)
-        self.allShots = sorted([ x for x in os.listdir(self.seqPath) if 'sh_' in x])
+        if not os.path.exists(self.seqPath):
+            print('Warning:  Path missing: %s' % self.seqPath)
+            sys.exit()
+        self.allShots = sorted([x for x in os.listdir(self.seqPath) if 'sh_' in x])
         # added to fix shot folder naming inconsistencies
-        if len(self.allShots)==0:
-            self.allShots = sorted([ x for x in os.listdir(self.seqPath) if unicode(x).isnumeric()])
+        if len(self.allShots) == 0:
+            self.allShots = sorted([x for x in os.listdir(self.seqPath) if unicode(x).isnumeric()])
         else:
             pass
 
     def getLastAnim(self):
 
-        '''
-        if os.name == 'posix':
-            animDir = r'03_maya/02_animation'
-        elif systemCheck == 'robert-PC':
-            animDir = r'03_maya\02_animation'
-        '''    
-        
         lastAnimMAs = []
+        animDir = None
 
         for shot in self.allShots:
-            shotDir = os.path.join(self.seqPath, shot )
+            shotDir = os.path.join(self.seqPath, shot)
             for x in sorted(os.listdir(shotDir)):
                 if 'maya' in x:
-                    shotDirMaya = os.path.join( shotDir, x )
+                    shotDirMaya = os.path.join(shotDir, x)
                     # print 'shotDirMaya:\n' + shotDirMaya
                 else:
-                    NameError('maya directory not found in...%s\n    '%shotDir)
+                    NameError('maya directory not found in...%s\n    ' % shotDir)
 
             for dept in sorted(os.listdir(shotDirMaya)):
                 if 'animation' in dept:
@@ -158,10 +157,10 @@ class Info():
                     # print ('animDir:\n{}'.format(animDir))
                     # print ('\n')
                 else:
-                    NameError('animation directory not found in...%s\n    '%shotDirMaya)
+                    NameError('animation directory not found in...%s\n    ' % shotDirMaya)
 
             maPath = os.path.join(shotDirMaya, animDir)
-            maFiles = sorted([f for f in os.listdir(maPath) if '.ma' in f if not 'PUBLISH' in f if not f.startswith('.') if f.startswith('sq')])
+            maFiles = sorted([f for f in os.listdir(maPath) if '.ma' in f if 'PUBLISH' not in f if not f.startswith('.') if f.startswith('sq')])
 
             if maFiles:
                 lastAnimMAs.append(os.path.join(maPath, maFiles[-1]))
@@ -169,20 +168,14 @@ class Info():
         return lastAnimMAs
 
 
-# SeqInfo('season_01', '101_rain', 'sq100_downpour')
-'''
-class ShotInfo():
-    pass
-
-if __name__ == '__main__':
-    print 'name = main'
-    sys.exit()
-    from sys import argv
-    ep, seq, shot = argv[1:]
-    print Info(ep, seq, shot).seqPath
-    for x in Info(ep, seq, shot).allShots: print x
-'''
-
-
 if __name__ == '__main__':
     main()
+
+__author__ = "Robert Showalter"
+__copyright__ = "Copyright 2017, Jib Jab Studios"
+__credits__ = ["Robert Showalter, Mark Thielen"]
+__license__ = "GPL"
+__version__ = "1.0.2"
+__maintainer__ = "Mark Thielen"
+__email__ = "mdthielen@gmail.com"
+__status__ = "Production"

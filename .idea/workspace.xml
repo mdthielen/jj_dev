@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="60660b26-05be-49d9-832a-fac41afd6d86" name="Default" comment="clean maya_initialize code&#10;add .idea/ folder to .gitignore">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+    <list default="true" id="60660b26-05be-49d9-832a-fac41afd6d86" name="Default" comment="add local pointer to sbtvKey.txt&#10;add sys.exit if paths are not found&#10;clean code">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_scripts/python/maya_initialize.py" afterPath="$PROJECT_DIR$/maya_scripts/python/maya_initialize.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_scripts/python/sbtvInfo.py" afterPath="$PROJECT_DIR$/maya_scripts/python/sbtvInfo.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,21 +24,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="animCleanup.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/maya_scripts/python/animCleanup.py">
+      <file leaf-file-name="sbtvInfo.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/maya_scripts/python/sbtvInfo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="50" lean-forward="false" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
+            <state relative-caret-position="109">
+              <caret line="99" column="30" lean-forward="true" selection-start-line="99" selection-start-column="30" selection-end-line="99" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="maya_initialize.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="maya_initialize.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/maya_scripts/python/maya_initialize.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="82" lean-forward="false" selection-start-line="30" selection-start-column="82" selection-end-line="30" selection-end-column="82" />
+            <state relative-caret-position="172">
+              <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="82" selection-end-column="79" />
               <folding />
             </state>
           </provider>
@@ -59,9 +61,10 @@
       <find>name</find>
       <find>allShots</find>
       <find>rein</find>
-      <find>keyFile</find>
       <find>sbtvtools_replaced</find>
       <find>/</find>
+      <find>keyFile</find>
+      <find>using</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/maya_scripts/python</dir>
@@ -81,7 +84,7 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/maya_scripts/python/animCleanup.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/maya_scripts/python/animCleanup.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -90,13 +93,13 @@
         <option value="$PROJECT_DIR$/maya_scripts/python/userSetup.py" />
         <option value="$PROJECT_DIR$/maya_scripts/python/sbtvKey.txt" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/maya_scripts/python/sbtvInfo.py" />
         <option value="$PROJECT_DIR$/maya_scripts/python/sbtvKeyMaker.py" />
         <option value="$USER_HOME$/Library/Preferences/Autodesk/maya/2017/userSetup.py" />
         <option value="$USER_HOME$/Library/Preferences/Autodesk/maya/2017/Maya.env" />
         <option value="$USER_HOME$/Library/Preferences/Autodesk/maya/2017/prefs/pluginPrefs.mel" />
         <option value="$PROJECT_DIR$/shell/maya_initialize.command" />
         <option value="$PROJECT_DIR$/maya_scripts/python/maya_initialize.py" />
+        <option value="$PROJECT_DIR$/maya_scripts/python/sbtvInfo.py" />
       </list>
     </option>
   </component>
@@ -323,7 +326,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.maya_initialize">
+  <component name="RunManager" selected="Python.sbtvInfo">
     <configuration default="false" name="sbtvInfo" type="PythonConfigurationType" factoryName="Python" singleton="true" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -481,8 +484,8 @@
     </list>
     <recent_temporary>
       <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Python.maya_initialize" />
-        <item index="1" class="java.lang.String" itemvalue="Python.sbtvInfo" />
+        <item index="0" class="java.lang.String" itemvalue="Python.sbtvInfo" />
+        <item index="1" class="java.lang.String" itemvalue="Python.maya_initialize" />
         <item index="2" class="java.lang.String" itemvalue="Python.sbtvKeyMaker" />
       </list>
     </recent_temporary>
@@ -601,7 +604,14 @@
       <option name="project" value="LOCAL" />
       <updated>1488925856263</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="clean maya_initialize code&#10;add .idea/ folder to .gitignore">
+      <created>1489004545400</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1489004545400</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
@@ -615,19 +625,20 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1023" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32914045" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32914045" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27132487" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27044025" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32940108" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3375262" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32940108" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20892857" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20892857" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Maya Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32940108" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24983074" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39927405" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39832285" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -656,14 +667,15 @@
     <MESSAGE value="creates userSetup.py if not exists&#10;edits userSetup.py&#10;creates Maya.env if not exists&#10;edits Maya.env with sbtvtools locations and keeps existing paths&#10;edits userPlugins.mel for vray plugin&#10;currently set to dev on which points to the jj_dev folder" />
     <MESSAGE value="feedback for running shell command" />
     <MESSAGE value="clean maya_initialize code&#10;add .idea/ folder to .gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean maya_initialize code&#10;add .idea/ folder to .gitignore" />
+    <MESSAGE value="add local pointer to sbtvKey.txt&#10;add sys.exit if paths are not found&#10;clean code" />
+    <option name="LAST_COMMIT_MESSAGE" value="add local pointer to sbtvKey.txt&#10;add sys.exit if paths are not found&#10;clean code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="35" />
+      <option name="time" value="40" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -798,13 +810,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/sbtvInfo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2790">
-          <caret line="186" column="0" lean-forward="false" selection-start-line="186" selection-start-column="0" selection-end-line="187" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/maya_scripts/python/pipelineTools.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -816,14 +821,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="9" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/animCleanup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="50" lean-forward="false" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -844,10 +841,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/maya_shelves/lighting/shelf_lightingTools.mel" />
     <entry file="file://$PROJECT_DIR$/shell/maya_initialize.command" />
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/animCleanup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="19" lean-forward="true" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/lightingSetup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/maya_scripts/python/maya_initialize.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="82" lean-forward="false" selection-start-line="30" selection-start-column="82" selection-end-line="30" selection-end-column="82" />
+        <state relative-caret-position="172">
+          <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="82" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/sbtvInfo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="99" column="30" lean-forward="true" selection-start-line="99" selection-start-column="30" selection-end-line="99" selection-end-column="30" />
           <folding />
         </state>
       </provider>
