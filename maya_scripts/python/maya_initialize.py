@@ -44,7 +44,7 @@ def main():
         print('Updated userSetup.py')
 
     # userPrefs.mel
-    replaced_userPrefs_mel = fixLineInFile(maya_prefs_path + 'prefs/userPrefs.mel', '"mayaBinary"', '"mayaAscii"', search_replace=True)
+    replaced_userPrefs_mel = fixLineInFile(maya_prefs_path + 'prefs/userPrefs.mel', '"mayaBinary"', '"mayaAscii"', True)
     if replaced_userPrefs_mel:
         print('Updated userPrefs.mel')
 
@@ -77,8 +77,14 @@ def maya_env(filepath, dev = False):
     maya_shelf_path_var = 'MAYA_SHELF_PATH = '
 
     sbtvtools_path = '/Volumes/public/StoryBots/production/series/ask_the_storybots/03_shared_assets/01_cg/05_maya_tools/'
+    if not os.path.exists(sbtvtools_path):
+        sbtvtools_path = os.path.expanduser('~/Documents/maya/scripts/JibJab/')
     if dev:
         sbtvtools_path = '/Volumes/public/StoryBots/production/series/ask_the_storybots/03_shared_assets/01_cg/05_maya_tools/jj_dev/'
+        if not os.path.exists(sbtvtools_path):
+            sbtvtools_path = os.path.expanduser('~/Documents/maya/scripts/JibJab/jj_dev')
+    if not os.path.exists(sbtvtools_path):
+        os.makedirs(sbtvtools_path)
     maya_scripts_path = '$SBTVTOOLS/maya_scripts/mel'
     maya_shelf_path = '$SBTVTOOLS/maya_shelves/lighting/'
     pythonpath = '$SBTVTOOLS/maya_scripts/python:$SBTVTOOLS/maya_scripts/python/RnD'
@@ -212,15 +218,17 @@ def fixLineInFile(filepath, line_keyword, newline, search_replace = False):
             f.close()                          # we opened it , we close it
             lines_replaced = []
             for line in lines:
-                if line_keyword not in line:
-                    lines_replaced.append(line.rstrip() + '\n')
+                if line_keyword in line:
+                    if search_replace:
+                        lines_replaced.append(line.replace(line_keyword, newline))
+                        written = True
+                    else:
+                        found_plugin = True
                 elif line.startswith('#'):
                     lines_replaced.append(line.rstrip() + '\n')
-                elif line_keyword in line and not search_replace:
-                    found_plugin = True
-                elif line_keyword in line and search_replace:
-                    lines_replaced.append(line.replace(line_keyword, newline))
-            if not found_plugin:
+                else:
+                    lines_replaced.append(line.rstrip() + '\n')
+            if not found_plugin and not search_replace:
                 lines_replaced.append(newline)
                 written = True
             if written:
