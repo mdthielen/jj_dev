@@ -11,10 +11,6 @@ Run from desktop:
 Attributes:
 
 Todo:
-    * setup Maya.env
-    * setup pluginPrefs.mel
-    * setup userSetup.py
-    * setup userPrefs.mel
 
 """
 
@@ -39,14 +35,17 @@ def main():
         print('Updated Maya.env')
 
     # userSetup.py
-    replaced_usersetup_py = fixLineInFile(maya_prefs_path + 'userSetup.py', 'import maya.cmds as mc', 'import maya.cmds as mc')
+    replaced_usersetup_py = fixLineInFile(maya_prefs_path + 'scripts/userSetup.py', 'import maya.cmds as mc', 'import maya.cmds as mc')
     if replaced_usersetup_py:
         print('Updated userSetup.py')
 
     # userPrefs.mel
     replaced_userPrefs_mel = fixLineInFile(maya_prefs_path + 'prefs/userPrefs.mel', '"mayaBinary"', '"mayaAscii"', True)
     if replaced_userPrefs_mel:
-        print('Updated userPrefs.mel')
+        print('Updated userPrefs.mel  --> default mayaAscii save')
+    replaced_userPrefs_mel = fixLineInFile(maya_prefs_path + 'prefs/userPrefs.mel', ' -sv "preferredRenderer" "', ' -sv "preferredRenderer" "vray"\n')
+    if replaced_userPrefs_mel:
+        print('Updated userPrefs.mel  --> default VRay renderer')
 
 
 def maya_env(filepath, dev=False):
@@ -204,10 +203,7 @@ def fixLineInFile(filepath, line_keyword, newline, search_replace=False):
     """
 
     # quick parameter checks
-    try:
-        assert os.path.exists(filepath)
-    except IOError, ioe:  # if something bad happened.
-        print("ERROR", ioe)
+    if not os.path.exists(filepath):
         with open(filepath, 'w') as f:
             f.close()
     assert (line_keyword and str(line_keyword))  # is not empty and is a string
@@ -226,6 +222,10 @@ def fixLineInFile(filepath, line_keyword, newline, search_replace=False):
                     if search_replace:
                         lines_replaced.append(line.replace(line_keyword, newline))
                         written = True
+                    elif 'plugin' not in line_keyword:
+                        lines_replaced.append(newline)
+                        written = True
+                        found_plugin = True
                     else:
                         found_plugin = True
                 elif line.startswith('#'):
