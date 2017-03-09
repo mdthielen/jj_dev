@@ -256,3 +256,12 @@ def lightingCleanup():
             mc.sets(noVis, add='groundPlane_noVis_set')
         mc.hide(shd)
     mc.hide('SHD_GEO_GRP')
+
+__author__ = "Robert Showalter"
+__copyright__ = "Copyright 2017, Jib Jab Studios"
+__credits__ = ["Robert Showalter, Mark Thielen"]
+__license__ = "GPL"
+__version__ = "1.0.1"
+__maintainer__ = "Mark Thielen"
+__email__ = "mdthielen@gmail.com"
+__status__ = "Production"
