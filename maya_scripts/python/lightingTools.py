@@ -1,8 +1,18 @@
+#!/usr/bin/python
 """
-Lighting Tools
+Lighting tools
+VRay lighting and subdivision surfaces tools
+
+Attributes:
+    
+    
+Todo:
+    
+    
 """
 
-import maya.cmds as mc
+
+import maya.cmds as cmds
 
 '''ADD VRAY OPENSUBDIV TO SELECTED GEO'''
 
@@ -13,10 +23,10 @@ def addVrayOSD(userDepth=2):
     :param userDepth: default 2, subdivision depth
     """
 
-    shapes = mc.ls(sl=1, dag=1, lf=1, s=1)
+    shapes = cmds.ls(sl=1, dag=1, lf=1, s=1)
     for shape in shapes:
-        mc.vray("addAttributesFromGroup", shape, "vray_opensubdiv", 1)
-        mc.setAttr(shape + '.vrayOsdSubdivDepth', userDepth)
+        cmds.vray("addAttributesFromGroup", shape, "vray_opensubdiv", 1)
+        cmds.setAttr(shape + '.vrayOsdSubdivDepth', userDepth)
 
 
 def addVrayOID():
@@ -24,12 +34,12 @@ def addVrayOID():
     Add VRay object ID to all selected nodes
     """
 
-    shapes = mc.ls(sl=1, dag=1, lf=1, s=1)
+    shapes = cmds.ls(sl=1, dag=1, lf=1, s=1)
     for shape in shapes:
-        mc.vray("addAttributesFromGroup", shape, "vray_objectID", 1)
+        cmds.vray("addAttributesFromGroup", shape, "vray_objectID", 1)
 
 
-# mc.setAttr( trans+'.vrayObjectID', userID)
+# cmds.setAttr( trans+'.vrayObjectID', userID)
 
 
 maLightTypes = ['VRayLightDomeShape',
@@ -47,7 +57,7 @@ maLightTypes = ['VRayLightDomeShape',
                 'VRaySunShape']
 
 
-def checkSelectedLights(sel=mc.ls(sl=1)):
+def checkSelectedLights(sel=cmds.ls(sl=1)):
     """
     use to check if the selection matches the light types defined in maLightTypes
     :param sel: selected lights
@@ -58,9 +68,9 @@ def checkSelectedLights(sel=mc.ls(sl=1)):
 
     for obj in sel:
 
-        shape = mc.listRelatives(obj, s=1)
+        shape = cmds.listRelatives(obj, s=1)
 
-        if mc.objectType(shape) in maLightTypes:
+        if cmds.objectType(shape) in maLightTypes:
 
             ltShapes.append(shape)
 
@@ -80,7 +90,7 @@ def listAllLights(ltShapes):
     :return: light shapes of type maLightTypes
     """
     for t in maLightTypes:
-        [ltShapes.append(x) for x in mc.ls(type=t)]
+        [ltShapes.append(x) for x in cmds.ls(type=t)]
 
     return ltShapes
 
@@ -93,12 +103,12 @@ def mkLightElem(ltShapes):
     import maya.mel
 
     for lt in ltShapes:
-        ltTran = mc.listRelatives(lt, p=1)[0]
+        ltTran = cmds.listRelatives(lt, p=1)[0]
         elem = 'vrayRE_' + ltTran
         maya.mel.eval('vrayAddRenderElement( "LightSelectElement" );')
-        mc.rename('vrayRE_Light_Select', elem)
-        mc.setAttr(elem + '.vray_name_lightselect', 'lt_' + ltTran, type='string')
-        mc.sets(ltTran, addElement=elem)
+        cmds.rename('vrayRE_Light_Select', elem)
+        cmds.setAttr(elem + '.vray_name_lightselect', 'lt_' + ltTran, type='string')
+        cmds.sets(ltTran, addElement=elem)
 
 
 def autoCreateLightElem():
@@ -108,11 +118,11 @@ def autoCreateLightElem():
     ltShapes, badEgg = checkSelectedLights()
 
     if badEgg:
-        mc.warning('Selection contains unrecognised light types')
+        cmds.warning('Selection contains unrecognised light types')
     elif ltShapes:
         mkLightElem(ltShapes)
     elif not ltShapes:
-        result = mc.promptDialog(
+        result = cmds.promptDialog(
                 title='Create VRay Light Element(s)',
                 message='No light selected, create elements for all lights in the scene?',
                 button=['OK', 'Cancel'],
@@ -130,7 +140,7 @@ def characterEyes():
     """
     import re
 
-    visMesh = mc.ls(et="mesh", v=1)
+    visMesh = cmds.ls(et="mesh", v=1)
     characters = ["bang", "boop", "bing", "bo", "beep"]
     leftEyePattern = "_lpupil|_l_.*pupil"
     rightEyePattern = "_rpupil|_r_.*pupil"
@@ -157,42 +167,43 @@ def createLightAndLink(mesh, lightName):  #
     lightShape = lightName + "Shape"
 
     # create a vray dome
-    newDome = mc.shadingNode("VRayLightDomeShape", asLight=True, name=lightShape)
+    newDome = cmds.shadingNode("VRayLightDomeShape", asLight=True, name=lightShape)
 
     # set the dome attributes
-    mc.setAttr(lightShape + ".intensityMult", 10)
-    mc.setAttr(lightShape + ".shadows", 0)
-    mc.setAttr(lightShape + ".useDomeTex", 1)
+    cmds.setAttr(lightShape + ".intensityMult", 10)
+    cmds.setAttr(lightShape + ".shadows", 0)
+    cmds.setAttr(lightShape + ".useDomeTex", 1)
     ###
-    mc.setAttr(lightShape + ".invisible", 1)
-    mc.setAttr(lightShape + ".affectDiffuse", 0)
-    mc.setAttr(lightShape + ".affectSpecular", 1)
-    mc.setAttr(lightShape + ".affectReflections", 0)
-    mc.setAttr(lightShape + ".affectAlpha", 0)
+    cmds.setAttr(lightShape + ".invisible", 1)
+    cmds.setAttr(lightShape + ".affectDiffuse", 0)
+    cmds.setAttr(lightShape + ".affectSpecular", 1)
+    cmds.setAttr(lightShape + ".affectReflections", 0)
+    cmds.setAttr(lightShape + ".affectAlpha", 0)
 
     # create ramp texture
-    newRamp = mc.shadingNode("ramp", asTexture=True, name=lightName + "_Ramp")
-    placeTex = mc.shadingNode("VRayPlaceEnvTex", asUtility=True, name=lightName + "_VRayPlaceEnvTex")
-    mc.setAttr(placeTex + ".mappingType", 2)
-    mc.setAttr(placeTex + ".useTransform", 1)
+    newRamp = cmds.shadingNode("ramp", asTexture=True, name=lightName + "_Ramp")
+    placeTex = cmds.shadingNode("VRayPlaceEnvTex", asUtility=True, name=lightName + "_VRayPlaceEnvTex")
+    cmds.setAttr(placeTex + ".mappingType", 2)
+    cmds.setAttr(placeTex + ".useTransform", 1)
 
     # first ramp point
-    mc.setAttr(newRamp + ".colorEntryList[0].position", 0.96)
-    mc.setAttr(newRamp + ".colorEntryList[0].color", 0, 0, 0, type="double3")
+    cmds.setAttr(newRamp + ".colorEntryList[0].position", 0.96)
+    cmds.setAttr(newRamp + ".colorEntryList[0].color", 0, 0, 0, type="double3")
     # second ramp point
-    mc.setAttr(newRamp + ".colorEntryList[1].position", 0.97)
-    mc.setAttr(newRamp + ".colorEntryList[1].color", 1, 1, 1, type="double3")
+    cmds.setAttr(newRamp + ".colorEntryList[1].position", 0.97)
+    cmds.setAttr(newRamp + ".colorEntryList[1].color", 1, 1, 1, type="double3")
 
     # Connect texture
-    mc.connectAttr(newRamp + ".outColor", lightShape + ".domeTex", force=True)
-    mc.connectAttr(placeTex + ".outUV", newRamp + ".uvCoord", force=True)
-    mc.connectAttr(lightShape + ".worldMatrix[0]", placeTex + ".transform")
+    cmds.connectAttr(newRamp + ".outColor", lightShape + ".domeTex", force=True)
+    cmds.connectAttr(placeTex + ".outUV", newRamp + ".uvCoord", force=True)
+    cmds.connectAttr(lightShape + ".worldMatrix[0]", placeTex + ".transform")
 
     # Break light links with everything but the mesh(s)
-    mc.lightlink(b=True, light=newDome, object=mc.ls())
-    mc.lightlink(make=True, light=newDome, object=mesh)
+    cmds.lightlink(b=True, light=newDome, object=cmds.ls())
+    cmds.lightlink(make=True, light=newDome, object=mesh)
 
     return newDome, newRamp
+
 
 # REVIEW[mark] what is this below?
 '''
@@ -240,25 +251,27 @@ def lightingCleanup():
     """
     charAll = ['Bing_Riglocator', 'Beep_Riglocator', 'Bo_Riglocator', 'Boop_Riglocator', 'Bang_Riglocator']
     for char in charAll:
-        mc.editRenderLayerMembers('shd', char, noRecurse=1)
-    mc.editRenderLayerMembers('shd', 'SHD_GEO_GRP', noRecurse=1)
-    mc.select('SHD_GEO_GRP', r=1)
-    newShdGrp = mc.duplicate(rr=1)[0]
-    children = mc.listRelatives(newShdGrp, c=1)
+        cmds.editRenderLayerMembers('shd', char, noRecurse=1)
+    cmds.editRenderLayerMembers('shd', 'SHD_GEO_GRP', noRecurse=1)
+    cmds.select('SHD_GEO_GRP', r=1)
+    newShdGrp = cmds.duplicate(rr=1)[0]
+    children = cmds.listRelatives(newShdGrp, c=1)
     for c in children:
-        shd = mc.rename(newShdGrp + '|' + c, c + '_shd')
-        noVis = mc.duplicate(shd, n=c + '_noVis', rr=1)[0]
-        mc.setAttr(noVis + '.primaryVisibility', 0)
-        mc.sets(shd, addElement='groundPlane_shd_vrayobjectproperties')
-        if not mc.objExists('groundPlane_noVis_set'):
-            mc.sets(noVis, n='groundPlane_noVis_set')
+        shd = cmds.rename(newShdGrp + '|' + c, c + '_shd')
+        noVis = cmds.duplicate(shd, n=c + '_noVis', rr=1)[0]
+        cmds.setAttr(noVis + '.primaryVisibility', 0)
+        cmds.sets(shd, addElement='groundPlane_shd_vrayobjectproperties')
+        if not cmds.objExists('groundPlane_noVis_set'):
+            cmds.sets(noVis, n='groundPlane_noVis_set')
         else:
-            mc.sets(noVis, add='groundPlane_noVis_set')
-        mc.hide(shd)
-    mc.hide('SHD_GEO_GRP')
+            cmds.sets(noVis, add='groundPlane_noVis_set')
+        cmds.hide(shd)
+    cmds.hide('SHD_GEO_GRP')
+
 
 __author__ = "Robert Showalter"
 __copyright__ = "Copyright 2017, Jib Jab Studios"
+__date__ = "3/6/2017"
 __credits__ = ["Robert Showalter, Mark Thielen"]
 __license__ = "GPL"
 __version__ = "1.0.1"

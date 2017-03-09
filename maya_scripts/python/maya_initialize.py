@@ -35,7 +35,7 @@ def main():
         print('Updated Maya.env')
 
     # userSetup.py
-    replaced_usersetup_py = fixLineInFile(maya_prefs_path + 'scripts/userSetup.py', 'import maya.cmds as mc', 'import maya.cmds as mc')
+    replaced_usersetup_py = fixLineInFile(maya_prefs_path + 'scripts/userSetup.py', 'import maya.cmds as cmds', 'import maya.cmds as cmds')
     if replaced_usersetup_py:
         print('Updated userSetup.py')
 
@@ -96,8 +96,8 @@ def maya_env(filepath, dev=False):
     pythonpath_replaced = False
 
     try:
-        with open(filepath, 'r') as f:    # open for read/write -- alias to f
-            lines = f.readlines()            # get all lines in file
+        with open(filepath, 'r') as f:  # open for read/write -- alias to f
+            lines = f.readlines()  # get all lines in file
             f.close()  # we opened it , we close it
             lines_replaced = []
 
@@ -213,9 +213,9 @@ def fixLineInFile(filepath, line_keyword, newline, search_replace=False):
     written = False
 
     try:
-        with open(filepath, 'r') as f:    # open for read/write -- alias to f
-            lines = f.readlines()            # get all lines in file
-            f.close()                          # we opened it , we close it
+        with open(filepath, 'r') as f:  # open for read/write -- alias to f
+            lines = f.readlines()  # get all lines in file
+            f.close()  # we opened it , we close it
             lines_replaced = []
             for line in lines:
                 if line_keyword in line:
@@ -241,17 +241,19 @@ def fixLineInFile(filepath, line_keyword, newline, search_replace=False):
                     f2.close()
                 return written
 
-    except IOError, ioe:                 # if something bad happened.
+    except IOError, ioe:  # if something bad happened.
         print("ERROR", ioe)
         return False
 
-    return written        # replacement happened with no errors = True
+    return written  # replacement happened with no errors = True
+
 
 if __name__ == '__main__':
     main()
 
 __author__ = "Mark Thielen"
 __copyright__ = "Copyright 2017, Jib Jab Studios"
+__date__ = "3/6/2017"
 __credits__ = ["Mark Thielen"]
 __license__ = "GPL"
 __version__ = "1.0.1"

@@ -23,7 +23,6 @@
 
 """
 
-
 import os
 
 
@@ -37,11 +36,10 @@ def main():
 
 
 def readContents(keyFile):
-
-        text = open(keyFile, 'r')
-        fileContents = text.read().splitlines()
-        text.close()
-        return fileContents
+    text = open(keyFile, 'r')
+    fileContents = text.read().splitlines()
+    text.close()
+    return fileContents
 
 
 def getEp(ep, fileContents):
@@ -125,7 +123,7 @@ class Info:
 
         self.epID, self.epName = getEp(self.ep, fileContents)
         self.seqID, self.seqName = getSeq(self.ep + ' ' + self.epName, self.seq, fileContents)
-        self.sequence = 'sq' + self.seqID		
+        self.sequence = 'sq' + self.seqID
         self.seqPath = os.path.join(project_folder, self.epID, stage, self.sequence)
         if not os.path.exists(self.seqPath):
             print('Warning:  Path missing: %s' % self.seqPath)
@@ -160,7 +158,7 @@ class Info:
                     NameError('animation directory not found in...%s\n    ' % shotDirMaya)
 
             maPath = os.path.join(shotDirMaya, animDir)
-            maFiles = sorted([f for f in os.listdir(maPath) if '.ma' in f if 'PUBLISH' not in f if not f.startswith('.') if f.startswith('sq')])
+            maFiles = sorted([f for f in os.listdir(maPath) if '.last_anim' in f if 'PUBLISH' not in f if not f.startswith('.') if f.startswith('sq')])
 
             if maFiles:
                 lastAnimMAs.append(os.path.join(maPath, maFiles[-1]))
@@ -173,6 +171,7 @@ if __name__ == '__main__':
 
 __author__ = "Robert Showalter"
 __copyright__ = "Copyright 2017, Jib Jab Studios"
+__date__ = "3/7/2017"
 __credits__ = ["Robert Showalter, Mark Thielen"]
 __license__ = "GPL"
 __version__ = "1.0.2"

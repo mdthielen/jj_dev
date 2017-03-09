@@ -1,103 +1,142 @@
-'''ANIM CLEANUP'''
+#!/usr/bin/python
+"""
+Animation Cleanup
 
-import maya.cmds as mc
+Clean up animation for lighting hand off.
+
+Attributes:
+    
+Todo: 
+    
+"""
+
+import maya.cmds as cmds
+
 
 def delRenderLayers():
-    print('Running %s...\n' % 'delRenderLayers' )
-    rLayers = [rln for rln in mc.ls(type = 'renderLayer') if not 'default' in rln]
-    for rln in rLayers: mc.delete( rln ); print 'Deleted %s renderlayer' % rln
+    """
+    Delete all render layers.
+    """
+    print('Running %s...\n' % 'delRenderLayers')
+    rLayers = [rln for rln in cmds.ls(type='renderLayer') if not 'default' in rln]
+    for rln in rLayers: cmds.delete(rln); print 'Deleted %s renderlayer' % rln
 
-#remove shading group assignments
+
 def cleanREF_SG():
-    print('Running %s...' % 'cleanREF_SG' )
-    allRef = mc.ls(references=True)
+    """
+    Remove reference shading group assignments
+        * Remove unloaded references
+        * Remove shading group reference edits
+    """
+    print('Running %s...' % 'cleanREF_SG')
+    allRef = cmds.ls(references=True)
 
-    #remove unloaded reference from the list
+    # remove unloaded reference from the list
     for ref in allRef:
-        if not mc.referenceQuery(ref, isLoaded=1):
+        if not cmds.referenceQuery(ref, isLoaded=1):
             allRef.remove(ref)
-            print( '****COULDN\'T FIND: %s' % ref )
-    print( 'Found:' )
-    for ref in allRef: print('    %s'%ref )
+            print('****COULDN\'T FIND: %s' % ref)
+    print('Found:')
+    for ref in allRef: print('    %s' % ref)
 
-    #unloading all references
-    print( '\nUnloading references...' )
-    for ref in allRef: mc.file(unloadReference=ref)
+    # unloading all references
+    print('\nUnloading references...')
+    for ref in allRef: cmds.file(unloadReference=ref)
 
-    #remove Shading group reference edits
-    print( 'Removing Shading Group reference edits...' )
+    # remove Shading group reference edits
+    print('Removing Shading Group reference edits...')
     for ref in allRef:
-        sgEdits = [sge for sge in mc.referenceQuery( ref, editNodes=True ) if 'SG' in sge]
+        sgEdits = [sge for sge in cmds.referenceQuery(ref, editNodes=True) if 'SG' in sge]
         for sge in sgEdits:
-            mc.referenceEdit( sge + '.dagSetMembers', failedEdits=True, successfulEdits=True, removeEdits=True)
+            cmds.referenceEdit(sge + '.dagSetMembers', failedEdits=True, successfulEdits=True, removeEdits=True)
 
-    #reload reference
-    print( 'Reloading...' )
-    for ref in allRef: print( '    %s'%ref ); mc.file(loadReference = ref)
-    print( '' )
+    # reload reference
+    print('Reloading...')
+    for ref in allRef: print('    %s' % ref); cmds.file(loadReference=ref)
+    print('')
+
+
 '''
 def delOldLights(oldLights = [u'mentalrayIbl1', u'Rim_Light', u'Bounce_Light', u'Keylight']):
-    mc.delete( oldLights )
+    cmds.delete( oldLights )
 '''
+
+
 def delAllLights():
-    print('Running %s...\n' % 'delAllLights' )
-    lightShapes = mc.ls(type = 'light')
-    lightTrans = mc.listRelatives( lightShapes, p = 1)
-    if lightTrans: [mc.delete(light) for light in lightTrans]
+    """
+    Delete all lights
+    """
+    print('Running %s...\n' % 'delAllLights')
+    lightShapes = cmds.ls(type='light')
+    lightTrans = cmds.listRelatives(lightShapes, p=1)
+    if lightTrans: [cmds.delete(light) for light in lightTrans]
+
 
 def groupSoloGeo():
-    print('Running %s...' % 'groupSoloGeo' )
+    """
+    Group all solo geo meshes
+    """
+    print('Running %s...' % 'groupSoloGeo')
     rootGeo = []
-    for obj in mc.ls(tr = 1):
-        if not mc.listRelatives( obj, p = 1 ):
-            if mc.listRelatives( obj, c = 1, type = 'mesh' ):
+    for obj in cmds.ls(tr=1):
+        if not cmds.listRelatives(obj, p=1):
+            if cmds.listRelatives(obj, c=1, type='mesh'):
                 rootGeo.append(obj)
-    if not mc.objExists('SHD_GEO_GRP'):
+    if not cmds.objExists('SHD_GEO_GRP'):
         if rootGeo:
             if len(rootGeo) == 1:
-                setGRP = mc.group( rootGeo[0], name = 'SHD_GEO_GRP')
+                setGRP = cmds.group(rootGeo[0], name='SHD_GEO_GRP')
             elif len(rootGeo) > 1:
-                setGRP = mc.group( rootGeo[0], rootGeo[1:], name = 'SHD_GEO_GRP')
+                setGRP = cmds.group(rootGeo[0], rootGeo[1:], name='SHD_GEO_GRP')
             print('    created \"SHD_GEO_GRP\"')
         else:
             print 'No orphaned meshes found'
-    else: print('****\"SHD_GEO_GRP\" already exists. Doing nothing.')
+    else:
+        print('****\"SHD_GEO_GRP\" already exists. Doing nothing.')
 
     '''
 def setProxiesHi():
     rigRoots = ['Bing_Rig_Bing_ROOTC', 'Bo_Rig_Bo_ROOTC',]
     for root in rigRoots:
-        mc.setAttr( root + '.Proxy', 0 )
-'''	
+        cmds.setAttr( root + '.Proxy', 0 )
+'''
 
-def all():
+
+def cleanAll():
+    """
+    Perform all clean
+        * Delete render layers
+        * Delete reference shading edits
+        * group solo geo
+    """
     delRenderLayers()
     cleanREF_SG()
-    #delAllLights()
+    # delAllLights()
     groupSoloGeo()
+
 
 '''
 
-    if mc.referenceQuery(sge + '.dagSetMembers', editStrings = True):
+    if cmds.referenceQuery(sge + '.dagSetMembers', editStrings = True):
         print sge + '.dagSetMembers is an edit'
-    if mc.connectionInfo(sge + '.dagSetMembers', isSource = 1): print 'isSource'
-    elif mc.connectionInfo(sge + '.dagSetMembers', isDestination = 1): print 'isDestination'
+    if cmds.connectionInfo(sge + '.dagSetMembers', isSource = 1): print 'isSource'
+    elif cmds.connectionInfo(sge + '.dagSetMembers', isDestination = 1): print 'isDestination'
     
 sge = sgEdits[0]
-mc.listConnections(sge)
+cmds.listConnections(sge)
 
 dagEdits = [es for es in editStrings if 'SG.dagSetMembers' in es]
 len(dagEdits)
-attr_types = mc.referenceQuery( ref, editAttrs=True )
+attr_types = cmds.referenceQuery( ref, editAttrs=True )
 
 
 for edit_command in ['addAttr', 'connectAttr', 'deleteAttr', 'disconnectAttr', 'parent', 'setAttr', 'lock', 'unlock']:
-            mc.referenceEdit( node+'.'+attr_type, failedEdits=True, successfulEdits=True, removeEdits=True, editCommand=edit_command)
+            cmds.referenceEdit( node+'.'+attr_type, failedEdits=True, successfulEdits=True, removeEdits=True, editCommand=edit_command)
 
 #Clean ref python
-for ref in mc.ls(references=True):
-    mc.file(unloadReference=ref)
-    mc.file (cr=ref) # cleanReference
+for ref in cmds.ls(references=True):
+    cmds.file(unloadReference=ref)
+    cmds.file (cr=ref) # cleanReference
 
 # Remove all edits
 ref = 'myrefRN'
@@ -126,3 +165,13 @@ for ref in pm.listReferences():
 SG.dagSetMember
 
 '''
+
+__author__ = "Robert Showalter"
+__copyright__ = "Copyright 2017, Jib Jab Studios"
+__date__ = "3/9/17"
+__credits__ = ["Robert Showalter, Mark Thielen"]
+__license__ = "GPL"
+__version__ = "1.0.1"
+__maintainer__ = "Mark Thielen"
+__email__ = "mdthielen@gmail.com"
+__status__ = "Production"
