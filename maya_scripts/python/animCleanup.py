@@ -2,7 +2,8 @@
 """
 Animation Cleanup
 
-Clean up animation for lighting hand off.
+** Deprectated **
+Clean up mental ray rigs to vray rigs.
 
 Attributes:
     
