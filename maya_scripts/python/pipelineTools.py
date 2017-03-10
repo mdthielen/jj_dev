@@ -40,7 +40,11 @@ def publish(currentFile=None, saveCurrentFile=False):
     :return: pubFile  --> name of published file
     """
     if not currentFile:
-        currentFile = cmds.file(q=1, l=1)[0]
+        if cmds.file(q=1, sn=1):
+            currentFile = cmds.file(q=1, l=1)[0]
+        else:
+            cmds.warning('Save current file before publishing.')
+            return
 
     pubFile = pubName(currentFile)
 
