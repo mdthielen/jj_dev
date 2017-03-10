@@ -63,7 +63,7 @@ global proc shelf_lightingTools () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "try: reload(pipelineTools)\nexcept: import pipelineTools\npipelineTools.publish(mc.file(q=1, l=1)[0], exportOnly = True)" 
+        -command "try: reload(pipelineTools)\nexcept: import pipelineTools\npipelineTools.publish(cmds.file(q=1, l=1)[0], exportOnly = True)" 
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -95,7 +95,7 @@ global proc shelf_lightingTools () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "try: reload(pipelineTools)\nexcept: import pipelineTools\npipelineTools.replaceCharRigs(mc.file(q=1, l=1)[0])" 
+        -command "try: reload(pipelineTools)\nexcept: import pipelineTools\npipelineTools.replaceCharRigs(cmds.file(q=1, l=1)[0])" 
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -191,7 +191,7 @@ global proc shelf_lightingTools () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "for s in shapes:\n    if mc.attributeQuery('vrayOsdSubdivEnable', node = s, exists = True):\n        mc.select( s, add = True )" 
+        -command "for s in shapes:\n    if cmds.attributeQuery('vrayOsdSubdivEnable', node = s, exists = True):\n        cmds.select( s, add = True )" 
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -223,7 +223,7 @@ global proc shelf_lightingTools () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "for s in shapes:\n    if mc.attributeQuery('vrayOsdSubdivEnable', node = s, exists = True):\n        print s \n        newstate = not mc.getAttr( s + '.vrayOsdSubdivEnable')\n        print newstate\n        mc.setAttr( s + '.vrayOsdSubdivEnable', newstate)" 
+        -command "for s in shapes:\n    if cmds.attributeQuery('vrayOsdSubdivEnable', node = s, exists = True):\n        print s \n        newstate = not cmds.getAttr( s + '.vrayOsdSubdivEnable')\n        print newstate\n        cmds.setAttr( s + '.vrayOsdSubdivEnable', newstate)" 
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
