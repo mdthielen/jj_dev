@@ -27,26 +27,40 @@ def pubName(currentFile):  # = cmds.file(q=1, l=1)[0] ):
     """
     ver = '_?\d+.ma$'  # version syntax, in this case, to search for '###.ma'
     pubFile = re.split(ver, currentFile)[0]  # remove version suffix
-    pubFile += r'PUBLISH.ma'  # add PUBLISH suffix
+    pubFile += r'_PUBLISH.ma'  # add PUBLISH suffix
     return pubFile
 
 
-def publish(currentFile, exportOnly=False):  # = cmds.file(q=1, l=1)[0]:
+def publish(currentFile=None, saveCurrentFile=False):
     """
     publish current file
+    used on lightingTools shelf, labeled as pub  --> pipelineTools.publish()
     :param currentFile: currently opened file, even new untitled file
-    :param exportOnly: export only, no saving of current file
+    :param saveCurrentFile: export only, no saving of current file
     :return: pubFile  --> name of published file
     """
+    if not currentFile:
+        currentFile = cmds.file(q=1, l=1)[0]
+
     pubFile = pubName(currentFile)
-    # export all as a .ma file, overwrite if existing.
-    # cmds.file( rename = pubFile)
-    if not exportOnly:
+
+    if saveCurrentFile:
         # save the current file
         cmds.file(save=True, force=True)
         print('Saved %s' % currentFile)
+
     try:
-        cmds.file(pubFile, force=1, options="v=0;", type="mayaAscii", pr=1, ea=1)
+        if os.path.exists(pubFile):
+            if os.access(pubFile, os.W_OK):
+                cmds.file(pubFile, force=1, options="v=0;", type="mayaAscii", pr=1, ea=1)
+            else:
+                print('FAILED TO EXPORT\n%s' % pubFile)
+                print('Check user permissions\n')
+                return
+        else:
+            print('FAILED TO EXPORT\n%s' % pubFile)
+            print('Check path exists\n')
+            return
     except IOError:
         print('FAILED TO EXPORT\n%s' % pubFile)
         return

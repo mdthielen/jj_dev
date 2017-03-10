@@ -63,7 +63,7 @@ global proc shelf_lightingTools () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "try: reload(pipelineTools)\nexcept: import pipelineTools\npipelineTools.publish(cmds.file(q=1, l=1)[0], exportOnly = True)" 
+        -command "try: reload(pipelineTools)\nexcept: import pipelineTools\npipelineTools.publish()"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
