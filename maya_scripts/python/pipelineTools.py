@@ -68,7 +68,9 @@ def publish(currentFile=None, saveCurrentFile=False):
     except IOError:
         print('FAILED TO EXPORT\n%s' % pubFile)
         return
-    print('\n*Exported: \n    %s \n\n' % pubFile.split('\\')[-1])  # only works on windows, returns long name on others
+    message_out = ('JJ Exported:   {}'.format(pubFile))
+    cmds.headsUpMessage(message_out, time=2.0)
+    print(message_out)
     return pubFile
 
 
