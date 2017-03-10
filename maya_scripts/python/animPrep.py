@@ -50,7 +50,7 @@ def shotTasks(ma_file):
     # print(ma_file)
     cmds.file(ma_file, force=True, open=True)
     animCleanup.cleanAll()
-    pipelineTools.publish(ma_file, exportOnly=True)
+    pipelineTools.publish(ma_file)
     pipelineTools.replaceCharRigs(ma_file)
 
 
