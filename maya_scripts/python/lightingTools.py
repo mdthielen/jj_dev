@@ -2,6 +2,7 @@
 """
 Lighting tools
 VRay lighting and subdivision surfaces tools
+use these on lightingTools shelf
 
 Attributes:
     
@@ -14,10 +15,42 @@ Todo:
 
 import maya.cmds as cmds
 
-'''ADD VRAY OPENSUBDIV TO SELECTED GEO'''
+maLightTypes = ['VRayLightDomeShape',
+                'VRayLightIESShape',
+                'VRayLightMesh',
+                'VRayLightMtl',
+                'VRayLightRectShape',
+                'VRayLightSphereShape',
+                'VRayPluginNodeLightShape',
+                'VRaySunShape',
+                'ambientLight',
+                'areaLight',
+                'directionalLight',
+                'pointLight',
+                'spotLight',
+                'volumeLight']
 
 
-def addVrayOSD(userDepth=2):
+def getShapeNodesList(all_in_heirarchy=False):
+    """
+    Get shape nodes list from selected or all geometry shape nodes if nothing is selected.
+    
+    :rtype: shapes: list of all geometry shape nodes
+    :type all_in_heirarchy: select all geometry shape nodes in heirarchy based on anything selected in heirarchy 
+    """
+    if all_in_heirarchy:
+        pass
+
+    if cmds.ls(sl=1):
+        transforms = cmds.ls(sl=1)
+        shapes = cmds.listRelatives(transforms)
+    else:
+        shapes = cmds.ls(type='geometryShape')
+
+    return shapes
+
+
+def addVrayOsd(userDepth=2):
     """
     Add VRay open subdivision surface to shape nodes
     :param userDepth: default 2, subdivision depth
@@ -39,22 +72,51 @@ def addVrayOID():
         cmds.vray("addAttributesFromGroup", shape, "vray_objectID", 1)
 
 
-# cmds.setAttr( trans+'.vrayObjectID', userID)
+def selVrayOsd():
+    """
+    Select VRay Osd shape nodes either from selection or if nothing selected, then parse all scene elements.
+    
+    :param : none
+    """
+
+    shapes = getShapeNodesList()
+    cmds.select(cl=1)
+    if shapes:
+        for shape in shapes:
+            if cmds.attributeQuery('vrayOsdSubdivEnable', node=shape, exists=True):
+                cmds.select(shape, add=True)
+        if cmds.ls(sl=1):
+            print('\nSelected shapes with vrayOsdSubdivEnable on:')
+            for sel in cmds.ls(sl=1):
+                print sel
+    else:
+        print('No shapes found')
 
 
-maLightTypes = ['VRayLightDomeShape',
-                'VRayLightIESShape',
-                'VRayLightMesh',
-                'VRayLightMtl',
-                'VRayLightRectShape',
-                'VRayLightSphereShape',
-                'ambientLight',
-                'areaLight',
-                'directionalLight',
-                'pointLight',
-                'spotLight',
-                'volumeLight',
-                'VRaySunShape']
+def toggleVrayOsd(force_all=False, force_toggle=1):
+    """
+    Toggle VRay Osd shape nodes to be opposite of current setting.
+    
+    :param force_toggle: set toggle to be 1 or 0 if force_all is True
+    :param force_all: This will force all to be on or off
+    """
+
+    sel_start = cmds.ls(sl=1)
+    shapes = getShapeNodesList()
+    cmds.select(cl=1)
+    if shapes:
+        print('Toogle VRay Osd:')
+        for shape in shapes:
+            if cmds.attributeQuery('vrayOsdSubdivEnable', node=shape, exists=True):
+                if force_all:
+                    newstate = force_toggle
+                else:
+                    newstate = not cmds.getAttr(shape + '.vrayOsdSubdivEnable')
+                print ('VRay Osd: {} -->  {}'.format(int(newstate), shape))
+                cmds.setAttr(shape + '.vrayOsdSubdivEnable', newstate)
+    else:
+        print('No shapes found')
+    cmds.select(sel_start)
 
 
 def checkSelectedLights(sel=cmds.ls(sl=1)):
@@ -63,21 +125,16 @@ def checkSelectedLights(sel=cmds.ls(sl=1)):
     :param sel: selected lights
     :return: light shapes and lights not using predefined light types
     """
+
     ltShapes = []
     badEgg = None
 
     for obj in sel:
-
         shape = cmds.listRelatives(obj, s=1)
-
         if cmds.objectType(shape) in maLightTypes:
-
             ltShapes.append(shape)
-
         else:
-
             badEgg = True
-
             break
 
     return ltShapes, badEgg
@@ -122,13 +179,13 @@ def autoCreateLightElem():
     elif ltShapes:
         mkLightElem(ltShapes)
     elif not ltShapes:
-        result = cmds.promptDialog(
+        result = cmds.confirmDialog(
                 title='Create VRay Light Element(s)',
                 message='No light selected, create elements for all lights in the scene?',
-                button=['OK', 'Cancel'],
-                defaultButton='Cancel', cancelButton='Cancel', dismissString='Cancel')
+                button=['Yes', 'No'],
+                defaultButton='No', cancelButton='No', dismissString='No')
 
-        if result == 'OK':
+        if result == 'Yes':
             ltShapes = listAllLights(ltShapes)
             mkLightElem(ltShapes)
 
@@ -205,31 +262,6 @@ def createLightAndLink(mesh, lightName):  #
     return newDome, newRamp
 
 
-# REVIEW[mark] what is this below?
-'''
-// Warning: Texture is enabled for light "VRayLightDomeShape1", but no texture is connected // 
-setAttr "VRayLightDomeShape1.useDomeTex" 1;
-// Warning: Texture is enabled for light "VRayLightDomeShape1", but no texture is connected // 
-defaultNavigation -createNew -destination "VRayLightDomeShape1.domeTex";
-createRenderNode -allWithTexturesUp "defaultNavigation -force true -connectToExisting -source %node 
--destination |VRayLightDome2|VRayLightDomeShape1.domeTex" "";
-defaultNavigation -defaultTraversal -destination "VRayLightDomeShape1.domeTex";
-shadingNode -asTexture ramp;
-// Result: ramp1 // 
-shadingNode -asUtility place2dTexture;
-// Result: place2dTexture3 // 
-connectAttr place2dTexture3.outUV ramp1.uv;
-// Result: Connected place2dTexture3.outUV to ramp1.uvCoord. // 
-connectAttr place2dTexture3.outUvFilterSize ramp1.uvFilterSize;
-// Result: Connected place2dTexture3.outUvFilterSize to ramp1.uvFilterSize. // 
-defaultNavigation -force true -connectToExisting -source ramp1 -destination |VRayLightDome2|VRayLightDomeShape1.domeTex; window -e 
--vis false createRenderNodeWindow;
-connectAttr -force ramp1.outColor VRayLightDomeShape1.domeTex;
-// Result: Connected ramp1.outColor to VRayLightDomeShape1.domeTex. // 
-// Result: createRenderNodeWindow // 
-'''
-
-
 def buildEyeLights():
     """
     Build eye lights for all main characters
@@ -241,9 +273,6 @@ def buildEyeLights():
     for eye in charEyes:
         createLightAndLink(eye[0], eye[1])
 
-
-# def eyeSpecCleanup():
-#     setAttr "VRayPlaceEnvTex2.useTransform" 1;
 
 def lightingCleanup():
     """
