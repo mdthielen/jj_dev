@@ -7,64 +7,32 @@ global proc shelf_lightingTools () {
     shelfButton
         -enableCommandRepeat 1
         -enable 1
-        -width 35
-        -height 35
+        -width 23
+        -height 23
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Run animCleanup script" 
+        -annotation "publish animation or lighting file"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "animCleanup" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Publish"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "AC" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "pythonFamily.png" 
-        -image1 "pythonFamily.png" 
-        -style "iconOnly" 
-        -marginWidth 1
-        -marginHeight 1
-        -command "try: reload(animCleanup)\nexcept: import animCleanup\nanimCleanup.all()" 
-        -sourceType "python" 
-        -commandRepeatable 1
-        -flat 1
-    ;
-    shelfButton
-        -enableCommandRepeat 1
-        -enable 1
-        -width 35
-        -height 35
-        -manage 1
-        -visible 1
-        -preventOverride 0
-        -annotation "publish animation or lighting file" 
-        -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Publish" 
-        -labelOffset 0
-        -rotation 0
-        -flipX 0
-        -flipY 0
-        -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "pub" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "pythonFamily.png" 
-        -image1 "pythonFamily.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "pub"
+        -overlayLabelColor 1 1 1
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "publishAttributes.png"
+        -image1 "publishAttributes.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
         -command "try: reload(pipelineTools)\nexcept: import pipelineTools\npipelineTools.publish()"
-        -sourceType "python" 
+        -sourceType "python"
         -commandRepeatable 1
         -flat 1
     ;
@@ -76,27 +44,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "replace character rigs in the publish file with vray rigs" 
+        -annotation "create light elements for selectedl lights (select locators, not shapes)"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "replace rigs" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Light elements"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "RR" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "pythonFamily.png" 
-        -image1 "pythonFamily.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "LE"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "try: reload(pipelineTools)\nexcept: import pipelineTools\npipelineTools.replaceCharRigs(cmds.file(q=1, l=1)[0])" 
-        -sourceType "python" 
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.autoCreateLightElem()"
+        -sourceType "python"
         -commandRepeatable 1
         -flat 1
     ;
@@ -108,27 +76,63 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "create light elements for selectedl lights (select locators, not shapes)" 
+        -annotation "add VRay open subDiv to selection"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Light elements" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "addVrayOSD"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "LE" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "pythonFamily.png" 
-        -image1 "pythonFamily.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "OSD"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.autoCreateLightElem()" 
-        -sourceType "python" 
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.addVrayOsd(3)"
+        -sourceType "python"
+        -commandRepeatable 1
+        -flat 1
+        -mi "VRayOsd level 2" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.addVrayOsd(2)" )
+        -mip 0
+        -mi "VRay Osd level 1" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.addVrayOsd(1)" )
+        -mip 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "select alll osd"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "select openSubDiv"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "sel"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selVrayOsd()"
+        -sourceType "python"
         -commandRepeatable 1
         -flat 1
     ;
@@ -140,27 +144,63 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "add vray open subDiv to selection" 
+        -annotation "toggle vray open subdiv on or off"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "addVrayOSD" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "toggle osd"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "OSD" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "pythonFamily.png" 
-        -image1 "pythonFamily.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "1/0"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "import lightingTools\nlightingTools.addVrayOSD(3)" 
-        -sourceType "python" 
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.toggleVrayOsd()"
+        -sourceType "python"
+        -commandRepeatable 1
+        -flat 1
+        -mi "VRayOsd all On" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.toggleVrayOsd(force_all=True)" )
+        -mip 0
+        -mi "VRayOsd all Off" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.toggleVrayOsd(force_all=True, force_toggle=0)" )
+        -mip 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Edit the references for the current scene"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Reference Editor"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "RE"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "menuIconFile.png"
+        -image1 "menuIconFile.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "ReferenceEditor"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -172,27 +212,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "select alll osd" 
+        -annotation "Create a V-Ray Rect Light"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "select openSubDiv" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "V-Ray Rect Light"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "sel" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "pythonFamily.png" 
-        -image1 "pythonFamily.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "VRL"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "menuIconEdit.png"
+        -image1 "menuIconEdit.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "for s in shapes:\n    if cmds.attributeQuery('vrayOsdSubdivEnable', node = s, exists = True):\n        cmds.select( s, add = True )" 
-        -sourceType "python" 
+        -command "select -r `shadingNode -asLight VRayLightRectShape`"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -204,27 +244,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "toggle vray open subdiv on or off" 
+        -annotation "Apply vray object properties node to selection"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "toggle osd" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Vray object properties"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "1/0" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "pythonFamily.png" 
-        -image1 "pythonFamily.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "VOP"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "menuIconEdit.png"
+        -image1 "menuIconEdit.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "for s in shapes:\n    if cmds.attributeQuery('vrayOsdSubdivEnable', node = s, exists = True):\n        print s \n        newstate = not cmds.getAttr( s + '.vrayOsdSubdivEnable')\n        print newstate\n        cmds.setAttr( s + '.vrayOsdSubdivEnable', newstate)" 
-        -sourceType "python" 
+        -command "vray objectProperties add_single"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -236,27 +276,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Edit the references for the current scene" 
+        -annotation "Edit the attributes of the selected object(s)"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Reference Editor" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Attribute Spread Sheet"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "RE" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "menuIconFile.png" 
-        -image1 "menuIconFile.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "SpSh"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "menuIconWindow.png"
+        -image1 "menuIconWindow.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "ReferenceEditor" 
-        -sourceType "mel" 
+        -command "SpreadSheetEditor"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -268,27 +308,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Create a V-Ray Rect Light" 
+        -annotation "Edit set membership"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "V-Ray Rect Light" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Sets"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "VRL" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "menuIconEdit.png" 
-        -image1 "menuIconEdit.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "Sets"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "menuIconWindow.png"
+        -image1 "menuIconWindow.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "select -r `shadingNode -asLight VRayLightRectShape`" 
-        -sourceType "mel" 
+        -command "SetEditor"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -300,27 +340,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Apply vray object properties node to selection" 
+        -annotation "Set render test resolution to 100%"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Vray object properties" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Render Settings (1920x1080)"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "VOP" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "menuIconEdit.png" 
-        -image1 "menuIconEdit.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "r100"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "menuIconRender.png"
+        -image1 "menuIconRender.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "vray objectProperties add_single" 
-        -sourceType "mel" 
+        -command "setTestResolutionVar(1)"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -332,27 +372,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Edit the attributes of the selected object(s)" 
+        -annotation "Set render test resolution to 50%"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Attribute Spread Sheet" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "50% Settings (960x540)"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "SpSh" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "menuIconWindow.png" 
-        -image1 "menuIconWindow.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "r050"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "menuIconRender.png"
+        -image1 "menuIconRender.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "SpreadSheetEditor" 
-        -sourceType "mel" 
+        -command "setTestResolutionVar(4)"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -364,27 +404,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Edit set membership" 
+        -annotation "Set render test resolution to 25%"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Sets" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "25% Settings (480x270)"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "Sets" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "menuIconWindow.png" 
-        -image1 "menuIconWindow.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "r025"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "menuIconRender.png"
+        -image1 "menuIconRender.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "SetEditor" 
-        -sourceType "mel" 
+        -command "setTestResolutionVar(3)"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -396,27 +436,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Set render test resolution to 100%" 
+        -annotation "Show VRay Frame Buffer"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Render Settings (1920x1080)" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "vrayShowVFB();"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "r100" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "menuIconRender.png" 
-        -image1 "menuIconRender.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "VFB"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "commandButton.png"
+        -image1 "commandButton.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "setTestResolutionVar(1)" 
-        -sourceType "mel" 
+        -command "vrayShowVFB();"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -428,27 +468,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Set render test resolution to 50%" 
+        -annotation "Light Link Export (selected)"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "50% Settings (960x540)" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "lightingSync export"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "r050" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "menuIconRender.png" 
-        -image1 "menuIconRender.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "LLE"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "setTestResolutionVar(4)" 
-        -sourceType "mel" 
+        -command "import lightingSync\nlightingSync.storeLightLinks()\nlightingSync.exportLightRig()"
+        -sourceType "python"
         -commandRepeatable 1
         -flat 1
     ;
@@ -460,27 +500,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Set render test resolution to 25%" 
+        -annotation "Light Link Apply (selected)"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "25% Settings (480x270)" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "lightingSync apply"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "r025" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "menuIconRender.png" 
-        -image1 "menuIconRender.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "LLA"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "setTestResolutionVar(3)" 
-        -sourceType "mel" 
+        -command "import lightingSync\nlightingSync.applyLightLinks()"
+        -sourceType "python"
         -commandRepeatable 1
         -flat 1
     ;
@@ -492,27 +532,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Show VRay Frame Buffer" 
+        -annotation "Build Eye Lights"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "vrayShowVFB();" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "build eye lights"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "VFB" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "commandButton.png" 
-        -image1 "commandButton.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "EYE"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "vrayShowVFB();" 
-        -sourceType "mel" 
+        -command "import lightingTools\nreload(lightingTools)\nlightingTools.buildEyeLights()"
+        -sourceType "python"
         -commandRepeatable 1
         -flat 1
     ;
@@ -524,27 +564,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Light Link Export (selected)" 
+        -annotation "light-link light-centric"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "lightingSync export" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Light-Centric"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "LLE" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "pythonFamily.png" 
-        -image1 "pythonFamily.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "LLLC"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "menuIconWindow.png"
+        -image1 "menuIconWindow.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "import lightingSync\nlightingSync.storeLightLinks()\nlightingSync.exportLightRig()" 
-        -sourceType "python" 
+        -command "LightCentricLightLinkingEditor"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -556,27 +596,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Light Link Apply (selected)" 
+        -annotation "Light-links object centric"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "lightingSync apply" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Object-Centric"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "LLA" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "pythonFamily.png" 
-        -image1 "pythonFamily.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "LLOC"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "menuIconWindow.png"
+        -image1 "menuIconWindow.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "import lightingSync\nlightingSync.applyLightLinks()" 
-        -sourceType "python" 
+        -command "ObjectCentricLightLinkingEditor"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -588,27 +628,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Build Eye Lights" 
+        -annotation "Make light links between selected lights and selected objects"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "build eye lights" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Make Light Links"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "EYE" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "pythonFamily.png" 
-        -image1 "pythonFamily.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "MLL"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "menuIconShading.png"
+        -image1 "menuIconShading.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "import lightingTools\nreload(lightingTools)\nlightingTools.buildEyeLights()" 
-        -sourceType "python" 
+        -command "MakeLightLinks"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -620,27 +660,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "light-link object-centric" 
+        -annotation "Break light links between selected lights and selected objects"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Light-Centric" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Break Light Links"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "LLLC" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "menuIconWindow.png" 
-        -image1 "menuIconWindow.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "BLL"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "menuIconShading.png"
+        -image1 "menuIconShading.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "LightCentricLightLinkingEditor" 
-        -sourceType "mel" 
+        -command "BreakLightLinks"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -652,27 +692,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Light-links object centric" 
+        -annotation "Make shadow links between selected lights and selected objects"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Object-Centric" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Make Shadow Links"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "LLOC" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "menuIconWindow.png" 
-        -image1 "menuIconWindow.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "MSL"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "menuIconShading.png"
+        -image1 "menuIconShading.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "ObjectCentricLightLinkingEditor" 
-        -sourceType "mel" 
+        -command "MakeShadowLinks"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -684,27 +724,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Make light links between selected lights and selected objects" 
+        -annotation "Break shadow links between selected lights and selected objects"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Make Light Links" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Break Shadow Links"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "MLL" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "menuIconShading.png" 
-        -image1 "menuIconShading.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "BSL"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "menuIconShading.png"
+        -image1 "menuIconShading.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "MakeLightLinks" 
-        -sourceType "mel" 
+        -command "BreakShadowLinks"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -716,27 +756,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Break light links between selected lights and selected objects" 
+        -annotation "Select Bang Geometry"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Break Light Links" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Select Bang Geometry"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "BLL" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "menuIconShading.png" 
-        -image1 "menuIconShading.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "bang"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0.25 1 0.5
+        -image "commandButton.png"
+        -image1 "commandButton.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "BreakLightLinks" 
-        -sourceType "mel" 
+        -command "select -cl; select -r bang_r_arm_bez_GEOShape bang_L_eye_BLENDZ2Shape bang_R_pupil_bigShape |bang|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape bang_L_pupil_bigShape bang_L_pupil_smallShape bang_R_lid_top_GEOShape bang_R_lid_OLDShape bang_R_lid_bot_GEOShape bang_R_pupil_smallShape |bang|R_blinker_bot|joint_lidz|bang_R_eye_BLENDZ3|bang_R_eye_BLENDZ3Shape |bang|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape |bang|L_blinker_top|joint_lidz|bang_L_eye_BLENDZ3|bang_L_eye_BLENDZ3Shape |bang|L_blinker_bot|joint_lidz|bang_L_eye_BLENDZ3|bang_L_eye_BLENDZ3Shape |bang|R_blinker_top|joint_lidz|bang_R_eye_BLENDZ3|bang_R_eye_BLENDZ3Shape bang_L_eye_BLENDZShape bang_L_lid_OLDShape bang_GEO|bang_R_brow_GEO|bang_R_brow_GEO bang_body_GEOShape bang_GEO|bang_L_brow_GEO|bang_L_brow_GEO bang_L_hand_GEOShape bang_L_leg_GEOShape bang_R_hand_GEOShape bang_R_leg_GEOShape bang_l_arm_bez_GEO1Shape bang_L_wheel_GEOShape bang_r_eye_GEO.f[0:239] bang_L_eye_OLDShape bang_L_eye_GEO.f[0:239] bang_l_lid_top_GEOShape bang_mouth_target_bodyShape bang_R_eye_OLDShape bang_l_leg_thick_BSShape bang_R_wheel_GEOShape bang_mouth_target_headShape bang_r_leg_thick_BSShape bang_l_lid_bot_GEOShape bang_head_GEOShape;"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -748,27 +788,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Make shadow links between selected lights and selected objects" 
+        -annotation "Select Beep Geometry"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Make Shadow Links" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Select Beep Geometry"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "MSL" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "menuIconShading.png" 
-        -image1 "menuIconShading.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "beep"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 1 0 0.5
+        -image "commandButton.png"
+        -image1 "commandButton.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "MakeShadowLinks" 
-        -sourceType "mel" 
+        -command "select -cl; select -r |beep|L_blinker_bot|joint_lidz|beep_L_eye_BLENDZ3|beep_L_eye_BLENDZ3Shape beep_r_arm_bez_GEOShape beep_l_lid_bot_GEOShape beep_R_eye_OLDShape beep_L_wheel_GEOShape beep_R_lid_top_GEOShape beep_R_lid_OLDShape beep_L_eye_GEO.f[0:239] beep_R_wheel_GEOShape beep_l_lid_top_GEOShape beep_l_arm_bez_GEO1Shape beep_L_lid_OLDShape beep_L_eye_BLENDZShape beep_R_lid_bot_GEOShape |beep|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape |beep|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape beep_L_eye_BLENDZ2Shape beep_L_arm_GEOShape beep_R_hand_GEOShape beep_L_hand_GEOShape beep_L_leg_GEOShape beep_R_arm_GEOShape beep_head_GEOShape beep_body_GEOShape beep_L_eye_OLDShape beep_mouth_target_headShape |beep|R_blinker_top|joint_lidz|beep_R_eye_BLENDZ3|beep_R_eye_BLENDZ3Shape beep_mouth_target_bodyShape |beep|L_blinker_top|joint_lidz|beep_L_eye_BLENDZ3|beep_L_eye_BLENDZ3Shape beep_r_eye_GEO.f[0:239] beep_L_brow_GEOShape beep_R_leg_GEOShape beep_R_brow_GEOShape |beep|R_blinker_bot|joint_lidz|beep_R_eye_BLENDZ3|beep_R_eye_BLENDZ3Shape;\n"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -780,26 +820,122 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Break shadow links between selected lights and selected objects" 
+        -annotation "Select Bing Geometry"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Break Shadow Links" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Select Bing Geometry"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "BSL" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
-        -image "menuIconShading.png" 
-        -image1 "menuIconShading.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "bing"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 1 1 0 0.5
+        -image "commandButton.png"
+        -image1 "commandButton.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "BreakShadowLinks" 
+        -command "select -cl; select -r bing_Spine_ribbonShape bing_Spine_ribbonBlendShape bing_Neck_ribbonShape bing_Neck_ribbonBlendShape bing_R_hand_GEOShape bing_L_hand_GEOShape bing_l_lid_top_BLENDZ12Shape bing_l_lid_top_BLENDZ13Shape bing_l_lid_top_BLENDZ14Shape bing_l_lid_top_BLENDZ15Shape bing_l_lid_top_BLENDZ19Shape bing_l_lid_top_BLENDZ21Shape bing_l_lid_top_BLENDZ16Shape |bing|L_blinker_bot|joint_lidz|bing_L_eye_BLENDZ3|bing_L_eye_BLENDZ3Shape |bing|L_blinker_bot|joint_lidz|L_tuck_low_BS|L_tuck_low_BSShape |bing|L_blinker_bot|joint_lidz|bing_l_lid_top_BLENDZ22|bing_l_lid_top_BLENDZ22Shape |bing|R_blinker_top|joint_lidz|bing_R_lid_top_BLENDZ22|bing_R_lid_top_BLENDZ22Shape |bing|R_blinker_top|joint_lidz|bing_R_eye_BLENDZ3|bing_R_eye_BLENDZ3Shape |bing|R_blinker_bot|joint_lidz|bing_R_eye_BLENDZ3|bing_R_eye_BLENDZ3Shape |bing|R_blinker_bot|joint_lidz|bing_R_lid_top_BLENDZ22|bing_R_lid_top_BLENDZ22Shape |bing|R_blinker_bot|joint_lidz|R_tuck_low_BS|R_tuck_low_BSShape bing_l_lid_top_BLENDZ20Shape bing_mouth_target_headShape bing_mouth_target_bodyShape |bing|L_blinker_top|joint_lidz|bing_l_lid_top_BLENDZ22|bing_l_lid_top_BLENDZ22Shape |bing|L_blinker_top|joint_lidz|bing_L_eye_BLENDZ3|bing_L_eye_BLENDZ3Shape bing_l_arm_thick_BSShape1 bing_l_leg_thick_BSShape body1Shape bing_L_arm_GEOShape |bing|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape bing_l_lid_top_BLENDZ2Shape bing_L_wheel_GEOShape bing_R_wheel_GEOShape bing_l_lid_bot_BLENDZ24Shape bing_r_arm_bez_GEOShape bing_R_leg_GEOShape bing_r_leg_thick_BSShape bing_GEO|R_pinch|R_pinchShape1 bing_L_eye_GEO.f[0:239] bing_R_lid_OLDShape bing_R_eye_OLDShape bing_R_lid_bot_GEOShape bing_l_arm_bez_GEOShape bing_GEO|L_pinch|L_pinchShape1 bing_R_lid_top_GEOShape bing_l_lid_bot_BLENDZ28Shape bing_L_eye_BLENDZ2Shape bing_L_pupil_bigShape1 bing_R_brow_GEOShape bing_L_brow_GEOShape bing_l_lid_bot_BLENDZ26Shape bing_L_pupil_smallShape1 bing_l_lid_bot_BLENDZ22Shape bing_R_pupil_smallShape1 bing_l_lid_bot_BLENDZ27Shape bing_l_lid_top_BLENDZ10Shape bing_l_lid_bot_BLENDZ29Shape bing_l_lid_bot_BLENDZ31Shape bing_l_lid_bot_BLENDZ23Shape bing_l_lid_bot_BLENDZ25Shape bing_L_eye_BLENDZShape bing_l_lid_top_BLENDZShape bing_l_lid_bot_BLENDZ30Shape bing_L_leg_GEOShape bing_R_arm_GEOShape bing_l_lid_bot_GEOShape bing_r_eye_GEO.f[0:239] bing_l_lid_top_BLENDZ11Shape bing_L_eye_OLDShape bing_l_lid_top_GEOShape bing_head_GEOShape bing_R_pupil_bigShape1 bing_L_lid_OLDShape |bing|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape bing_r_arm_thick_BSShape1;"
+        -sourceType "mel"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Select Bo Geometry"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Select Bo Geometry"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "bo"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0.250234 0 1 0.5
+        -image "commandButton.png"
+        -image1 "commandButton.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "select -cl; select -r bo_Spine_ribbonShape bo_Spine_ribbonBlendShape bo_Neck_ribbonShape bo_Neck_ribbonBlendShape bo_L_hand_GEOShape bo_body_GEO1Shape bo_r_arm_thick_BSShape bo_head_GEOShape bo_L_eye_OLDShape bo_L_eye_GEO.f[0:239] bo_R_lid_top_GEOShape bo_R_wheel_GEOShape |bo|L_blinker_bot|joint_lidz|bo_L_eye_BLENDZ3|bo_L_eye_BLENDZ3Shape |bo|L_blinker_bot|joint_lidz|bo_l_lid_top_BLENDZ22|bo_l_lid_top_BLENDZ22Shape bo_L_eye_BLENDZShape bo_R_lid_bot_GEOShape bo_L_wheel_GEOShape bo_R_eye_OLDShape |bo|R_blinker_bot|joint_lidz|bo_R_eye_BLENDZ3|bo_R_eye_BLENDZ3Shape |bo|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape bo_L_eye_BLENDZ2Shape bo_l_lid_top_BLENDZShape bo_L_lid_OLDShape bo_R_lid_OLDShape bo_l_arm_bez_GEOShape bo_r_arm_bez_GEOShape bo_l_lid_top_BLENDZ15Shape bo_l_lid_bot_BLENDZ23Shape bo_L_pupil_bigShape1 bo_l_lid_top_BLENDZ2Shape bo_l_lid_bot_BLENDZ22Shape bo_R_pupil_smallShape1 bo_l_lid_bot_BLENDZ29Shape bo_l_lid_bot_BLENDZ28Shape |bo|L_blinker_top|joint_lidz|bo_L_eye_BLENDZ3|bo_L_eye_BLENDZ3Shape bo_l_lid_bot_BLENDZ24Shape bo_l_lid_bot_BLENDZ26Shape bo_l_lid_top_GEOShape bo_l_lid_bot_GEOShape |bo|R_blinker_top|joint_lidz|bo_R_eye_BLENDZ3|bo_R_eye_BLENDZ3Shape |bo|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape bo_L_pupil_smallShape1 bo_R_pupil_bigShape1 |bo|L_blinker_top|joint_lidz|bo_l_lid_top_BLENDZ22|bo_l_lid_top_BLENDZ22Shape bo_l_lid_top_BLENDZ11Shape bo_r_eye_GEO.f[0:239] bo_l_lid_bot_BLENDZ27Shape bo_l_lid_bot_BLENDZ25Shape bo_l_lid_top_BLENDZ12Shape |bo|R_blinker_top|joint_lidz|bo_R_lid_top_BLENDZ22|bo_R_lid_top_BLENDZ22Shape bo_l_lid_top_BLENDZ13Shape |bo|R_blinker_bot|joint_lidz|bo_R_lid_top_BLENDZ22|bo_R_lid_top_BLENDZ22Shape bo_mouth_target_headShape bo_l_lid_top_BLENDZ16Shape bo_l_lid_top_BLENDZ19Shape bo_l_lid_top_BLENDZ21Shape bo_l_lid_top_BLENDZ20Shape bo_R_brow_GEOShape bo_body_GEOShape bo_L_leg_GEOShape bo_r_leg_thick_BSShape bo_l_arm_thick_BSShape bo_l_leg_thick_BSShape bo_GEO|R_pinch|R_pinchShape2 bo_L_brow_GEOShape bo_R_leg_GEOShape bo_GEO|L_pinch|L_pinchShape2 bo_L_arm_GEOShape bo_R_arm_GEOShape bo_R_hand_GEOShape bo_l_lid_bot_BLENDZ30Shape bo_l_lid_bot_BLENDZ31Shape bo_l_lid_top_BLENDZ10Shape bo_l_lid_top_BLENDZ14Shape;"
+        -sourceType "mel"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Select Boop Geometry"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Select Boop Geometry"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "boop"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 1 0 0 0.5
+        -image "commandButton.png"
+        -image1 "commandButton.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "select -cl; select -r boop_mouth_target_bodyShape |boop|R_blinker_top|joint_lidz|boop_R_eye_BLENDZ3|boop_R_eye_BLENDZ3Shape |boop|R_blinker_bot|joint_lidz|boop_R_eye_BLENDZ3|boop_R_eye_BLENDZ3Shape boop_L_leg_GEOShape boop_L_hand_GEOShape boop_R_arm_GEOShape boop_R_leg_GEOShape boop_R_hand_GEOShape boop_eyeSpare1Shape boop_L_arm_GEOShape browShape boop_R_lid_bot_GEOShape boop_R_eye_OLDShape boop_R_lid_OLDShape boop_r_eye_GEO.f[0:239] boop_head_GEOShape boop_L_lid_bot_GEOShape boop_R_wheel_GEOShape boop_L_lid_OLDShape |boop|L_blinker_top|joint_lidz|boop_L_eye_BLENDZ3|boop_L_eye_BLENDZ3Shape |boop|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape |boop|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape boop_L_eye_BLENDZShape boop_L_eye_GEO.f[0:239] boop_R_lid_top_GEOShape boop_L_wheel_GEOShape boop_L_eye_OLDShape boop_L_lid_top_GEOShape boop_L_eye_BLENDZ2Shape |boop|L_blinker_bot|joint_lidz|boop_L_eye_BLENDZ3|boop_L_eye_BLENDZ3Shape boop_mouth_target_headShape bodyShape boop_l_arm_bez_GEOShape boop_r_arm_bez_GEOShape boop_l_leg_thick_BSShape boop_r_leg_thick_BSShape;"
+        -sourceType "mel"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Select All Bots Geometry"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Select All Bots Geometry"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "ALL"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0.122 0.122 0.122 0.5
+        -image "commandButton.png"
+        -image1 "commandButton.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "select -cl;\n\nselect bang_r_arm_bez_GEOShape bang_L_eye_BLENDZ2Shape bang_R_pupil_bigShape |bang|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape bang_L_pupil_bigShape bang_L_pupil_smallShape bang_R_lid_top_GEOShape bang_R_lid_OLDShape bang_R_lid_bot_GEOShape bang_R_pupil_smallShape |bang|R_blinker_bot|joint_lidz|bang_R_eye_BLENDZ3|bang_R_eye_BLENDZ3Shape |bang|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape |bang|L_blinker_top|joint_lidz|bang_L_eye_BLENDZ3|bang_L_eye_BLENDZ3Shape |bang|L_blinker_bot|joint_lidz|bang_L_eye_BLENDZ3|bang_L_eye_BLENDZ3Shape |bang|R_blinker_top|joint_lidz|bang_R_eye_BLENDZ3|bang_R_eye_BLENDZ3Shape bang_L_eye_BLENDZShape bang_L_lid_OLDShape bang_GEO|bang_R_brow_GEO|bang_R_brow_GEO bang_body_GEOShape bang_GEO|bang_L_brow_GEO|bang_L_brow_GEO bang_L_hand_GEOShape bang_L_leg_GEOShape bang_R_hand_GEOShape bang_R_leg_GEOShape bang_l_arm_bez_GEO1Shape bang_L_wheel_GEOShape bang_r_eye_GEO.f[0:239] bang_L_eye_OLDShape bang_L_eye_GEO.f[0:239] bang_l_lid_top_GEOShape bang_mouth_target_bodyShape bang_R_eye_OLDShape bang_l_leg_thick_BSShape bang_R_wheel_GEOShape bang_mouth_target_headShape bang_r_leg_thick_BSShape bang_l_lid_bot_GEOShape bang_head_GEOShape;\n\nselect -add |beep|L_blinker_bot|joint_lidz|beep_L_eye_BLENDZ3|beep_L_eye_BLENDZ3Shape beep_r_arm_bez_GEOShape beep_l_lid_bot_GEOShape beep_R_eye_OLDShape beep_L_wheel_GEOShape beep_R_lid_top_GEOShape beep_R_lid_OLDShape beep_L_eye_GEO.f[0:239] beep_R_wheel_GEOShape beep_l_lid_top_GEOShape beep_l_arm_bez_GEO1Shape beep_L_lid_OLDShape beep_L_eye_BLENDZShape beep_R_lid_bot_GEOShape |beep|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape |beep|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape beep_L_eye_BLENDZ2Shape beep_L_arm_GEOShape beep_R_hand_GEOShape beep_L_hand_GEOShape beep_L_leg_GEOShape beep_R_arm_GEOShape beep_head_GEOShape beep_body_GEOShape beep_L_eye_OLDShape beep_mouth_target_headShape |beep|R_blinker_top|joint_lidz|beep_R_eye_BLENDZ3|beep_R_eye_BLENDZ3Shape beep_mouth_target_bodyShape |beep|L_blinker_top|joint_lidz|beep_L_eye_BLENDZ3|beep_L_eye_BLENDZ3Shape beep_r_eye_GEO.f[0:239] beep_L_brow_GEOShape beep_R_leg_GEOShape beep_R_brow_GEOShape |beep|R_blinker_bot|joint_lidz|beep_R_eye_BLENDZ3|beep_R_eye_BLENDZ3Shape;\n\nselect -add bing_Spine_ribbonShape bing_Spine_ribbonBlendShape bing_Neck_ribbonShape bing_Neck_ribbonBlendShape bing_R_hand_GEOShape bing_L_hand_GEOShape bing_l_lid_top_BLENDZ12Shape bing_l_lid_top_BLENDZ13Shape bing_l_lid_top_BLENDZ14Shape bing_l_lid_top_BLENDZ15Shape bing_l_lid_top_BLENDZ19Shape bing_l_lid_top_BLENDZ21Shape bing_l_lid_top_BLENDZ16Shape |bing|L_blinker_bot|joint_lidz|bing_L_eye_BLENDZ3|bing_L_eye_BLENDZ3Shape |bing|L_blinker_bot|joint_lidz|L_tuck_low_BS|L_tuck_low_BSShape |bing|L_blinker_bot|joint_lidz|bing_l_lid_top_BLENDZ22|bing_l_lid_top_BLENDZ22Shape |bing|R_blinker_top|joint_lidz|bing_R_lid_top_BLENDZ22|bing_R_lid_top_BLENDZ22Shape |bing|R_blinker_top|joint_lidz|bing_R_eye_BLENDZ3|bing_R_eye_BLENDZ3Shape |bing|R_blinker_bot|joint_lidz|bing_R_eye_BLENDZ3|bing_R_eye_BLENDZ3Shape |bing|R_blinker_bot|joint_lidz|bing_R_lid_top_BLENDZ22|bing_R_lid_top_BLENDZ22Shape |bing|R_blinker_bot|joint_lidz|R_tuck_low_BS|R_tuck_low_BSShape bing_l_lid_top_BLENDZ20Shape bing_mouth_target_headShape bing_mouth_target_bodyShape |bing|L_blinker_top|joint_lidz|bing_l_lid_top_BLENDZ22|bing_l_lid_top_BLENDZ22Shape |bing|L_blinker_top|joint_lidz|bing_L_eye_BLENDZ3|bing_L_eye_BLENDZ3Shape bing_l_arm_thick_BSShape1 bing_l_leg_thick_BSShape body1Shape bing_L_arm_GEOShape |bing|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape bing_l_lid_top_BLENDZ2Shape bing_L_wheel_GEOShape bing_R_wheel_GEOShape bing_l_lid_bot_BLENDZ24Shape bing_r_arm_bez_GEOShape bing_R_leg_GEOShape bing_r_leg_thick_BSShape bing_GEO|R_pinch|R_pinchShape1 bing_L_eye_GEO.f[0:239] bing_R_lid_OLDShape bing_R_eye_OLDShape bing_R_lid_bot_GEOShape bing_l_arm_bez_GEOShape bing_GEO|L_pinch|L_pinchShape1 bing_R_lid_top_GEOShape bing_l_lid_bot_BLENDZ28Shape bing_L_eye_BLENDZ2Shape bing_L_pupil_bigShape1 bing_R_brow_GEOShape bing_L_brow_GEOShape bing_l_lid_bot_BLENDZ26Shape bing_L_pupil_smallShape1 bing_l_lid_bot_BLENDZ22Shape bing_R_pupil_smallShape1 bing_l_lid_bot_BLENDZ27Shape bing_l_lid_top_BLENDZ10Shape bing_l_lid_bot_BLENDZ29Shape bing_l_lid_bot_BLENDZ31Shape bing_l_lid_bot_BLENDZ23Shape bing_l_lid_bot_BLENDZ25Shape bing_L_eye_BLENDZShape bing_l_lid_top_BLENDZShape bing_l_lid_bot_BLENDZ30Shape bing_L_leg_GEOShape bing_R_arm_GEOShape bing_l_lid_bot_GEOShape bing_r_eye_GEO.f[0:239] bing_l_lid_top_BLENDZ11Shape bing_L_eye_OLDShape bing_l_lid_top_GEOShape bing_head_GEOShape bing_R_pupil_bigShape1 bing_L_lid_OLDShape |bing|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape bing_r_arm_thick_BSShape1;\n\nselect -add bo_Spine_ribbonShape bo_Spine_ribbonBlendShape bo_Neck_ribbonShape bo_Neck_ribbonBlendShape bo_L_hand_GEOShape bo_body_GEO1Shape bo_r_arm_thick_BSShape bo_head_GEOShape bo_L_eye_OLDShape bo_L_eye_GEO.f[0:239] bo_R_lid_top_GEOShape bo_R_wheel_GEOShape |bo|L_blinker_bot|joint_lidz|bo_L_eye_BLENDZ3|bo_L_eye_BLENDZ3Shape |bo|L_blinker_bot|joint_lidz|bo_l_lid_top_BLENDZ22|bo_l_lid_top_BLENDZ22Shape bo_L_eye_BLENDZShape bo_R_lid_bot_GEOShape bo_L_wheel_GEOShape bo_R_eye_OLDShape |bo|R_blinker_bot|joint_lidz|bo_R_eye_BLENDZ3|bo_R_eye_BLENDZ3Shape |bo|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape bo_L_eye_BLENDZ2Shape bo_l_lid_top_BLENDZShape bo_L_lid_OLDShape bo_R_lid_OLDShape bo_l_arm_bez_GEOShape bo_r_arm_bez_GEOShape bo_l_lid_top_BLENDZ15Shape bo_l_lid_bot_BLENDZ23Shape bo_L_pupil_bigShape1 bo_l_lid_top_BLENDZ2Shape bo_l_lid_bot_BLENDZ22Shape bo_R_pupil_smallShape1 bo_l_lid_bot_BLENDZ29Shape bo_l_lid_bot_BLENDZ28Shape |bo|L_blinker_top|joint_lidz|bo_L_eye_BLENDZ3|bo_L_eye_BLENDZ3Shape bo_l_lid_bot_BLENDZ24Shape bo_l_lid_bot_BLENDZ26Shape bo_l_lid_top_GEOShape bo_l_lid_bot_GEOShape |bo|R_blinker_top|joint_lidz|bo_R_eye_BLENDZ3|bo_R_eye_BLENDZ3Shape |bo|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape bo_L_pupil_smallShape1 bo_R_pupil_bigShape1 |bo|L_blinker_top|joint_lidz|bo_l_lid_top_BLENDZ22|bo_l_lid_top_BLENDZ22Shape bo_l_lid_top_BLENDZ11Shape bo_r_eye_GEO.f[0:239] bo_l_lid_bot_BLENDZ27Shape bo_l_lid_bot_BLENDZ25Shape bo_l_lid_top_BLENDZ12Shape |bo|R_blinker_top|joint_lidz|bo_R_lid_top_BLENDZ22|bo_R_lid_top_BLENDZ22Shape bo_l_lid_top_BLENDZ13Shape |bo|R_blinker_bot|joint_lidz|bo_R_lid_top_BLENDZ22|bo_R_lid_top_BLENDZ22Shape bo_mouth_target_headShape bo_l_lid_top_BLENDZ16Shape bo_l_lid_top_BLENDZ19Shape bo_l_lid_top_BLENDZ21Shape bo_l_lid_top_BLENDZ20Shape bo_R_brow_GEOShape bo_body_GEOShape bo_L_leg_GEOShape bo_r_leg_thick_BSShape bo_l_arm_thick_BSShape bo_l_leg_thick_BSShape bo_GEO|R_pinch|R_pinchShape2 bo_L_brow_GEOShape bo_R_leg_GEOShape bo_GEO|L_pinch|L_pinchShape2 bo_L_arm_GEOShape bo_R_arm_GEOShape bo_R_hand_GEOShape bo_l_lid_bot_BLENDZ30Shape bo_l_lid_bot_BLENDZ31Shape bo_l_lid_top_BLENDZ10Shape bo_l_lid_top_BLENDZ14Shape;\n\nselect -add boop_mouth_target_bodyShape |boop|R_blinker_top|joint_lidz|boop_R_eye_BLENDZ3|boop_R_eye_BLENDZ3Shape |boop|R_blinker_bot|joint_lidz|boop_R_eye_BLENDZ3|boop_R_eye_BLENDZ3Shape boop_L_leg_GEOShape boop_L_hand_GEOShape boop_R_arm_GEOShape boop_R_leg_GEOShape boop_R_hand_GEOShape boop_eyeSpare1Shape boop_L_arm_GEOShape browShape boop_R_lid_bot_GEOShape boop_R_eye_OLDShape boop_R_lid_OLDShape boop_r_eye_GEO.f[0:239] boop_head_GEOShape boop_L_lid_bot_GEOShape boop_R_wheel_GEOShape boop_L_lid_OLDShape |boop|L_blinker_top|joint_lidz|boop_L_eye_BLENDZ3|boop_L_eye_BLENDZ3Shape |boop|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape |boop|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape boop_L_eye_BLENDZShape boop_L_eye_GEO.f[0:239] boop_R_lid_top_GEOShape boop_L_wheel_GEOShape boop_L_eye_OLDShape boop_L_lid_top_GEOShape boop_L_eye_BLENDZ2Shape |boop|L_blinker_bot|joint_lidz|boop_L_eye_BLENDZ3|boop_L_eye_BLENDZ3Shape boop_mouth_target_headShape bodyShape boop_l_arm_bez_GEOShape boop_r_arm_bez_GEOShape boop_l_leg_thick_BSShape boop_r_leg_thick_BSShape;\n"
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
