@@ -417,8 +417,22 @@ def lightingCleanup():
         cmds.hide(shd)
     cmds.hide('SHD_GEO_GRP')
 
-if __name__ == '__main__':
-    buildEyeLights()
+
+def selChar(char=None, shapes=True, transforms=False):
+    """
+    Select characters transform or shape nodes.
+    
+    :param char: None is default. Name of character can be passed. All or all can be passed to select all characters.
+    :param shapes: True is default. Select shape nodes of character.
+    :param transforms: False is default. Select transforms of character.
+    """
+
+    if shapes:
+        cmds.select('{}*GEOShape'.format(char), r=1)
+    if transforms:
+        cmds.select('{}*GEO'.format(char), r=1)
+
+
 
 __author__ = "Robert Showalter"
 __copyright__ = "Copyright 2017, Jib Jab Studios"

@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="60660b26-05be-49d9-832a-fac41afd6d86" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_scripts/python/printFrameRange.py" afterPath="$PROJECT_DIR$/maya_scripts/python/printFrameRange.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_scripts/python/lightingTools.py" afterPath="$PROJECT_DIR$/maya_scripts/python/lightingTools.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,21 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lightingTools.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="lightingTools.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/maya_scripts/python/lightingTools.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-87">
-              <caret line="150" column="24" lean-forward="true" selection-start-line="150" selection-start-column="24" selection-end-line="150" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="printFrameRange.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/maya_scripts/python/printFrameRange.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="59" column="42" lean-forward="true" selection-start-line="59" selection-start-column="42" selection-end-line="59" selection-end-column="42" />
+            <state relative-caret-position="465">
+              <caret line="428" column="0" lean-forward="true" selection-start-line="428" selection-start-column="0" selection-end-line="428" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -169,8 +159,8 @@
         <option value="$PROJECT_DIR$/maya_scripts/python/maya_initialize.py" />
         <option value="$PROJECT_DIR$/maya_shelves/lighting/shelf_lightingTools.mel" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py" />
-        <option value="$PROJECT_DIR$/maya_scripts/python/lightingTools.py" />
         <option value="$PROJECT_DIR$/maya_scripts/python/printFrameRange.py" />
+        <option value="$PROJECT_DIR$/maya_scripts/python/lightingTools.py" />
       </list>
     </option>
   </component>
@@ -768,7 +758,14 @@
       <option name="project" value="LOCAL" />
       <updated>1489374613947</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="print out if no playbackOptions found">
+      <created>1489374691601</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1489374691601</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -812,7 +809,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="add mc import line" />
     <MESSAGE value="clean up code" />
     <MESSAGE value="ignore .idea folder&#10;update sbtvInfo based on new folder structure&#10;added debug into sbtvInfo&#10;added sbtvKeyMaker&#10;generated new sbtvKey.txt" />
     <MESSAGE value="fix seq name split with multiple underscores&#10;generate new sbtvKey.txt with correct seq names" />
@@ -837,7 +833,8 @@
     <MESSAGE value="update shelf pointing to lightingTools" />
     <MESSAGE value="make eye lights for new light setup&#10;shelf update&#10;todo for maya_initialize" />
     <MESSAGE value="clean up output to print start and end frame" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean up output to print start and end frame" />
+    <MESSAGE value="print out if no playbackOptions found" />
+    <option name="LAST_COMMIT_MESSAGE" value="print out if no playbackOptions found" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1187,18 +1184,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/lightingTools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-87">
-          <caret line="150" column="24" lean-forward="true" selection-start-line="150" selection-start-column="24" selection-end-line="150" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/maya_scripts/python/printFrameRange.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
           <caret line="59" column="42" lean-forward="true" selection-start-line="59" selection-start-column="42" selection-end-line="59" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/lightingTools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="428" column="0" lean-forward="true" selection-start-line="428" selection-start-column="0" selection-end-line="428" selection-end-column="0" />
           <folding />
         </state>
       </provider>
