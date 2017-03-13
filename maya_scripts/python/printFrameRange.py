@@ -44,10 +44,10 @@ def findContents(fileContents, search_text):
 if __name__ == '__main__':
     file_contents = readFile(sys.argv[1])
     line = findContents(file_contents, text)
-    # print line
-    index = 0
+
     print sys.argv[1]
     if line:
+        index = 0
         for element in line.split(' '):
             if 'ast' in element:
                 start = line.split(' ')[index + 1]
@@ -56,6 +56,8 @@ if __name__ == '__main__':
                 end = line.split(' ')[index + 1]
                 print('End frame:   {}'.format(end))
             index += 1
+    else:
+        print('No playbackOptions found.')
 
 
 __author__ = "Robert Showalter"
