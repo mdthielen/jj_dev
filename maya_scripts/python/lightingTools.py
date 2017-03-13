@@ -148,7 +148,7 @@ def listAllLights(ltShapes):
     """
     for t in maLightTypes:
         [ltShapes.append(x) for x in cmds.ls(type=t)]
-
+    cmds.playbackOptions()
     return ltShapes
 
 

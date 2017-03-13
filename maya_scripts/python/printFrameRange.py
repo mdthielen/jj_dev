@@ -43,7 +43,20 @@ def findContents(fileContents, search_text):
 
 if __name__ == '__main__':
     file_contents = readFile(sys.argv[1])
-    print (findContents(file_contents, text))
+    line = findContents(file_contents, text)
+    # print line
+    index = 0
+    print sys.argv[1]
+    if line:
+        for element in line.split(' '):
+            if 'ast' in element:
+                start = line.split(' ')[index + 1]
+                print('Start frame: {}'.format(start))
+            if 'aet' in element:
+                end = line.split(' ')[index + 1]
+                print('End frame:   {}'.format(end))
+            index += 1
+
 
 __author__ = "Robert Showalter"
 __copyright__ = "Copyright 2017, Jib Jab Studios"

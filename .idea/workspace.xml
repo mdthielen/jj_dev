@@ -4,12 +4,10 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60660b26-05be-49d9-832a-fac41afd6d86" name="Default" comment="clean formatting of code&#10;add Jib Jab header and footer&#10;add docstrings to all functions">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jj_dev.iml" afterPath="$PROJECT_DIR$/.idea/jj_dev.iml" />
+    <list default="true" id="60660b26-05be-49d9-832a-fac41afd6d86" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_scripts/python/lightingTools.py" afterPath="$PROJECT_DIR$/maya_scripts/python/lightingTools.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_scripts/python/maya_initialize.py" afterPath="$PROJECT_DIR$/maya_scripts/python/maya_initialize.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_shelves/lighting/shelf_lightingTools.mel" afterPath="$PROJECT_DIR$/maya_shelves/lighting/shelf_lightingTools.mel" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_scripts/python/printFrameRange.py" afterPath="$PROJECT_DIR$/maya_scripts/python/printFrameRange.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,11 +35,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lightingTools.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="lightingTools.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/maya_scripts/python/lightingTools.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="670">
-              <caret line="377" column="48" lean-forward="true" selection-start-line="377" selection-start-column="48" selection-end-line="377" selection-end-column="48" />
+            <state relative-caret-position="-87">
+              <caret line="150" column="24" lean-forward="true" selection-start-line="150" selection-start-column="24" selection-end-line="150" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="printFrameRange.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/maya_scripts/python/printFrameRange.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="445">
+              <caret line="58" column="12" lean-forward="false" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -87,7 +95,6 @@
       <find>shape</find>
       <find>autoCreateLightElem</find>
       <find>listAllLights</find>
-      <find>checkSelectedLights</find>
       <find>buildE</find>
       <find>lightingCleanup</find>
       <find>mkLightElem</find>
@@ -98,6 +105,7 @@
       <find>LGT_GRP</find>
       <find>print</find>
       <find>lightShape</find>
+      <find>checkSelectedLights</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -152,7 +160,6 @@
         <option value="$PROJECT_DIR$/maya_scripts/python/Old/animPrep_old01.py" />
         <option value="$PROJECT_DIR$/maya_scripts/python/RnD/cmdtest.py" />
         <option value="$PROJECT_DIR$/maya_scripts/python/lightingSetup.py" />
-        <option value="$PROJECT_DIR$/maya_scripts/python/printFrameRange.py" />
         <option value="$PROJECT_DIR$/maya_scripts/python/propagateLighting.py" />
         <option value="$PROJECT_DIR$/maya_scripts/python/userSetup.py" />
         <option value="$USER_HOME$/Library/Preferences/Autodesk/maya/2017/prefs/shelves/shelf_VRay.mel" />
@@ -164,6 +171,7 @@
         <option value="$PROJECT_DIR$/maya_shelves/lighting/shelf_lightingTools.mel" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py" />
         <option value="$PROJECT_DIR$/maya_scripts/python/lightingTools.py" />
+        <option value="$PROJECT_DIR$/maya_scripts/python/printFrameRange.py" />
       </list>
     </option>
   </component>
@@ -336,25 +344,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.scratch_2">
-    <configuration default="false" name="sbtvInfo" type="PythonConfigurationType" factoryName="Python" singleton="true" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/maya_scripts/python" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="jj_dev" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/maya_scripts/python/sbtvInfo.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.printFrameRange">
     <configuration default="false" name="maya_initialize" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -423,6 +413,24 @@
       <module name="jj_dev" />
       <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py" />
       <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="printFrameRange" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/maya_scripts/python" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="jj_dev" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/maya_scripts/python/printFrameRange.py" />
+      <option name="PARAMETERS" value="$PROJECT_DIR$/../../01_characters/01_beep/beep_rig.ma" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <method />
@@ -533,19 +541,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="MayaCharm Runner.test_none" />
-      <item index="1" class="java.lang.String" itemvalue="Python.sbtvInfo" />
-      <item index="2" class="java.lang.String" itemvalue="Python.maya_initialize" />
-      <item index="3" class="java.lang.String" itemvalue="Python.animPrep" />
-      <item index="4" class="java.lang.String" itemvalue="Python.lightingTools" />
-      <item index="5" class="java.lang.String" itemvalue="Python.scratch_2" />
+      <item index="1" class="java.lang.String" itemvalue="Python.maya_initialize" />
+      <item index="2" class="java.lang.String" itemvalue="Python.animPrep" />
+      <item index="3" class="java.lang.String" itemvalue="Python.lightingTools" />
+      <item index="4" class="java.lang.String" itemvalue="Python.scratch_2" />
+      <item index="5" class="java.lang.String" itemvalue="Python.printFrameRange" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.scratch_2" />
-        <item index="1" class="java.lang.String" itemvalue="Python.lightingTools" />
-        <item index="2" class="java.lang.String" itemvalue="Python.maya_initialize" />
-        <item index="3" class="java.lang.String" itemvalue="Python.animPrep" />
-        <item index="4" class="java.lang.String" itemvalue="Python.sbtvInfo" />
+        <item index="0" class="java.lang.String" itemvalue="Python.printFrameRange" />
+        <item index="1" class="java.lang.String" itemvalue="Python.scratch_2" />
+        <item index="2" class="java.lang.String" itemvalue="Python.lightingTools" />
+        <item index="3" class="java.lang.String" itemvalue="Python.maya_initialize" />
+        <item index="4" class="java.lang.String" itemvalue="Python.animPrep" />
       </list>
     </recent_temporary>
     <configuration default="true" type="tests" factoryName="Attests">
@@ -747,7 +755,14 @@
       <option name="project" value="LOCAL" />
       <updated>1489135619083</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="make eye lights for new light setup&#10;shelf update&#10;todo for maya_initialize">
+      <created>1489372915848</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1489372915848</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -765,7 +780,7 @@
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281768" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26961327" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26961327" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281768" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33701658" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -791,7 +806,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="tabs to spaces fix" />
     <MESSAGE value="tabs to spaces fix&#10;add .idea files" />
     <MESSAGE value="add mc import line" />
     <MESSAGE value="clean up code" />
@@ -816,7 +830,8 @@
     <MESSAGE value="print out export to heads up display and to script editor" />
     <MESSAGE value="move maLightTypes variable to top&#10;make getShapeNodesList function&#10;use confirmDialog if no lights selected&#10;clean code" />
     <MESSAGE value="update shelf pointing to lightingTools" />
-    <option name="LAST_COMMIT_MESSAGE" value="update shelf pointing to lightingTools" />
+    <MESSAGE value="make eye lights for new light setup&#10;shelf update&#10;todo for maya_initialize" />
+    <option name="LAST_COMMIT_MESSAGE" value="make eye lights for new light setup&#10;shelf update&#10;todo for maya_initialize" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -831,11 +846,16 @@
           <line>14</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/maya_scripts/python/printFrameRange.py</url>
+          <line>50</line>
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="61" />
+      <option name="time" value="62" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1028,13 +1048,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/printFrameRange.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="47" column="30" lean-forward="false" selection-start-line="47" selection-start-column="14" selection-end-line="47" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/maya_scripts/python/propagateLighting.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="553">
@@ -1175,8 +1188,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/maya_scripts/python/lightingTools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="377" column="48" lean-forward="true" selection-start-line="377" selection-start-column="48" selection-end-line="377" selection-end-column="48" />
+        <state relative-caret-position="-87">
+          <caret line="150" column="24" lean-forward="true" selection-start-line="150" selection-start-column="24" selection-end-line="150" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/printFrameRange.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="445">
+          <caret line="58" column="12" lean-forward="false" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="12" />
           <folding />
         </state>
       </provider>
