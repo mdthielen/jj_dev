@@ -64,6 +64,9 @@ def maya_env(filepath, dev=False):
     Todo:
 
     """
+
+    # todo-mark add MAYA_RENDER_SETUP_GLOBAL_PRESETS_PATH to Maya.env
+
     # quick parameter checks
     try:
         assert os.path.exists(filepath)

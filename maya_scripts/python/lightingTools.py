@@ -152,22 +152,6 @@ def listAllLights(ltShapes):
     return ltShapes
 
 
-def mkLightElem(ltShapes):
-    """
-    Make render element for lights
-    :param ltShapes: selected light shape nodes
-    """
-    import maya.mel
-
-    for lt in ltShapes:
-        ltTran = cmds.listRelatives(lt, p=1)[0]
-        elem = 'vrayRE_' + ltTran
-        maya.mel.eval('vrayAddRenderElement( "LightSelectElement" );')
-        cmds.rename('vrayRE_Light_Select', elem)
-        cmds.setAttr(elem + '.vray_name_lightselect', 'lt_' + ltTran, type='string')
-        cmds.sets(ltTran, addElement=elem)
-
-
 def autoCreateLightElem():
     """
     Auto create render element for lights
@@ -190,88 +174,224 @@ def autoCreateLightElem():
             mkLightElem(ltShapes)
 
 
-def characterEyes():
+def mkLightElem(ltShapes):
     """
-    Find all main character pupils
-    :return: charEyes all pupils
+    Make render element for lights
+    :param ltShapes: selected light shape nodes
     """
-    import re
+    import maya.mel
 
-    visMesh = cmds.ls(et="mesh", v=1)
-    characters = ["bang", "boop", "bing", "bo", "beep"]
-    leftEyePattern = "_lpupil|_l_.*pupil"
-    rightEyePattern = "_rpupil|_r_.*pupil"
-    charEyes = []
-
-    for mesh in visMesh:
-        for char in characters:
-            if re.search(char + "_.*pupil", mesh, re.I) and not re.search("orig$|rig1$", mesh, re.I):
-                if re.search(leftEyePattern, mesh, re.I):  # LEFT EYES
-                    charEyes.append([mesh, char + "_R_eyeSpec"])  # pair rig-left with screen-right
-
-                if re.search(rightEyePattern, mesh, re.I):  # RIGHT EYES
-                    charEyes.append([mesh, char + "_L_eyeSpec"])  # pair rig-right with screen-left
-    return charEyes
-
-
-def createLightAndLink(mesh, lightName):  #
-    """
-    create vray dome with a disc and link it only to the mesh objects.
-    :param mesh: multiple meshes can be used with the syntax: ( "obj1", "obj2", "obj3" )
-    :param lightName: light to link to
-    :return: newDome, newRamp: new light dome and new ramp on dome
-    """
-    lightShape = lightName + "Shape"
-
-    # create a vray dome
-    newDome = cmds.shadingNode("VRayLightDomeShape", asLight=True, name=lightShape)
-
-    # set the dome attributes
-    cmds.setAttr(lightShape + ".intensityMult", 10)
-    cmds.setAttr(lightShape + ".shadows", 0)
-    cmds.setAttr(lightShape + ".useDomeTex", 1)
-    ###
-    cmds.setAttr(lightShape + ".invisible", 1)
-    cmds.setAttr(lightShape + ".affectDiffuse", 0)
-    cmds.setAttr(lightShape + ".affectSpecular", 1)
-    cmds.setAttr(lightShape + ".affectReflections", 0)
-    cmds.setAttr(lightShape + ".affectAlpha", 0)
-
-    # create ramp texture
-    newRamp = cmds.shadingNode("ramp", asTexture=True, name=lightName + "_Ramp")
-    placeTex = cmds.shadingNode("VRayPlaceEnvTex", asUtility=True, name=lightName + "_VRayPlaceEnvTex")
-    cmds.setAttr(placeTex + ".mappingType", 2)
-    cmds.setAttr(placeTex + ".useTransform", 1)
-
-    # first ramp point
-    cmds.setAttr(newRamp + ".colorEntryList[0].position", 0.96)
-    cmds.setAttr(newRamp + ".colorEntryList[0].color", 0, 0, 0, type="double3")
-    # second ramp point
-    cmds.setAttr(newRamp + ".colorEntryList[1].position", 0.97)
-    cmds.setAttr(newRamp + ".colorEntryList[1].color", 1, 1, 1, type="double3")
-
-    # Connect texture
-    cmds.connectAttr(newRamp + ".outColor", lightShape + ".domeTex", force=True)
-    cmds.connectAttr(placeTex + ".outUV", newRamp + ".uvCoord", force=True)
-    cmds.connectAttr(lightShape + ".worldMatrix[0]", placeTex + ".transform")
-
-    # Break light links with everything but the mesh(s)
-    cmds.lightlink(b=True, light=newDome, object=cmds.ls())
-    cmds.lightlink(make=True, light=newDome, object=mesh)
-
-    return newDome, newRamp
+    for lt in ltShapes:
+        ltTran = cmds.listRelatives(lt, p=1)[0]
+        elem = 'vrayRE_' + ltTran
+        maya.mel.eval('vrayAddRenderElement( "LightSelectElement" );')
+        cmds.rename('vrayRE_Light_Select', elem)
+        cmds.setAttr(elem + '.vray_name_lightselect', 'lt_' + ltTran, type='string')
+        cmds.sets(ltTran, addElement=elem)
 
 
 def buildEyeLights():
     """
     Build eye lights for all main characters
     """
+    print('\nJib Jab - buildEyeLights:')
+    sel_before_starting = cmds.ls(sl=1, l=1)
     # Get main character pupils
-    charEyes = characterEyes()
+    eyes = characterEyes()
 
     # Create light and link to pupils
-    for eye in charEyes:
+    print('\nBegin create lights and light linking:')
+
+    for eye in eyes:
         createLightAndLink(eye[0], eye[1])
+
+    cmds.select(sel_before_starting, r=1)
+    print('Jib Jab - buildEyeLights COMPLETE')
+
+
+def characterEyes():
+    """
+    Find all main character pupils
+    :return: charEyes all pupils
+    """
+
+    import re
+
+    print('Searching for eye geo and existing eye light rigs:')
+
+    eyes_visible = cmds.ls('*eye_*GEO', et='transform', v=1, l=1)
+    characters = ["bang", "boop", "bing", "bo", "beep"]
+
+    charEyes = []
+    eye_lights_old_char = []
+
+    for char in characters:
+        for mesh in eyes_visible:
+
+            # Test if old light rig exists
+            update_eye_lights = 'Yes'
+            eye_lights_old = cmds.ls('*ye_*pec_LGT*', v=1, type='transform', l=1)
+
+            if eye_lights_old:
+                light_old_exists = False
+                for light_old in eye_lights_old:
+                    if char in light_old:
+                        light_old_exists = True
+                        eye_lights_old_char.append(light_old)
+                if light_old_exists:
+                    # Ask to update eye light rig
+                    update_eye_lights = cmds.confirmDialog(title='Replace current eye lights for {}'.format(char),
+                                                           message='Are you sure?',
+                                                           button=['Yes', 'No'],
+                                                           defaultButton='Yes',
+                                                           cancelButton='No',
+                                                           dismissString='No')
+                    if update_eye_lights == 'Yes':
+                        if eye_lights_old_char:
+                            # Ask to delete old rig
+                            confirm_delete_lights = cmds.confirmDialog(title='Delete light setup for {}'.format(char),
+                                                                       message='Are you sure?',
+                                                                       button=['Yes', 'No'],
+                                                                       defaultButton='Yes',
+                                                                       cancelButton='No',
+                                                                       dismissString='No')
+                            if confirm_delete_lights == 'Yes':
+                                for light_old_del in eye_lights_old_char:
+                                    cmds.delete(light_old_del)
+                                old_groups = cmds.ls('*LGT_GRP', l=1)
+
+                                # Look for old Spec_LGT_GRP nodes in char to delete
+                                if old_groups:
+                                    for group in old_groups:
+                                        if char in group:
+                                            cmds.delete(group)
+            # Create running list of all geo and lights for eye light
+            if update_eye_lights == 'Yes':
+                if re.search('{}_L'.format(char), mesh, re.IGNORECASE):  # LEFT EYES
+                    charEyes.append([mesh, '{}_L_eye_spec_LGT'.format(char)])
+                    print('Found L_eye:   {}'.format(mesh))
+                if re.search('{}_R'.format(char), mesh, re.IGNORECASE):  # RIGHT EYES
+                    charEyes.append([mesh, '{}_R_eye_spec_LGT'.format(char)])
+                    print('Found R_eye:   {}'.format(mesh))
+
+    return charEyes
+
+
+def createLightAndLink(mesh, lightName, dome=False, rect=True):  #
+    """
+    create vray dome with a disc and link it only to the mesh objects.
+    :param dome: specify to create a dome light for the eyes. Default is False
+    :param rect: specify to create a Rect light for the eyes. Default is True
+    :param mesh: multiple meshes can be used with the syntax: ( "obj1", "obj2", "obj3" )
+    :param lightName: light to link to
+    :return: new_eye_light, newRamp: new light (dome or rect) and new ramp on dome
+    """
+
+    lightShape = lightName + "Shape"
+    char = lightName.split('_')[0]
+    eye_group = ('{}_eye_spec_LGT_GRP'.format(char))
+    if not cmds.objExists(eye_group):
+        cmds.group(empty=1, parent='{}_MainC'.format(char), name=eye_group)
+    eye_group_longname = cmds.ls(eye_group, l=1)[0]
+    new_eye_light = None
+
+    if dome:
+        # create a vray dome
+        new_eye_light = cmds.shadingNode("VRayLightDomeShape", asLight=True, name=lightShape)
+        cmds.parent(new_eye_light, eye_group_longname)
+        print('Created VRay Light Dome light:   {}'.format(new_eye_light))
+
+        # set the dome attributes
+        cmds.setAttr(lightShape + ".intensityMult", 10)
+        cmds.setAttr(lightShape + ".shadows", 0)
+        cmds.setAttr(lightShape + ".useDomeTex", 1)
+        ###
+        cmds.setAttr(lightShape + ".invisible", 1)
+        cmds.setAttr(lightShape + ".affectDiffuse", 0)
+        cmds.setAttr(lightShape + ".affectSpecular", 1)
+        cmds.setAttr(lightShape + ".affectReflections", 0)
+        cmds.setAttr(lightShape + ".affectAlpha", 0)
+
+        # create ramp texture
+        newRamp = cmds.shadingNode("ramp", asTexture=True, name=lightName + "_Ramp")
+        placeTex = cmds.shadingNode("VRayPlaceEnvTex", asUtility=True, name=lightName + "_VRayPlaceEnvTex")
+        cmds.setAttr(placeTex + ".mappingType", 2)
+        cmds.setAttr(placeTex + ".useTransform", 1)
+
+        # first ramp point
+        cmds.setAttr(newRamp + ".colorEntryList[0].position", 0.96)
+        cmds.setAttr(newRamp + ".colorEntryList[0].color", 0, 0, 0, type="double3")
+        # second ramp point
+        cmds.setAttr(newRamp + ".colorEntryList[1].position", 0.97)
+        cmds.setAttr(newRamp + ".colorEntryList[1].color", 1, 1, 1, type="double3")
+
+        # Connect texture
+        cmds.connectAttr(newRamp + ".outColor", lightShape + ".domeTex", force=True)
+        cmds.connectAttr(placeTex + ".outUV", newRamp + ".uvCoord", force=True)
+        cmds.connectAttr(lightShape + ".worldMatrix[0]", placeTex + ".transform")
+
+        print('Set attributes for:   {}'.format(new_eye_light))
+
+    elif rect:
+        # Create VRay Light Rect
+        new_eye_light = cmds.shadingNode("VRayLightRectShape", asLight=True, name=lightShape)
+        cmds.parent(new_eye_light, eye_group_longname)
+        print('Created VRay Light Rect:   {}'.format(new_eye_light))
+
+        # set the rect attributes
+
+        # Transform Left
+        if '_L_' in new_eye_light:
+            cmds.setAttr(new_eye_light + ".tx", -2.5)
+            cmds.setAttr(new_eye_light + ".ty", 10)
+            cmds.setAttr(new_eye_light + ".tz", 8)
+            cmds.setAttr(new_eye_light + ".rx", -5)
+            cmds.setAttr(new_eye_light + ".ry", -24)
+            cmds.setAttr(new_eye_light + ".rz", -0.75)
+            cmds.setAttr(new_eye_light + ".sx", 1.6)
+            cmds.setAttr(new_eye_light + ".sy", 1.6)
+            cmds.setAttr(new_eye_light + ".sz", 1.6)
+
+        # Transform Right
+        if '_R_' in new_eye_light:
+            cmds.setAttr(new_eye_light + ".tx", -8)
+            cmds.setAttr(new_eye_light + ".ty", 10)
+            cmds.setAttr(new_eye_light + ".tz", 6)
+            cmds.setAttr(new_eye_light + ".rx", -5)
+            cmds.setAttr(new_eye_light + ".ry", -24)
+            cmds.setAttr(new_eye_light + ".rz", -3)
+            cmds.setAttr(new_eye_light + ".sx", 1.6)
+            cmds.setAttr(new_eye_light + ".sy", 1.6)
+            cmds.setAttr(new_eye_light + ".sz", 1.6)
+
+        # Basic parameters
+        cmds.setAttr(lightShape + ".intensityMult", 38.889)
+        cmds.setAttr(lightShape + ".shapeType", 1)
+
+        # Options
+        cmds.setAttr(lightShape + ".invisible", 1)
+        cmds.setAttr(lightShape + ".affectDiffuse", 0)
+        cmds.setAttr(lightShape + ".affectSpecular", 1)
+        cmds.setAttr(lightShape + ".affectReflections", 1)
+
+        # shadows
+        cmds.setAttr(lightShape + ".shadows", 1)
+        cmds.setAttr(lightShape + ".shadowBias", 0.02)
+
+        print('Set attributes for: {}'.format(new_eye_light))
+
+    # Break light links with everything but the mesh(s)
+    print('Light linking:')
+    if new_eye_light:
+        cmds.lightlink(b=True, light=new_eye_light, object=cmds.ls())
+        cmds.lightlink(make=True, light=new_eye_light, object=mesh)
+        print ('Linked\t{}  --->  {}'.format(new_eye_light, mesh))
+        for mat in cmds.ls(materials=1):
+            import re
+            shading_group = cmds.listConnections(mat, d=1, type='shadingEngine')[0]
+            if re.search(char, mat, re.IGNORECASE):
+                cmds.lightlink(make=True, light=new_eye_light, object=shading_group)
+                print ('Linked\t{}  --->  {}'.format(new_eye_light, shading_group))
 
 
 def lightingCleanup():
@@ -297,6 +417,8 @@ def lightingCleanup():
         cmds.hide(shd)
     cmds.hide('SHD_GEO_GRP')
 
+if __name__ == '__main__':
+    buildEyeLights()
 
 __author__ = "Robert Showalter"
 __copyright__ = "Copyright 2017, Jib Jab Studios"
