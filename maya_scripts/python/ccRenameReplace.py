@@ -149,7 +149,7 @@ uiFile = """<?xml version="1.0" encoding="UTF-8"?>
 
 
 # noinspection PyTypeChecker
-class Renamer():
+class Renamer:
 
     replace = False
     _settings = {"startNb": 1, "stepNb": 1, "structure": [0]}
@@ -165,7 +165,7 @@ class Renamer():
     _winName = "winRenamer"
     _settingsName = "dialRenamerSettings"
 
-    def __init__(self, *arg):
+    def __init__(self):
         #  ### ou %3d
         self._setupUI()
 
@@ -194,19 +194,26 @@ class Renamer():
         cmds.textField("cc_edit_rename", e=True, ec=self.rename)
         cmds.textField("cc_edit_replace", e=True, ec=self.rename)
 
-    def setNumOptions(self, *args):
+    def setNumOptions(self):
 
-        prompt = cmds.promptDialog(title='Start/Step Settings', message='Start, Step', button=['OK', 'Cancel'], defaultButton='OK', cancelButton='Cancel', dismissString='Cancel', text=str(self._startNb)+","+str(self._stepNb))
+        prompt = cmds.promptDialog(title='Start/Step Settings', message='Start, Step',
+                                   button=['OK', 'Cancel'], defaultButton='OK',
+                                   cancelButton='Cancel', dismissString='Cancel',
+                                   text=str(self._startNb)+","+str(self._stepNb))
         if prompt == 'OK':
             results = cmds.promptDialog(query=True, text=True).split(",")
             self._settings["startNb"] = int(results[0])
             self._settings["stepNb"] = int(results[1])
 
-    def _insert(self, *args):
+    @staticmethod
+    def _insert(*args):
         ajout = args[0]
         cmds.textField(args[1], e=True, it=ajout)
 
-    def _nb_digits(self, chaine):
+    @staticmethod
+    def _nb_digits(chaine):
+        # type: (object) -> object
+
         nb_zeros = 0
         substr = ""
         match_hash = re.findall("(#+)", chaine)
@@ -279,9 +286,13 @@ class Renamer():
     def _parseDigits(self, nn, i=0):
         digits = self._nb_digits(nn)
         if digits:
-            nn = str(self._settings["startNb"]+i*self._settings["stepNb"]).zfill(digits[0]).join(nn.split(digits[1]))
+            # warning on following line: Class 'object' does not define '__getitem__', so the '[]' operator cannot be used on its instances
+            digit_0 = digits[0]
+            digit_1 = digits[1]
+            nn = str(self._settings["startNb"]+i*self._settings["stepNb"]).zfill(digit_0).join(nn.split(digit_1))
         return nn
 
+    @staticmethod
     def _MObject(name):
         sel = OpenMaya.MSelectionList()
         OpenMaya.MGlobal.getSelectionListByName(name, sel)
@@ -289,13 +300,14 @@ class Renamer():
         sel.getDependNode(0, mObj)
         return mObj
 
+    @staticmethod
     def _isDag(obj):
         if isinstance(obj, OpenMaya.MObject):
             return obj.hasFn(OpenMaya.MFn.kDagNode)
         else:
             return False
 
-    def rename(self, *args):
+    def rename(self):
         newName = cmds.textField("cc_edit_rename", q=True, text=True)
 
         if len(newName) < 1:
@@ -327,7 +339,7 @@ class Renamer():
 
             try:
                 cmds.rename(oldName, n)
-            except:
+            except IOError:
                 continue
 
 Renamer()
