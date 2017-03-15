@@ -165,7 +165,7 @@ class Renamer:
     _winName = "winRenamer"
     _settingsName = "dialRenamerSettings"
 
-    def __init__(self):
+    def __init__(self, *arg):
         #  ### ou %3d
         self._setupUI()
 
@@ -194,7 +194,7 @@ class Renamer:
         cmds.textField("cc_edit_rename", e=True, ec=self.rename)
         cmds.textField("cc_edit_replace", e=True, ec=self.rename)
 
-    def setNumOptions(self):
+    def setNumOptions(self, *args):
 
         prompt = cmds.promptDialog(title='Start/Step Settings', message='Start, Step',
                                    button=['OK', 'Cancel'], defaultButton='OK',
@@ -205,15 +205,11 @@ class Renamer:
             self._settings["startNb"] = int(results[0])
             self._settings["stepNb"] = int(results[1])
 
-    @staticmethod
-    def _insert(*args):
+    def _insert(self, *args):
         ajout = args[0]
         cmds.textField(args[1], e=True, it=ajout)
 
-    @staticmethod
-    def _nb_digits(chaine):
-        # type: (object) -> object
-
+    def _nb_digits(self, chaine):
         nb_zeros = 0
         substr = ""
         match_hash = re.findall("(#+)", chaine)
@@ -292,22 +288,20 @@ class Renamer:
             nn = str(self._settings["startNb"]+i*self._settings["stepNb"]).zfill(digit_0).join(nn.split(digit_1))
         return nn
 
-    @staticmethod
-    def _MObject(name):
+    def _MObject(self, name):
         sel = OpenMaya.MSelectionList()
         OpenMaya.MGlobal.getSelectionListByName(name, sel)
         mObj = OpenMaya.MObject()
         sel.getDependNode(0, mObj)
         return mObj
 
-    @staticmethod
-    def _isDag(obj):
+    def _isDag(self, obj):
         if isinstance(obj, OpenMaya.MObject):
             return obj.hasFn(OpenMaya.MFn.kDagNode)
         else:
             return False
 
-    def rename(self):
+    def rename(self, *args):
         newName = cmds.textField("cc_edit_rename", q=True, text=True)
 
         if len(newName) < 1:
