@@ -4,9 +4,17 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60660b26-05be-49d9-832a-fac41afd6d86" name="Default" comment="">
+    <list default="true" id="60660b26-05be-49d9-832a-fac41afd6d86" name="Default" comment="add todo for maya_initialize&#10;basic clean up lightingSetup&#10;change name of function importRef to loadRef to reflect what the function does&#10;clean up pipelineTools&#10;basic setup of dynamicShelfConf.xml">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/maya_shelves/dynamicShelf/jj_CleanUp/dynamicShelfConf.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/maya_shelves/dynamicShelf/jj_Lighting/dynamicShelfConf.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/maya_scripts/python/dynamicShelf.py" afterPath="$PROJECT_DIR$/maya_scripts/python/plugins/dynamicShelf.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_scripts/python/lightingTools.py" afterPath="$PROJECT_DIR$/maya_scripts/python/lightingTools.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_scripts/python/Old/lightingSetup_old03.py" afterPath="$PROJECT_DIR$/maya_scripts/python/Old/lightingSetup_old03.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_scripts/python/Old/lightingSetup_old04.py" afterPath="$PROJECT_DIR$/maya_scripts/python/Old/lightingSetup_old04.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_scripts/python/Old/lightingSetup_old05.py" afterPath="$PROJECT_DIR$/maya_scripts/python/Old/lightingSetup_old05.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_scripts/python/lightingSetup.py" afterPath="$PROJECT_DIR$/maya_scripts/python/lightingSetup.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_scripts/python/maya_initialize.py" afterPath="$PROJECT_DIR$/maya_scripts/python/maya_initialize.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_scripts/python/pipelineTools.py" afterPath="$PROJECT_DIR$/maya_scripts/python/pipelineTools.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,31 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="shelf_lightingTools.mel" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/maya_shelves/lighting/shelf_lightingTools.mel">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="836">
-              <caret line="944" column="0" lean-forward="false" selection-start-line="944" selection-start-column="0" selection-end-line="944" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lightingTools.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/maya_scripts/python/lightingTools.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="428" column="0" lean-forward="true" selection-start-line="428" selection-start-column="0" selection-end-line="428" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="maya_initialize.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="maya_initialize.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/maya_scripts/python/maya_initialize.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+            <state relative-caret-position="481">
+              <caret line="69" column="0" lean-forward="true" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -65,36 +53,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>m</find>
-      <find>mc</find>
-      <find>la</find>
-      <find>las</find>
-      <find>last_</find>
-      <find>pubName</find>
-      <find>importRef</find>
-      <find>litDir</find>
-      <find>$gBuffStr</find>
-      <find>mc.</find>
-      <find>saveCurrentFile</find>
-      <find>last_anim</find>
-      <find>addVrayOsd</find>
-      <find>buildSelectAllMM_release</find>
-      <find>setTestResolutionVar</find>
-      <find>maLightTypes</find>
-      <find>shape</find>
-      <find>autoCreateLightElem</find>
-      <find>listAllLights</find>
-      <find>buildE</find>
-      <find>lightingCleanup</find>
-      <find>mkLightElem</find>
       <find>charEyes</find>
       <find>found</find>
       <find>Found</find>
       <find>createLightAndLink</find>
       <find>LGT_GRP</find>
-      <find>print</find>
       <find>lightShape</find>
+      <find>UI</find>
+      <find>wi</find>
+      <find>with</find>
+      <find>with</find>
+      <find>with o</find>
+      <find>with op</find>
+      <find>with ope</find>
+      <find>with open</find>
       <find>checkSelectedLights</find>
+      <find>Object</find>
+      <find>##</find>
+      <find>removeShelf</find>
+      <find>shelfTab</find>
+      <find>uninitializePlugin</find>
+      <find>mobject</find>
+      <find>cmds</find>
+      <find>\n</find>
+      <find>getAnnotation</find>
+      <find>shelfLayout</find>
+      <find>print</find>
+      <find>rename</find>
+      <find>prjName</find>
+      <find>&amp;#xD;</find>
+      <find>essid</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -104,6 +92,11 @@
       <replace>ma</replace>
       <replace>cmds.</replace>
       <replace>new_eye_light</replace>
+      <replace>command</replace>
+      <replace>&amp;#xA;</replace>
+      <replace>#</replace>
+      <replace>;</replace>
+      <replace>dynamicShelf</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/maya_scripts/python</dir>
@@ -148,19 +141,32 @@
         <option value="$PROJECT_DIR$/maya_scripts/python/RnD/lightingSetup.bak.py" />
         <option value="$PROJECT_DIR$/maya_scripts/python/Old/animPrep_old01.py" />
         <option value="$PROJECT_DIR$/maya_scripts/python/RnD/cmdtest.py" />
-        <option value="$PROJECT_DIR$/maya_scripts/python/lightingSetup.py" />
         <option value="$PROJECT_DIR$/maya_scripts/python/propagateLighting.py" />
         <option value="$PROJECT_DIR$/maya_scripts/python/userSetup.py" />
         <option value="$USER_HOME$/Library/Preferences/Autodesk/maya/2017/prefs/shelves/shelf_VRay.mel" />
         <option value="$PROJECT_DIR$/maya_scripts/python/animPrep.py" />
         <option value="$PROJECT_DIR$/maya_scripts/python/animCleanup.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_1.py" />
-        <option value="$PROJECT_DIR$/maya_scripts/python/pipelineTools.py" />
-        <option value="$PROJECT_DIR$/maya_scripts/python/maya_initialize.py" />
-        <option value="$PROJECT_DIR$/maya_shelves/lighting/shelf_lightingTools.mel" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py" />
         <option value="$PROJECT_DIR$/maya_scripts/python/printFrameRange.py" />
+        <option value="$PROJECT_DIR$/maya_scripts/python/RenameTool.py" />
+        <option value="$PROJECT_DIR$/maya_scripts/python/ingest.py" />
+        <option value="$PROJECT_DIR$/maya_scripts/python/shelfManager.py" />
         <option value="$PROJECT_DIR$/maya_scripts/python/lightingTools.py" />
+        <option value="$PROJECT_DIR$/maya_scripts/python/dynamicShelf.py" />
+        <option value="$PROJECT_DIR$/maya_shelves/dynamicShelf/jj_CleanUp/dynamicShelfConf.xml" />
+        <option value="$PROJECT_DIR$/maya_shelves/dynamicShelf/jj_Lighting/dynamicShelfConf.xml" />
+        <option value="$PROJECT_DIR$/maya_scripts/python/RnD/__init__.py" />
+        <option value="$PROJECT_DIR$/maya_scripts/python/ccRenameReplace.py" />
+        <option value="$PROJECT_DIR$/maya_shelves/lighting/shelf_lightingTools.mel" />
+        <option value="$USER_HOME$/Library/Preferences/Autodesk/maya/2017/prefs/workspaces/Maya_Classic.json" />
+        <option value="$PROJECT_DIR$/maya_scripts/python/plugins/dynamicShelf.py" />
+        <option value="$PROJECT_DIR$/maya_scripts/python/maya_initialize.py" />
+        <option value="$PROJECT_DIR$/maya_scripts/python/lightingSetup.py" />
+        <option value="$PROJECT_DIR$/maya_scripts/python/pipelineTools.py" />
+        <option value="$PROJECT_DIR$/maya_scripts/python/Old/lightingSetup_old03.py" />
+        <option value="$PROJECT_DIR$/maya_scripts/python/Old/lightingSetup_old04.py" />
+        <option value="$PROJECT_DIR$/maya_scripts/python/Old/lightingSetup_old05.py" />
       </list>
     </option>
   </component>
@@ -276,11 +282,99 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="maya_shelves" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dynamicShelf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jj_Lighting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jj_dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jj_dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maya_shelves" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dynamicShelf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jj_CleanUp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jj_dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jj_dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="maya_scripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jj_dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jj_dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maya_scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jj_dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jj_dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maya_scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Old" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -317,7 +411,12 @@
     </option>
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/maya_scripts/python/plugins" />
+      <recent name="$PROJECT_DIR$/maya_shelves" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/maya_scripts/python/plugins" />
       <recent name="$PROJECT_DIR$/maya_scripts/python" />
     </key>
   </component>
@@ -333,61 +432,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.printFrameRange">
-    <configuration default="false" name="maya_initialize" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/maya_scripts/python" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="jj_dev" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/maya_scripts/python/maya_initialize.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="animPrep" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/maya_scripts/python" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="jj_dev" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/maya_scripts/python/animPrep.py" />
-      <option name="PARAMETERS" value="200 900" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="lightingTools" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/maya_scripts/python" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="jj_dev" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/maya_scripts/python/lightingTools.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.sbtvInfo">
     <configuration default="false" name="scratch_2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -420,6 +465,60 @@
       <module name="jj_dev" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/maya_scripts/python/printFrameRange.py" />
       <option name="PARAMETERS" value="$PROJECT_DIR$/../../01_characters/01_beep/beep_rig.ma" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="ingest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/maya_scripts/python" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="jj_dev" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/maya_scripts/python/ingest.py" />
+      <option name="PARAMETERS" value="$PROJECT_DIR$/../../01_characters/05_bo/bo_rig.ma" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="dynamicShelf" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/maya_scripts/python/plugins" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="jj_dev" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/maya_scripts/python/plugins/dynamicShelf.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="sbtvInfo" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/maya_scripts/python" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="jj_dev" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/maya_scripts/python/sbtvInfo.py" />
+      <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <method />
@@ -524,25 +623,25 @@
       <method />
     </configuration>
     <configuration default="false" name="test_none" type="MAYACHARM_RUN_CONFIGURATION" factoryName="MayaCharm Configuration Factory">
-      <option name="ScriptFilePath" value="" />
+      <option name="ScriptFilePath" value="$PROJECT_DIR$/maya_scripts/python/plugins/dynamicShelf.py" />
       <option name="ScriptCodeText" value="" />
       <method />
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="MayaCharm Runner.test_none" />
-      <item index="1" class="java.lang.String" itemvalue="Python.maya_initialize" />
-      <item index="2" class="java.lang.String" itemvalue="Python.animPrep" />
-      <item index="3" class="java.lang.String" itemvalue="Python.lightingTools" />
-      <item index="4" class="java.lang.String" itemvalue="Python.scratch_2" />
-      <item index="5" class="java.lang.String" itemvalue="Python.printFrameRange" />
+      <item index="1" class="java.lang.String" itemvalue="Python.scratch_2" />
+      <item index="2" class="java.lang.String" itemvalue="Python.printFrameRange" />
+      <item index="3" class="java.lang.String" itemvalue="Python.ingest" />
+      <item index="4" class="java.lang.String" itemvalue="Python.dynamicShelf" />
+      <item index="5" class="java.lang.String" itemvalue="Python.sbtvInfo" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.printFrameRange" />
-        <item index="1" class="java.lang.String" itemvalue="Python.scratch_2" />
-        <item index="2" class="java.lang.String" itemvalue="Python.lightingTools" />
-        <item index="3" class="java.lang.String" itemvalue="Python.maya_initialize" />
-        <item index="4" class="java.lang.String" itemvalue="Python.animPrep" />
+        <item index="0" class="java.lang.String" itemvalue="Python.sbtvInfo" />
+        <item index="1" class="java.lang.String" itemvalue="Python.dynamicShelf" />
+        <item index="2" class="java.lang.String" itemvalue="Python.ingest" />
+        <item index="3" class="java.lang.String" itemvalue="Python.printFrameRange" />
+        <item index="4" class="java.lang.String" itemvalue="Python.scratch_2" />
       </list>
     </recent_temporary>
     <configuration default="true" type="tests" factoryName="Attests">
@@ -567,6 +666,9 @@
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -765,7 +867,70 @@
       <option name="project" value="LOCAL" />
       <updated>1489374691601</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="add selChar function - started">
+      <created>1489426931182</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1489426931182</updated>
+    </task>
+    <task id="LOCAL-00029" summary="download file from highend 3D">
+      <created>1489514646862</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1489514646862</updated>
+    </task>
+    <task id="LOCAL-00030" summary="ingest mayaAscii files to remove RenderMan or Turtle renderers.">
+      <created>1489515511679</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1489515511679</updated>
+    </task>
+    <task id="LOCAL-00031" summary="download file from user site">
+      <created>1489544964404</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1489544964404</updated>
+    </task>
+    <task id="LOCAL-00032" summary="add selGEO for selecting nodes with GEO or GEOShape in name">
+      <created>1489545026367</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1489545026367</updated>
+    </task>
+    <task id="LOCAL-00033" summary="add renamer and shelfManager">
+      <created>1489545114132</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1489545114132</updated>
+    </task>
+    <task id="LOCAL-00034" summary="shelf using new selGEO for chars">
+      <created>1489545435351</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1489545435351</updated>
+    </task>
+    <task id="LOCAL-00035" summary="renamer add">
+      <created>1489605234216</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1489605234216</updated>
+    </task>
+    <task id="LOCAL-00036" summary="add self back into statements">
+      <created>1489605538115</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1489605538115</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -782,20 +947,21 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3281768" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281768" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26961327" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26961327" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281768" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33701658" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22405373" sideWeight="0.48730963" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16056167" sideWeight="0.48730963" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Maya Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34696132" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25579977" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39779004" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22161172" sideWeight="0.51269037" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281768" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -809,16 +975,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="clean up code" />
-    <MESSAGE value="ignore .idea folder&#10;update sbtvInfo based on new folder structure&#10;added debug into sbtvInfo&#10;added sbtvKeyMaker&#10;generated new sbtvKey.txt" />
-    <MESSAGE value="fix seq name split with multiple underscores&#10;generate new sbtvKey.txt with correct seq names" />
-    <MESSAGE value="remove debug test" />
-    <MESSAGE value="update shell command to run maya_initialize" />
-    <MESSAGE value="header with docstring&#10;footer with credits" />
-    <MESSAGE value="add header and footer&#10;fix plugin add VRay&#10;start Maya.env block" />
-    <MESSAGE value="creates userSetup.py if not exists&#10;edits userSetup.py&#10;creates Maya.env if not exists&#10;edits Maya.env with sbtvtools locations and keeps existing paths&#10;edits userPlugins.mel for vray plugin&#10;currently set to dev on which points to the jj_dev folder" />
-    <MESSAGE value="feedback for running shell command" />
-    <MESSAGE value="clean maya_initialize code&#10;add .idea/ folder to .gitignore" />
     <MESSAGE value="add local pointer to sbtvKey.txt&#10;add sys.exit if paths are not found&#10;clean code" />
     <MESSAGE value="docstrings add&#10;clean code" />
     <MESSAGE value="add credits" />
@@ -834,16 +990,21 @@
     <MESSAGE value="make eye lights for new light setup&#10;shelf update&#10;todo for maya_initialize" />
     <MESSAGE value="clean up output to print start and end frame" />
     <MESSAGE value="print out if no playbackOptions found" />
-    <option name="LAST_COMMIT_MESSAGE" value="print out if no playbackOptions found" />
+    <MESSAGE value="add selChar function - started" />
+    <MESSAGE value="download file from highend 3D" />
+    <MESSAGE value="ingest mayaAscii files to remove RenderMan or Turtle renderers." />
+    <MESSAGE value="download file from user site" />
+    <MESSAGE value="add selGEO for selecting nodes with GEO or GEOShape in name" />
+    <MESSAGE value="add renamer and shelfManager" />
+    <MESSAGE value="shelf using new selGEO for chars" />
+    <MESSAGE value="renamer add" />
+    <MESSAGE value="add self back into statements" />
+    <MESSAGE value="add todo for maya_initialize&#10;basic clean up lightingSetup&#10;change name of function importRef to loadRef to reflect what the function does&#10;clean up pipelineTools&#10;basic setup of dynamicShelfConf.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="add todo for maya_initialize&#10;basic clean up lightingSetup&#10;change name of function importRef to loadRef to reflect what the function does&#10;clean up pipelineTools&#10;basic setup of dynamicShelfConf.xml" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/maya_scripts/python/maya_initialize.py</url>
-          <line>85</line>
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py</url>
           <line>14</line>
@@ -853,107 +1014,11 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="62" />
+      <option name="time" value="72" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/animCleanup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="50" lean-forward="false" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/userSetup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="3" column="31" lean-forward="false" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/maya_initialize.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1065">
-          <caret line="72" column="28" lean-forward="false" selection-start-line="72" selection-start-column="28" selection-end-line="72" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/pipelineTools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Preferences/Autodesk/maya/2017/Maya.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/sbtvInfo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2790">
-          <caret line="186" column="0" lean-forward="false" selection-start-line="186" selection-start-column="0" selection-end-line="187" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/sbtvKeyMaker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/animCleanup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="50" lean-forward="false" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/userSetup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="3" column="31" lean-forward="true" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/sbtvKey.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/sbtvInfo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/sbtvKey.bak" />
-    <entry file="file://$PROJECT_DIR$/.gitignore" />
-    <entry file="file://$PROJECT_DIR$/shell/maya_initialize.sh" />
-    <entry file="file://$USER_HOME$/Library/Preferences/Autodesk/maya/2017/userSetup.py" />
-    <entry file="file://$USER_HOME$/Library/Preferences/Autodesk/maya/2017/Maya.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Preferences/Autodesk/maya/2017/prefs/pluginPrefs.mel">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shell/maya_initialize.command" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1039,45 +1104,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/lightingSetup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="301" column="4" lean-forward="true" selection-start-line="301" selection-start-column="4" selection-end-line="301" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/propagateLighting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="112" column="111" lean-forward="false" selection-start-line="112" selection-start-column="111" selection-end-line="112" selection-end-column="111" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/sbtvInfo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="39" lean-forward="true" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/maya_scripts/python/sbtvKey.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="553">
           <caret line="170" column="12" lean-forward="true" selection-start-line="170" selection-start-column="12" selection-end-line="170" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/sbtvKeyMaker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="42" column="7" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/userSetup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1116,16 +1146,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/pipelineTools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="70" column="55" lean-forward="false" selection-start-line="70" selection-start-column="55" selection-end-line="70" selection-end-column="55" />
-          <folding>
-            <element signature="e#167#176#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -1152,38 +1172,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///Applications/Autodesk/maya2017/devkit/other/pymel/extras/completion/py/maya/cmds/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147330">
-          <caret line="9822" column="0" lean-forward="false" selection-start-line="9822" selection-start-column="0" selection-end-line="9822" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/animCleanup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1012">
-          <caret line="5" column="38" lean-forward="false" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_scripts/python/maya_initialize.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/maya_shelves/lighting/shelf_lightingTools.mel">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="944" column="0" lean-forward="false" selection-start-line="944" selection-start-column="0" selection-end-line="944" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/maya_scripts/python/printFrameRange.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
@@ -1192,10 +1180,234 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/RenameTool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="20" column="41" lean-forward="true" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/rename.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="20" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/sbtvKeyMaker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="42" column="7" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/animCleanup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2127">
+          <caret line="5" column="38" lean-forward="false" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/propagateLighting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1620">
+          <caret line="112" column="111" lean-forward="false" selection-start-line="112" selection-start-column="111" selection-end-line="112" selection-end-column="111" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Applications/Autodesk/maya2017/Maya.app/Contents/Frameworks/Python.framework/Versions/Current/lib/python2.7/posixpath.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/RnD/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_shelves/lighting/shelf_lightingTools.mel">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="790">
+          <caret line="981" column="0" lean-forward="true" selection-start-line="981" selection-start-column="0" selection-end-line="981" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_shelves/lighting/shelf_lightingTools.mel">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="33" lean-forward="true" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_shelves/lighting/shelf_lightingTools.mel">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_shelves/lighting/shelf_lightingTools.mel">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="60" column="32" lean-forward="true" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/maya_scripts/python/lightingTools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="428" column="0" lean-forward="true" selection-start-line="428" selection-start-column="0" selection-end-line="428" selection-end-column="0" />
+        <state relative-caret-position="119">
+          <caret line="419" column="0" lean-forward="true" selection-start-line="419" selection-start-column="0" selection-end-line="419" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/ccRenameReplace.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="276" column="63" lean-forward="false" selection-start-line="276" selection-start-column="63" selection-end-line="276" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_shelves/dynamicShelf/jj_Lighting/dynamicShelfConf.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="36" lean-forward="true" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_shelves/dynamicShelf/jj_CleanUp/dynamicShelfConf.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Preferences/Autodesk/maya/2017/prefs/workspaces/Maya_Classic.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/ingest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="545">
+          <caret line="53" column="12" lean-forward="false" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/userSetup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/shelfManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Applications/Autodesk/maya2017/devkit/other/pymel/extras/completion/py/maya/cmds/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="9822" column="0" lean-forward="false" selection-start-line="9822" selection-start-column="0" selection-end-line="9822" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/sbtvInfo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-269">
+          <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/Old/lightingSetup_old05.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/Old/lightingSetup_old04.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/Old/lightingSetup_old03.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/pipelineTools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="16" column="24" lean-forward="true" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/lightingSetup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="100" lean-forward="false" selection-start-line="3" selection-start-column="100" selection-end-line="3" selection-end-column="100" />
+          <folding>
+            <element signature="e#805#814#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/plugins/dynamicShelf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="109" column="107" lean-forward="false" selection-start-line="109" selection-start-column="107" selection-end-line="109" selection-end-column="107" />
+          <folding>
+            <element signature="e#231#241#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maya_scripts/python/maya_initialize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="69" column="0" lean-forward="true" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -66,6 +66,7 @@ def maya_env(filepath, dev=False):
     """
 
     # todo-mark add MAYA_RENDER_SETUP_GLOBAL_PRESETS_PATH to Maya.env
+    # todo-mark add dynamicShelf variables if using
 
     # quick parameter checks
     try:

@@ -7,7 +7,6 @@ Attributes:
     
     
 Todo:
-    * Document more
     
 """
 
@@ -136,7 +135,7 @@ def findPUBLISH(sourcePath):
     :param sourcePath: path to search for publish file
     :return: srcPub[0] is the publish file name
     """
-    srcPub = [f for f in os.listdir(sourcePath) if 'PUBLISH.ma' in f]
+    srcPub = [f for f in os.listdir(sourcePath) if f.endswith('PUBLISH.ma')]
     if len(srcPub) < 1:
         import sys
         sys.exit('No publish file present. \n  Check for a \'PUBLISH\' file in:\n  %s' % sourcePath)
@@ -147,20 +146,23 @@ def findPUBLISH(sourcePath):
         return srcPub[0]
 
 
-def importRef(sourcePath):
+def loadRef(sourcePath):
     """
     Import references in publish file of a given sourcePath
     :param sourcePath: path of publish file to import references
+    
+    Used in:
+        lightingSetup.buildMA()
     """
-    # REVIEW[mark] This method is not being used.
+    # Find PUBLISH file in sourcePath and return filename only.
     srcPub = findPUBLISH(sourcePath)
-    # print 'srcPub:\n  ', srcPub
+    # Join sourcePath with PUBLISH filename
     srcPubFP = os.path.join(sourcePath, srcPub)
-    # print 'srcPubFP:\n  ', srcPubFP
-    # return
+
+    # Check if PUBLISH is a file and load as a reference
     if os.path.isfile(srcPubFP):
         print '\nImporting reference from...\n    ', srcPubFP
-        cmds.file(srcPubFP, mergeNamespacesOnClash=1, reference=1, namespace=':')  # todo-maek this is not the correct import command
+        cmds.file(srcPubFP, mergeNamespacesOnClash=1, reference=1, namespace=':')
     else:
         raise NameError('could not find:\n    ' + srcPubFP)
 

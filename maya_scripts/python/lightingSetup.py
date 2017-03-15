@@ -1,17 +1,18 @@
 #!/usr/bin/python
 """
 Lighting setup
-Sets up lighting shots based on animation publishes?
+Sets up new lighting shots based on animation publishes and then references in the anim PUBLISH file.
+Upon running with episode, sequence and shot as parameters, buildMA is called as main function.
 
-Attributes:
+Syntax:
+    lightingSetup <episode> <sequence> <shot>
+
+Arguments: (requires all 3)
     episode, sequence, shot
-    
-Todo:
-    # todo-mark test
-    
 """
 
-# todo-mark test and clean up
+# todo-mark clean up code that would be best inside a function and then called from __main__
+# REVIEW[mark] Test running lightingSetup on a sample shot to create new lighting file.
 
 # shotDirMaya variable modified on 12/3/2015 to accomodate an inproperly named directory structure
 # changed again on 1/20/2016 to accomodate 01_maya directory of old 102/070 directory naming
@@ -20,6 +21,11 @@ Todo:
 import os
 import re
 from sys import argv
+
+import maya.standalone
+import maya.cmds as cmds
+import sbtvInfo
+import pipelineTools
 
 try:
     ep, seq, shot = argv[1:]
@@ -31,82 +37,38 @@ print 'ep  =', ep
 print 'seq =', seq
 print 'shot=', shot
 
-# os.environ["MAYA_LOCATION"] = "C:\Program Files\Autodesk\Maya2015"
-import maya.standalone
-
 maya.standalone.initialize(name='python')
-import maya.cmds as cmds
-
-import sbtvInfo
-
-import pipelineTools
 
 seqInfo = sbtvInfo.Info(ep, seq, shot)
 seqPath = seqInfo.seqPath
 seqName = seqInfo.seqName
 
-# episode, sequence, shot ID - to be used for output directory
+# epNum/seqNum/sh_shotNum/<Layer> - to be used for output directory
 essid = r'/'.join([seqInfo.epID, seqInfo.seqID, 'sh_' + shot, '<Layer>'])
 
 for x in os.listdir(seqPath):
-
     if 'sh_' in x:
         shotDirMaya = os.path.join(seqPath, 'sh_' + shot, '03_maya')
-
         break
-
 else:
-
     shotDirMaya = os.path.join(seqPath, shot, '03_maya')
 
 litDir = None
 for dept in os.listdir(shotDirMaya):
-
     if 'lighting' in dept:
-
         litDir = os.path.join(shotDirMaya, dept)
-
     else:
-
         pass
         # raise NameError('lighting directory not found in...%s\n    '%shotDirMaya)
 
 try:
-
     litDir
-
-except:
-
+except IOError:
     dept = raw_input('Enter lighting folder name [05_lighting]: ') or '05_lighting'
-
     litDir = os.path.join(shotDirMaya, dept)
-
     os.makedirs(litDir)
 
 newShot = '_'.join(['sq' + seq, shot, seqName, 'lit.0001.last_anim'])
-
-'''
-#Moved to pipelineTools.py
-def importRef(sourcePath):
-
-    #curFile = cmds.file(q=1, l=1)[0] #not needed?
-    srcPub = [ f for f in os.listdir( sourcePath ) if 'PUBLISH' in f ]
-    
-    if len(srcPub) == 1:
-        srcPubFP = os.path.join( sourcePath, srcPub[0] )
-        if os.path.isfile(srcPubFP): 
-            print '\nImporting reference from...\n    ', srcPubFP
-            cmds.file( srcPubFP, mergeNamespacesOnClash = 1, reference = 1, namespace = ':')
-        else: raise NameError('could not find:\n    ' + srcPubFP)
-    elif len(srcPub) < 1:
-        StandardError ('No publish file present. \n    \
-                        Check for a \'PUBLISH\' file in:\n    \
-                        %s'%sourcePath)
-    elif len(srcPub) > 1:
-        StandardError ('More than one publish file present. \n    \
-                        Clean up directory:\n    \
-                        %s'%sourcePath)
-'''
 
 
 def buildMA(destDir, sourcePath, newShot):
@@ -126,22 +88,29 @@ def buildMA(destDir, sourcePath, newShot):
     else:
         print '\n*Creating \n    ', newFile
 
+    # Create new lighting file with proper naming and in correct folder
     cmds.file(rename=newFile)
     cmds.file(type='mayaAscii')
 
-    pipelineTools.importRef(sourcePath)
+    # Load reference animation PUBLISH file into new lighting file
+    pipelineTools.loadRef(sourcePath)
 
+    # Set render settings, set VRay settings and render layers,
+    # set persp cam to not renderable, set shotCam to renderable,
+    # remove image planes from visibility, remove unknown nodes
     lightingBasics(essid)
 
+    # Set time range to match animation PUBLISH time range
     setFrameRange(animDir)
 
+    # Save lighting file
     cmds.file(save=True, force=True, type='mayaAscii')
     print '\nSaved', newFile
 
     cmds.quit()
 
 
-def lightingBasics(essid=None):  # episode, sequence, shot ID
+def lightingBasics(essid=None):  # essid = epNum/seqNum/sh_shotNum/<Layer>
 
     # set renderer to vray
     cmds.loadPlugin("vrayformaya.mll")
@@ -153,20 +122,26 @@ def lightingBasics(essid=None):  # episode, sequence, shot ID
     if essid:
         try:
             cmds.setAttr("vraySettings.fileNamePrefix", essid, type="string")
-        except:
+        except IOError:
             pass
     # set output format
     if cmds.optionMenuGrp("vrayImageFormatMenu", exists=1):
         cmds.setAttr("vraySettings.imageFormatStr", "exr", type="string")
     # Disable persp camera
     cmds.setAttr("perspShape.renderable", 0)
+    # Set shot camera to renderable
+    try:
+        cmds.setAttr("shotCamShape.renderable", 1)
+    except IOError:
+        print('No shotCam found. No camera is renderable')
+
     # set render resolution
     try:
         cmds.setAttr("vraySettings.width", 1920)
         cmds.setAttr("vraySettings.height", 1080)
         cmds.setAttr("defaultRenderGlobals.animation", 1)
         cmds.setAttr("vraySettings.animBatchOnly", 1)
-    except:
+    except IOError:
         cmds.setAttr("defaultResolution.width", 1920)
         cmds.setAttr("defaultResolution.height", 1080)
 
@@ -187,10 +162,10 @@ def lightingBasics(essid=None):  # episode, sequence, shot ID
         cmds.setAttr(elem + '.vray_blueid_multimatte', i)
         i += 1
         cmds.setAttr(elem + '.vray_usematid_multimatte', 1)
-    createMultiMattes('vrayRE_matteChar1', 3, 2, 1)
-    createMultiMattes('vrayRE_matteChar2', 5, 4, 0)
-    createMultiMattes('vrayRE_matteCharEyesL', 11, 12, 13, 1)
-    createMultiMattes('vrayRE_matteCharEyesR', 14, 15, 16, 1)
+    createVRayMultiMattes('vrayRE_matteChar1', 3, 2, 1)
+    createVRayMultiMattes('vrayRE_matteChar2', 5, 4, 0)
+    createVRayMultiMattes('vrayRE_matteCharEyesL', 11, 12, 13, 1)
+    createVRayMultiMattes('vrayRE_matteCharEyesR', 14, 15, 16, 1)
     maya.mel.eval('vrayAddRenderElement( "diffuseChannel" );')
     maya.mel.eval('vrayAddRenderElement( "giChannel" );')
     maya.mel.eval('vrayAddRenderElement( "velocityChannel" );')
@@ -200,7 +175,7 @@ def lightingBasics(essid=None):  # episode, sequence, shot ID
     # turn off default image plane
     try:
         cmds.setAttr('imagePlaneShape1.displayMode', 0)
-    except:
+    except IOError:
         pass
 
     # delete unknown nodes
@@ -211,11 +186,11 @@ def lightingBasics(essid=None):  # episode, sequence, shot ID
             for n in unknownNodes:
                 cmds.delete(n)
                 print('    ' + n)
-    except:
+    except IO:
         print 'No unknown nodes found'
 
 
-def createMultiMattes(elem, r, g, b, MID=0):
+def createVRayMultiMattes(elem, r, g, b, MID=0):
     import maya.mel
     maya.mel.eval('vrayAddRenderElement( "MultiMatteElement" );')
     cmds.rename('vrayRE_Multi_Matte', elem)
@@ -259,7 +234,8 @@ def getFrameRange(playbackSettings):
     (12, ' ', u'200')
     (13, ' ', u'";')
     '''
-    for n, s in enumerate(playbackSettings.split(' ')): print n, s
+    for n, s in enumerate(playbackSettings.split(' ')):
+        print n, s
 
     if settingsList[4] == '"playbackOptions' and settingsList[11] == '-aet':
 
@@ -292,6 +268,7 @@ def setFrameRange(animDir):
     cmds.setAttr('defaultRenderGlobals.startFrame', animStart)
     cmds.setAttr('defaultRenderGlobals.endFrame', animEnd)
 
+
 animDir = None
 for dept in os.listdir(shotDirMaya):
     if 'animation' in dept:
@@ -313,10 +290,10 @@ if __name__ == '__main__':
     mayabatch -file someMayaFile.mb -command "file -save"
 '''
 
-__author__ = "Mark Thielen"
+__author__ = "Robert Showalter"
 __copyright__ = "Copyright 2017, Jib Jab Studios"
 __date__ = "3/9/17"
-__credits__ = ["Mark Thielen"]
+__credits__ = ["Robert Showalter, Mark Thielen"]
 __license__ = "GPL"
 __version__ = "1.0.1"
 __maintainer__ = "Mark Thielen"

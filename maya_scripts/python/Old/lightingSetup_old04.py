@@ -42,7 +42,7 @@ newShot = '_'.join( ['sq' + seq, shot, seqName, 'lit.0001.ma'] )
 
 '''
 #Moved to pipelineTools.py
-def importRef(sourcePath):
+def loadRef(sourcePath):
 
     #curFile = mc.file(q=1, l=1)[0] #not needed?
     srcPub = [ f for f in os.listdir( sourcePath ) if 'PUBLISH' in f ]
@@ -84,7 +84,7 @@ def buildMA(destDir, sourcePath, newShot):
     mc.file(rename = newFile)
     mc.file( type = 'mayaAscii')
     
-    pipelineTools.importRef(sourcePath)
+    pipelineTools.loadRef(sourcePath)
     
     lightingBasics(essid)
     mc.file( save = True, force = True, type = 'mayaAscii')
