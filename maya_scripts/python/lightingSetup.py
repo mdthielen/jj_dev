@@ -118,6 +118,7 @@ def lightingBasics(essid=None):  # essid = epNum/seqNum/sh_shotNum/<Layer>
 
     # on unix systems, the vray renderGlobals are not loading, therefore vraySettings cannot be set.
 
+    # todo-mark update output directory
     # set output directory
     if essid:
         try:
@@ -135,6 +136,7 @@ def lightingBasics(essid=None):  # essid = epNum/seqNum/sh_shotNum/<Layer>
     except IOError:
         print('No shotCam found. No camera is renderable')
 
+    # todo-mark update render settings
     # set render resolution
     try:
         cmds.setAttr("vraySettings.width", 1920)
