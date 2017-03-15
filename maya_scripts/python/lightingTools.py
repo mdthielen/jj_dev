@@ -418,7 +418,7 @@ def lightingCleanup():
     cmds.hide('SHD_GEO_GRP')
 
 
-def selChar(char=None, shapes=True, transforms=False):
+def selGEO(char='', shapes=True, transforms=False):
     """
     Select characters transform or shape nodes.
     
@@ -427,11 +427,61 @@ def selChar(char=None, shapes=True, transforms=False):
     :param transforms: False is default. Select transforms of character.
     """
 
-    if shapes:
-        cmds.select('{}*GEOShape'.format(char), r=1)
-    if transforms:
-        cmds.select('{}*GEO'.format(char), r=1)
+    print('\nJib Jab - selGEO:')
 
+
+    if cmds.ls(sl=1) and char == '':
+        parents = []
+        for sel in cmds.ls(sl=1, l=1):
+            parent = sel.split('|')[1]
+            if parent not in parents:
+                parents.append(parent)
+    elif 'all' == char.lower():
+        parents = ['beep', 'bing', 'bang', 'boop', 'bo']
+        print('Searching for all characters: {}'.format(parents))
+    else:
+        parents = [char]
+        print('Searching for: {}'.format(char))
+
+    cmds.select(cl=1)
+    if not parents:
+        parents = ['']
+
+    for parent in parents:
+        if shapes:
+            if 'GEO' not in parent:
+                # Root node name does not contain GEO
+                if cmds.objExists('{}*GEOShape'.format(parent)):
+                    cmds.select('{}*GEOShape'.format(parent), add=1)
+                    if parent:
+                        print('Selected GEOShape nodes for:   {}'.format(parent))
+                    else:
+                        print('Selected GEOShape nodes for:   All in scene')
+            else:
+                # Root node name contains GEO
+                if cmds.objExists('{}*Shape'.format(parent)):
+                    cmds.select('{}*Shape'.format(parent), add=1)
+                    if parent:
+                        print('Selected GEOShape nodes for:   {}'.format(parent))
+                    else:
+                        print('Selected GEOShape nodes for:   All in scene')
+        if transforms:
+            if 'GEO' not in parent:
+                if cmds.objExists('{}*GEO'.format(parent)):
+                    cmds.select('{}*GEO'.format(parent), add=1)
+                    if parent:
+                        print('Selected GEO nodes for:   {}'.format(parent))
+                    else:
+                        print('Selected GEO nodes for:   All in scene')
+            else:
+                if cmds.objExists('{}'.format(parent)):
+                    cmds.select('{}'.format(parent), add=1)
+                    if parent:
+                        print('Selected GEO nodes for:   {}'.format(parent))
+                    else:
+                        print('Selected GEO nodes for:   All in scene')
+
+    print('\nJib Jab - selGEO COMPLETE')
 
 
 __author__ = "Robert Showalter"
