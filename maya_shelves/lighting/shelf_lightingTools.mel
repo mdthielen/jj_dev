@@ -641,7 +641,7 @@ global proc shelf_lightingTools () {
         -font "plainLabelFont" 
         -imageOverlayLabel "MLL" 
         -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.25 
+        -overlayLabelBackColor 0 0 0 0.2 
         -image "menuIconShading.png" 
         -image1 "menuIconShading.png" 
         -style "iconOnly" 
@@ -756,38 +756,6 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Select Bang Geometry" 
-        -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Select Bang Geometry" 
-        -labelOffset 0
-        -rotation 0
-        -flipX 0
-        -flipY 0
-        -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "bang" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0.25 1 0.5 
-        -image "commandButton.png" 
-        -image1 "commandButton.png" 
-        -style "iconOnly" 
-        -marginWidth 1
-        -marginHeight 1
-        -command "select -cl; select -r bang_r_arm_bez_GEOShape bang_L_eye_BLENDZ2Shape bang_R_pupil_bigShape |bang|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape bang_L_pupil_bigShape bang_L_pupil_smallShape bang_R_lid_top_GEOShape bang_R_lid_OLDShape bang_R_lid_bot_GEOShape bang_R_pupil_smallShape |bang|R_blinker_bot|joint_lidz|bang_R_eye_BLENDZ3|bang_R_eye_BLENDZ3Shape |bang|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape |bang|L_blinker_top|joint_lidz|bang_L_eye_BLENDZ3|bang_L_eye_BLENDZ3Shape |bang|L_blinker_bot|joint_lidz|bang_L_eye_BLENDZ3|bang_L_eye_BLENDZ3Shape |bang|R_blinker_top|joint_lidz|bang_R_eye_BLENDZ3|bang_R_eye_BLENDZ3Shape bang_L_eye_BLENDZShape bang_L_lid_OLDShape bang_GEO|bang_R_brow_GEO|bang_R_brow_GEO bang_body_GEOShape bang_GEO|bang_L_brow_GEO|bang_L_brow_GEO bang_L_hand_GEOShape bang_L_leg_GEOShape bang_R_hand_GEOShape bang_R_leg_GEOShape bang_l_arm_bez_GEO1Shape bang_L_wheel_GEOShape bang_r_eye_GEO.f[0:239] bang_L_eye_OLDShape bang_L_eye_GEO.f[0:239] bang_l_lid_top_GEOShape bang_mouth_target_bodyShape bang_R_eye_OLDShape bang_l_leg_thick_BSShape bang_R_wheel_GEOShape bang_mouth_target_headShape bang_r_leg_thick_BSShape bang_l_lid_bot_GEOShape bang_head_GEOShape;" 
-        -sourceType "mel" 
-        -commandRepeatable 1
-        -flat 1
-    ;
-    shelfButton
-        -enableCommandRepeat 1
-        -enable 1
-        -width 35
-        -height 35
-        -manage 1
-        -visible 1
-        -preventOverride 0
         -annotation "Select Beep Geometry" 
         -enableBackground 0
         -highlightColor 0.321569 0.521569 0.65098 
@@ -807,8 +775,8 @@ global proc shelf_lightingTools () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "select -cl; select -r |beep|L_blinker_bot|joint_lidz|beep_L_eye_BLENDZ3|beep_L_eye_BLENDZ3Shape beep_r_arm_bez_GEOShape beep_l_lid_bot_GEOShape beep_R_eye_OLDShape beep_L_wheel_GEOShape beep_R_lid_top_GEOShape beep_R_lid_OLDShape beep_L_eye_GEO.f[0:239] beep_R_wheel_GEOShape beep_l_lid_top_GEOShape beep_l_arm_bez_GEO1Shape beep_L_lid_OLDShape beep_L_eye_BLENDZShape beep_R_lid_bot_GEOShape |beep|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape |beep|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape beep_L_eye_BLENDZ2Shape beep_L_arm_GEOShape beep_R_hand_GEOShape beep_L_hand_GEOShape beep_L_leg_GEOShape beep_R_arm_GEOShape beep_head_GEOShape beep_body_GEOShape beep_L_eye_OLDShape beep_mouth_target_headShape |beep|R_blinker_top|joint_lidz|beep_R_eye_BLENDZ3|beep_R_eye_BLENDZ3Shape beep_mouth_target_bodyShape |beep|L_blinker_top|joint_lidz|beep_L_eye_BLENDZ3|beep_L_eye_BLENDZ3Shape beep_r_eye_GEO.f[0:239] beep_L_brow_GEOShape beep_R_leg_GEOShape beep_R_brow_GEOShape |beep|R_blinker_bot|joint_lidz|beep_R_eye_BLENDZ3|beep_R_eye_BLENDZ3Shape;\n" 
-        -sourceType "mel" 
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(char='beep')" 
+        -sourceType "python" 
         -commandRepeatable 1
         -flat 1
     ;
@@ -839,8 +807,9 @@ global proc shelf_lightingTools () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "select -cl; select -r bing_Spine_ribbonShape bing_Spine_ribbonBlendShape bing_Neck_ribbonShape bing_Neck_ribbonBlendShape bing_R_hand_GEOShape bing_L_hand_GEOShape bing_l_lid_top_BLENDZ12Shape bing_l_lid_top_BLENDZ13Shape bing_l_lid_top_BLENDZ14Shape bing_l_lid_top_BLENDZ15Shape bing_l_lid_top_BLENDZ19Shape bing_l_lid_top_BLENDZ21Shape bing_l_lid_top_BLENDZ16Shape |bing|L_blinker_bot|joint_lidz|bing_L_eye_BLENDZ3|bing_L_eye_BLENDZ3Shape |bing|L_blinker_bot|joint_lidz|L_tuck_low_BS|L_tuck_low_BSShape |bing|L_blinker_bot|joint_lidz|bing_l_lid_top_BLENDZ22|bing_l_lid_top_BLENDZ22Shape |bing|R_blinker_top|joint_lidz|bing_R_lid_top_BLENDZ22|bing_R_lid_top_BLENDZ22Shape |bing|R_blinker_top|joint_lidz|bing_R_eye_BLENDZ3|bing_R_eye_BLENDZ3Shape |bing|R_blinker_bot|joint_lidz|bing_R_eye_BLENDZ3|bing_R_eye_BLENDZ3Shape |bing|R_blinker_bot|joint_lidz|bing_R_lid_top_BLENDZ22|bing_R_lid_top_BLENDZ22Shape |bing|R_blinker_bot|joint_lidz|R_tuck_low_BS|R_tuck_low_BSShape bing_l_lid_top_BLENDZ20Shape bing_mouth_target_headShape bing_mouth_target_bodyShape |bing|L_blinker_top|joint_lidz|bing_l_lid_top_BLENDZ22|bing_l_lid_top_BLENDZ22Shape |bing|L_blinker_top|joint_lidz|bing_L_eye_BLENDZ3|bing_L_eye_BLENDZ3Shape bing_l_arm_thick_BSShape1 bing_l_leg_thick_BSShape body1Shape bing_L_arm_GEOShape |bing|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape bing_l_lid_top_BLENDZ2Shape bing_L_wheel_GEOShape bing_R_wheel_GEOShape bing_l_lid_bot_BLENDZ24Shape bing_r_arm_bez_GEOShape bing_R_leg_GEOShape bing_r_leg_thick_BSShape bing_GEO|R_pinch|R_pinchShape1 bing_L_eye_GEO.f[0:239] bing_R_lid_OLDShape bing_R_eye_OLDShape bing_R_lid_bot_GEOShape bing_l_arm_bez_GEOShape bing_GEO|L_pinch|L_pinchShape1 bing_R_lid_top_GEOShape bing_l_lid_bot_BLENDZ28Shape bing_L_eye_BLENDZ2Shape bing_L_pupil_bigShape1 bing_R_brow_GEOShape bing_L_brow_GEOShape bing_l_lid_bot_BLENDZ26Shape bing_L_pupil_smallShape1 bing_l_lid_bot_BLENDZ22Shape bing_R_pupil_smallShape1 bing_l_lid_bot_BLENDZ27Shape bing_l_lid_top_BLENDZ10Shape bing_l_lid_bot_BLENDZ29Shape bing_l_lid_bot_BLENDZ31Shape bing_l_lid_bot_BLENDZ23Shape bing_l_lid_bot_BLENDZ25Shape bing_L_eye_BLENDZShape bing_l_lid_top_BLENDZShape bing_l_lid_bot_BLENDZ30Shape bing_L_leg_GEOShape bing_R_arm_GEOShape bing_l_lid_bot_GEOShape bing_r_eye_GEO.f[0:239] bing_l_lid_top_BLENDZ11Shape bing_L_eye_OLDShape bing_l_lid_top_GEOShape bing_head_GEOShape bing_R_pupil_bigShape1 bing_L_lid_OLDShape |bing|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape bing_r_arm_thick_BSShape1;" 
-        -sourceType "mel" 
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(char='bing')" 
+        -sourceType "python" 
+        -doubleClickCommand "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(char='bing')" 
         -commandRepeatable 1
         -flat 1
     ;
@@ -852,27 +821,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Select Bo Geometry" 
+        -annotation "Select Bang Geometry" 
         -enableBackground 0
         -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
-        -label "Select Bo Geometry" 
+        -label "Select Bang Geometry" 
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
         -font "plainLabelFont" 
-        -imageOverlayLabel "bo" 
+        -imageOverlayLabel "bang" 
         -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0.250234 0 1 0.5 
+        -overlayLabelBackColor 0 0.25 1 0.5 
         -image "commandButton.png" 
         -image1 "commandButton.png" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "select -cl; select -r bo_Spine_ribbonShape bo_Spine_ribbonBlendShape bo_Neck_ribbonShape bo_Neck_ribbonBlendShape bo_L_hand_GEOShape bo_body_GEO1Shape bo_r_arm_thick_BSShape bo_head_GEOShape bo_L_eye_OLDShape bo_L_eye_GEO.f[0:239] bo_R_lid_top_GEOShape bo_R_wheel_GEOShape |bo|L_blinker_bot|joint_lidz|bo_L_eye_BLENDZ3|bo_L_eye_BLENDZ3Shape |bo|L_blinker_bot|joint_lidz|bo_l_lid_top_BLENDZ22|bo_l_lid_top_BLENDZ22Shape bo_L_eye_BLENDZShape bo_R_lid_bot_GEOShape bo_L_wheel_GEOShape bo_R_eye_OLDShape |bo|R_blinker_bot|joint_lidz|bo_R_eye_BLENDZ3|bo_R_eye_BLENDZ3Shape |bo|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape bo_L_eye_BLENDZ2Shape bo_l_lid_top_BLENDZShape bo_L_lid_OLDShape bo_R_lid_OLDShape bo_l_arm_bez_GEOShape bo_r_arm_bez_GEOShape bo_l_lid_top_BLENDZ15Shape bo_l_lid_bot_BLENDZ23Shape bo_L_pupil_bigShape1 bo_l_lid_top_BLENDZ2Shape bo_l_lid_bot_BLENDZ22Shape bo_R_pupil_smallShape1 bo_l_lid_bot_BLENDZ29Shape bo_l_lid_bot_BLENDZ28Shape |bo|L_blinker_top|joint_lidz|bo_L_eye_BLENDZ3|bo_L_eye_BLENDZ3Shape bo_l_lid_bot_BLENDZ24Shape bo_l_lid_bot_BLENDZ26Shape bo_l_lid_top_GEOShape bo_l_lid_bot_GEOShape |bo|R_blinker_top|joint_lidz|bo_R_eye_BLENDZ3|bo_R_eye_BLENDZ3Shape |bo|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape bo_L_pupil_smallShape1 bo_R_pupil_bigShape1 |bo|L_blinker_top|joint_lidz|bo_l_lid_top_BLENDZ22|bo_l_lid_top_BLENDZ22Shape bo_l_lid_top_BLENDZ11Shape bo_r_eye_GEO.f[0:239] bo_l_lid_bot_BLENDZ27Shape bo_l_lid_bot_BLENDZ25Shape bo_l_lid_top_BLENDZ12Shape |bo|R_blinker_top|joint_lidz|bo_R_lid_top_BLENDZ22|bo_R_lid_top_BLENDZ22Shape bo_l_lid_top_BLENDZ13Shape |bo|R_blinker_bot|joint_lidz|bo_R_lid_top_BLENDZ22|bo_R_lid_top_BLENDZ22Shape bo_mouth_target_headShape bo_l_lid_top_BLENDZ16Shape bo_l_lid_top_BLENDZ19Shape bo_l_lid_top_BLENDZ21Shape bo_l_lid_top_BLENDZ20Shape bo_R_brow_GEOShape bo_body_GEOShape bo_L_leg_GEOShape bo_r_leg_thick_BSShape bo_l_arm_thick_BSShape bo_l_leg_thick_BSShape bo_GEO|R_pinch|R_pinchShape2 bo_L_brow_GEOShape bo_R_leg_GEOShape bo_GEO|L_pinch|L_pinchShape2 bo_L_arm_GEOShape bo_R_arm_GEOShape bo_R_hand_GEOShape bo_l_lid_bot_BLENDZ30Shape bo_l_lid_bot_BLENDZ31Shape bo_l_lid_top_BLENDZ10Shape bo_l_lid_top_BLENDZ14Shape;" 
-        -sourceType "mel" 
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(char='bang')" 
+        -sourceType "python" 
         -commandRepeatable 1
         -flat 1
     ;
@@ -903,8 +872,40 @@ global proc shelf_lightingTools () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "select -cl; select -r boop_mouth_target_bodyShape |boop|R_blinker_top|joint_lidz|boop_R_eye_BLENDZ3|boop_R_eye_BLENDZ3Shape |boop|R_blinker_bot|joint_lidz|boop_R_eye_BLENDZ3|boop_R_eye_BLENDZ3Shape boop_L_leg_GEOShape boop_L_hand_GEOShape boop_R_arm_GEOShape boop_R_leg_GEOShape boop_R_hand_GEOShape boop_eyeSpare1Shape boop_L_arm_GEOShape browShape boop_R_lid_bot_GEOShape boop_R_eye_OLDShape boop_R_lid_OLDShape boop_r_eye_GEO.f[0:239] boop_head_GEOShape boop_L_lid_bot_GEOShape boop_R_wheel_GEOShape boop_L_lid_OLDShape |boop|L_blinker_top|joint_lidz|boop_L_eye_BLENDZ3|boop_L_eye_BLENDZ3Shape |boop|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape |boop|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape boop_L_eye_BLENDZShape boop_L_eye_GEO.f[0:239] boop_R_lid_top_GEOShape boop_L_wheel_GEOShape boop_L_eye_OLDShape boop_L_lid_top_GEOShape boop_L_eye_BLENDZ2Shape |boop|L_blinker_bot|joint_lidz|boop_L_eye_BLENDZ3|boop_L_eye_BLENDZ3Shape boop_mouth_target_headShape bodyShape boop_l_arm_bez_GEOShape boop_r_arm_bez_GEOShape boop_l_leg_thick_BSShape boop_r_leg_thick_BSShape;" 
-        -sourceType "mel" 
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(char='boop')" 
+        -sourceType "python" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Select Bo Geometry" 
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Select Bo Geometry" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -imageOverlayLabel "bo" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0.250234 0 1 0.5 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(char='bo')" 
+        -sourceType "python" 
         -commandRepeatable 1
         -flat 1
     ;
@@ -935,10 +936,46 @@ global proc shelf_lightingTools () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "select -cl;\n\nselect bang_r_arm_bez_GEOShape bang_L_eye_BLENDZ2Shape bang_R_pupil_bigShape |bang|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape bang_L_pupil_bigShape bang_L_pupil_smallShape bang_R_lid_top_GEOShape bang_R_lid_OLDShape bang_R_lid_bot_GEOShape bang_R_pupil_smallShape |bang|R_blinker_bot|joint_lidz|bang_R_eye_BLENDZ3|bang_R_eye_BLENDZ3Shape |bang|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape |bang|L_blinker_top|joint_lidz|bang_L_eye_BLENDZ3|bang_L_eye_BLENDZ3Shape |bang|L_blinker_bot|joint_lidz|bang_L_eye_BLENDZ3|bang_L_eye_BLENDZ3Shape |bang|R_blinker_top|joint_lidz|bang_R_eye_BLENDZ3|bang_R_eye_BLENDZ3Shape bang_L_eye_BLENDZShape bang_L_lid_OLDShape bang_GEO|bang_R_brow_GEO|bang_R_brow_GEO bang_body_GEOShape bang_GEO|bang_L_brow_GEO|bang_L_brow_GEO bang_L_hand_GEOShape bang_L_leg_GEOShape bang_R_hand_GEOShape bang_R_leg_GEOShape bang_l_arm_bez_GEO1Shape bang_L_wheel_GEOShape bang_r_eye_GEO.f[0:239] bang_L_eye_OLDShape bang_L_eye_GEO.f[0:239] bang_l_lid_top_GEOShape bang_mouth_target_bodyShape bang_R_eye_OLDShape bang_l_leg_thick_BSShape bang_R_wheel_GEOShape bang_mouth_target_headShape bang_r_leg_thick_BSShape bang_l_lid_bot_GEOShape bang_head_GEOShape;\n\nselect -add |beep|L_blinker_bot|joint_lidz|beep_L_eye_BLENDZ3|beep_L_eye_BLENDZ3Shape beep_r_arm_bez_GEOShape beep_l_lid_bot_GEOShape beep_R_eye_OLDShape beep_L_wheel_GEOShape beep_R_lid_top_GEOShape beep_R_lid_OLDShape beep_L_eye_GEO.f[0:239] beep_R_wheel_GEOShape beep_l_lid_top_GEOShape beep_l_arm_bez_GEO1Shape beep_L_lid_OLDShape beep_L_eye_BLENDZShape beep_R_lid_bot_GEOShape |beep|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape |beep|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape beep_L_eye_BLENDZ2Shape beep_L_arm_GEOShape beep_R_hand_GEOShape beep_L_hand_GEOShape beep_L_leg_GEOShape beep_R_arm_GEOShape beep_head_GEOShape beep_body_GEOShape beep_L_eye_OLDShape beep_mouth_target_headShape |beep|R_blinker_top|joint_lidz|beep_R_eye_BLENDZ3|beep_R_eye_BLENDZ3Shape beep_mouth_target_bodyShape |beep|L_blinker_top|joint_lidz|beep_L_eye_BLENDZ3|beep_L_eye_BLENDZ3Shape beep_r_eye_GEO.f[0:239] beep_L_brow_GEOShape beep_R_leg_GEOShape beep_R_brow_GEOShape |beep|R_blinker_bot|joint_lidz|beep_R_eye_BLENDZ3|beep_R_eye_BLENDZ3Shape;\n\nselect -add bing_Spine_ribbonShape bing_Spine_ribbonBlendShape bing_Neck_ribbonShape bing_Neck_ribbonBlendShape bing_R_hand_GEOShape bing_L_hand_GEOShape bing_l_lid_top_BLENDZ12Shape bing_l_lid_top_BLENDZ13Shape bing_l_lid_top_BLENDZ14Shape bing_l_lid_top_BLENDZ15Shape bing_l_lid_top_BLENDZ19Shape bing_l_lid_top_BLENDZ21Shape bing_l_lid_top_BLENDZ16Shape |bing|L_blinker_bot|joint_lidz|bing_L_eye_BLENDZ3|bing_L_eye_BLENDZ3Shape |bing|L_blinker_bot|joint_lidz|L_tuck_low_BS|L_tuck_low_BSShape |bing|L_blinker_bot|joint_lidz|bing_l_lid_top_BLENDZ22|bing_l_lid_top_BLENDZ22Shape |bing|R_blinker_top|joint_lidz|bing_R_lid_top_BLENDZ22|bing_R_lid_top_BLENDZ22Shape |bing|R_blinker_top|joint_lidz|bing_R_eye_BLENDZ3|bing_R_eye_BLENDZ3Shape |bing|R_blinker_bot|joint_lidz|bing_R_eye_BLENDZ3|bing_R_eye_BLENDZ3Shape |bing|R_blinker_bot|joint_lidz|bing_R_lid_top_BLENDZ22|bing_R_lid_top_BLENDZ22Shape |bing|R_blinker_bot|joint_lidz|R_tuck_low_BS|R_tuck_low_BSShape bing_l_lid_top_BLENDZ20Shape bing_mouth_target_headShape bing_mouth_target_bodyShape |bing|L_blinker_top|joint_lidz|bing_l_lid_top_BLENDZ22|bing_l_lid_top_BLENDZ22Shape |bing|L_blinker_top|joint_lidz|bing_L_eye_BLENDZ3|bing_L_eye_BLENDZ3Shape bing_l_arm_thick_BSShape1 bing_l_leg_thick_BSShape body1Shape bing_L_arm_GEOShape |bing|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape bing_l_lid_top_BLENDZ2Shape bing_L_wheel_GEOShape bing_R_wheel_GEOShape bing_l_lid_bot_BLENDZ24Shape bing_r_arm_bez_GEOShape bing_R_leg_GEOShape bing_r_leg_thick_BSShape bing_GEO|R_pinch|R_pinchShape1 bing_L_eye_GEO.f[0:239] bing_R_lid_OLDShape bing_R_eye_OLDShape bing_R_lid_bot_GEOShape bing_l_arm_bez_GEOShape bing_GEO|L_pinch|L_pinchShape1 bing_R_lid_top_GEOShape bing_l_lid_bot_BLENDZ28Shape bing_L_eye_BLENDZ2Shape bing_L_pupil_bigShape1 bing_R_brow_GEOShape bing_L_brow_GEOShape bing_l_lid_bot_BLENDZ26Shape bing_L_pupil_smallShape1 bing_l_lid_bot_BLENDZ22Shape bing_R_pupil_smallShape1 bing_l_lid_bot_BLENDZ27Shape bing_l_lid_top_BLENDZ10Shape bing_l_lid_bot_BLENDZ29Shape bing_l_lid_bot_BLENDZ31Shape bing_l_lid_bot_BLENDZ23Shape bing_l_lid_bot_BLENDZ25Shape bing_L_eye_BLENDZShape bing_l_lid_top_BLENDZShape bing_l_lid_bot_BLENDZ30Shape bing_L_leg_GEOShape bing_R_arm_GEOShape bing_l_lid_bot_GEOShape bing_r_eye_GEO.f[0:239] bing_l_lid_top_BLENDZ11Shape bing_L_eye_OLDShape bing_l_lid_top_GEOShape bing_head_GEOShape bing_R_pupil_bigShape1 bing_L_lid_OLDShape |bing|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape bing_r_arm_thick_BSShape1;\n\nselect -add bo_Spine_ribbonShape bo_Spine_ribbonBlendShape bo_Neck_ribbonShape bo_Neck_ribbonBlendShape bo_L_hand_GEOShape bo_body_GEO1Shape bo_r_arm_thick_BSShape bo_head_GEOShape bo_L_eye_OLDShape bo_L_eye_GEO.f[0:239] bo_R_lid_top_GEOShape bo_R_wheel_GEOShape |bo|L_blinker_bot|joint_lidz|bo_L_eye_BLENDZ3|bo_L_eye_BLENDZ3Shape |bo|L_blinker_bot|joint_lidz|bo_l_lid_top_BLENDZ22|bo_l_lid_top_BLENDZ22Shape bo_L_eye_BLENDZShape bo_R_lid_bot_GEOShape bo_L_wheel_GEOShape bo_R_eye_OLDShape |bo|R_blinker_bot|joint_lidz|bo_R_eye_BLENDZ3|bo_R_eye_BLENDZ3Shape |bo|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape bo_L_eye_BLENDZ2Shape bo_l_lid_top_BLENDZShape bo_L_lid_OLDShape bo_R_lid_OLDShape bo_l_arm_bez_GEOShape bo_r_arm_bez_GEOShape bo_l_lid_top_BLENDZ15Shape bo_l_lid_bot_BLENDZ23Shape bo_L_pupil_bigShape1 bo_l_lid_top_BLENDZ2Shape bo_l_lid_bot_BLENDZ22Shape bo_R_pupil_smallShape1 bo_l_lid_bot_BLENDZ29Shape bo_l_lid_bot_BLENDZ28Shape |bo|L_blinker_top|joint_lidz|bo_L_eye_BLENDZ3|bo_L_eye_BLENDZ3Shape bo_l_lid_bot_BLENDZ24Shape bo_l_lid_bot_BLENDZ26Shape bo_l_lid_top_GEOShape bo_l_lid_bot_GEOShape |bo|R_blinker_top|joint_lidz|bo_R_eye_BLENDZ3|bo_R_eye_BLENDZ3Shape |bo|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape bo_L_pupil_smallShape1 bo_R_pupil_bigShape1 |bo|L_blinker_top|joint_lidz|bo_l_lid_top_BLENDZ22|bo_l_lid_top_BLENDZ22Shape bo_l_lid_top_BLENDZ11Shape bo_r_eye_GEO.f[0:239] bo_l_lid_bot_BLENDZ27Shape bo_l_lid_bot_BLENDZ25Shape bo_l_lid_top_BLENDZ12Shape |bo|R_blinker_top|joint_lidz|bo_R_lid_top_BLENDZ22|bo_R_lid_top_BLENDZ22Shape bo_l_lid_top_BLENDZ13Shape |bo|R_blinker_bot|joint_lidz|bo_R_lid_top_BLENDZ22|bo_R_lid_top_BLENDZ22Shape bo_mouth_target_headShape bo_l_lid_top_BLENDZ16Shape bo_l_lid_top_BLENDZ19Shape bo_l_lid_top_BLENDZ21Shape bo_l_lid_top_BLENDZ20Shape bo_R_brow_GEOShape bo_body_GEOShape bo_L_leg_GEOShape bo_r_leg_thick_BSShape bo_l_arm_thick_BSShape bo_l_leg_thick_BSShape bo_GEO|R_pinch|R_pinchShape2 bo_L_brow_GEOShape bo_R_leg_GEOShape bo_GEO|L_pinch|L_pinchShape2 bo_L_arm_GEOShape bo_R_arm_GEOShape bo_R_hand_GEOShape bo_l_lid_bot_BLENDZ30Shape bo_l_lid_bot_BLENDZ31Shape bo_l_lid_top_BLENDZ10Shape bo_l_lid_top_BLENDZ14Shape;\n\nselect -add boop_mouth_target_bodyShape |boop|R_blinker_top|joint_lidz|boop_R_eye_BLENDZ3|boop_R_eye_BLENDZ3Shape |boop|R_blinker_bot|joint_lidz|boop_R_eye_BLENDZ3|boop_R_eye_BLENDZ3Shape boop_L_leg_GEOShape boop_L_hand_GEOShape boop_R_arm_GEOShape boop_R_leg_GEOShape boop_R_hand_GEOShape boop_eyeSpare1Shape boop_L_arm_GEOShape browShape boop_R_lid_bot_GEOShape boop_R_eye_OLDShape boop_R_lid_OLDShape boop_r_eye_GEO.f[0:239] boop_head_GEOShape boop_L_lid_bot_GEOShape boop_R_wheel_GEOShape boop_L_lid_OLDShape |boop|L_blinker_top|joint_lidz|boop_L_eye_BLENDZ3|boop_L_eye_BLENDZ3Shape |boop|blendShapes|pupil_blendz|phantomObject2|phantomObject2Shape |boop|blendShapes|pupil_blendz|phantomObject1|phantomObject1Shape boop_L_eye_BLENDZShape boop_L_eye_GEO.f[0:239] boop_R_lid_top_GEOShape boop_L_wheel_GEOShape boop_L_eye_OLDShape boop_L_lid_top_GEOShape boop_L_eye_BLENDZ2Shape |boop|L_blinker_bot|joint_lidz|boop_L_eye_BLENDZ3|boop_L_eye_BLENDZ3Shape boop_mouth_target_headShape bodyShape boop_l_arm_bez_GEOShape boop_r_arm_bez_GEOShape boop_l_leg_thick_BSShape boop_r_leg_thick_BSShape;\n" 
-        -sourceType "mel" 
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(char='all')" 
+        -sourceType "python" 
         -commandRepeatable 1
         -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 34
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Select all GEOShape nodes - If nothing selected, searches scene. If items selected, searches through those hierarchies." 
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "selGEO" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -imageOverlayLabel "selGEO" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO()" 
+        -sourceType "python" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "Select GEO transforms" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)" )
+        -mip 0
+        -mi "Select GEO and GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(transforms=1)" )
+        -mip 1
     ;
 
 } 
