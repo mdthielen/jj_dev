@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-Propogate Lighting to shots.
+Propogate Lighting shot to other lighting shots.
 Use published animation files to create lightings shots.
 
 Attributes:
@@ -10,8 +10,8 @@ Todo:
     
     
 """
-# todo-mark test this out
-# todo-mark clean up code
+# REVIEW[mark] Test this out
+#  todo-mark clean up code
 
 import os
 import shutil
@@ -29,11 +29,11 @@ import maya.cmds as cmds
 
 try:
     ep, seq, srcShot = argv[1:4]
-except IOError:
+except:
     ep, seq, srcShot = raw_input('Enter Source: episode, sequence, shot as ### ### ###: ').split(' ')
 try:
     destEntry = argv[4:][0]
-except IOError:
+except:
     destEntry = raw_input('Enter Destination: shot(s) as ###,###: ')
 # test input
 # ep, seq, srcShot = ['101', '100', '020']
@@ -110,18 +110,18 @@ for i, shot in enumerate(newShots):
     dstPathReplace = dstAnimDir.split(seqName)[-1].replace('\\', '/')
 
     print 'Updating references...'
-    for i, line in enumerate(fileContents):  # todo-mark this variable, i, is being used in the above for loop.
+    for j, line in enumerate(fileContents):
 
         if scrFileReplace in line or scrPathReplace in line:
 
-            if len(fileContents[i]) < 250:  # limited to 250 characters for readability, though risking missed changes
-                print '\nline', i, fileContents[i]
+            if len(fileContents[j]) < 250:  # limited to 250 characters for readability, though risking missed changes
+                print '\nline', j, fileContents[j]
 
-            fileContents[i] = fileContents[i].replace(scrFileReplace, dstFileReplace)
-            fileContents[i] = fileContents[i].replace(scrPathReplace, dstPathReplace)
+            fileContents[j] = fileContents[j].replace(scrFileReplace, dstFileReplace)
+            fileContents[j] = fileContents[j].replace(scrPathReplace, dstPathReplace)
 
-            if len(fileContents[i]) < 250:
-                print 'line', i, fileContents[i]
+            if len(fileContents[j]) < 250:
+                print 'line', j, fileContents[j]
 
     pipelineTools.writeMA(dstLong, fileContents)
     print '\n#Rewrote: \n  %s\n' % dstLong
