@@ -99,15 +99,16 @@ def createShotCam(camera_name='shotCam'):
             cmds.rename(cam_generic[0], camera_name)
             new_shot_cam = True
             modify_cam_attr_safe = True
-            print('{} created'.format(camera_name))
+            print('Created   "{}"'.format(camera_name))
 
     if new_shot_cam or cam_exists_dialog == 'Yes':
         cmds.setAttr('{}Shape.horizontalFilmAperture'.format(camera_name), cmds.getAttr('{}Shape.verticalFilmAperture'.format(camera_name)) * aspect_ratio)
         cmds.setAttr('{}Shape.farClipPlane'.format(camera_name), far_clip)
         cmds.setAttr('{}Shape.nearClipPlane'.format(camera_name), near_clip)
+        print('Modified focal length to {}'.format(focal_length))
         print('Modified aspect ratio to {}'.format(aspect_ratio))
-        print('Modified near clip to {}'.format(near_clip))
-        print('Modified far clip to {}'.format(far_clip))
+        print('Modified near clip to    {}'.format(near_clip))
+        print('Modified far clip to     {}'.format(far_clip))
 
     if modify_cam_attr_safe:
         # change these to any shotCam
@@ -121,8 +122,8 @@ def createShotCam(camera_name='shotCam'):
         cmds.setAttr('{}.visibility'.format(camera_name), 1)
         cmds.setAttr('perspShape.renderable', 0)
 
-        print('{} attributes set to renderable and display gates setup'.format(camera_name))
-        print('Set persp camera renderable off')
+        print('Set "{}" attributes renderable and display gates setup'.format(camera_name))
+        print('Set "persp" attribute renderable off')
 
     print('\nJib Jab createShotCam COMPLETE')
 

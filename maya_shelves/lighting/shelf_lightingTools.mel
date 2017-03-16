@@ -26,8 +26,8 @@ global proc shelf_lightingTools () {
         -imageOverlayLabel "pub" 
         -overlayLabelColor 1 1 1 
         -overlayLabelBackColor 0 0 0 0.2 
-        -image "publishAttributes.png" 
-        -image1 "publishAttributes.png" 
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -38,7 +38,7 @@ global proc shelf_lightingTools () {
     ;
         separator
         -enable 1
-        -width 34
+        -width 10
         -height 35
         -manage 1
         -visible 1
@@ -186,7 +186,7 @@ global proc shelf_lightingTools () {
     ;
         separator
         -enable 1
-        -width 34
+        -width 10
         -height 35
         -manage 1
         -visible 1
@@ -230,7 +230,7 @@ global proc shelf_lightingTools () {
     ;
         separator
         -enable 1
-        -width 34
+        -width 10
         -height 35
         -manage 1
         -visible 1
@@ -306,7 +306,7 @@ global proc shelf_lightingTools () {
     ;
         separator
         -enable 1
-        -width 34
+        -width 10
         -height 35
         -manage 1
         -visible 1
@@ -382,7 +382,7 @@ global proc shelf_lightingTools () {
     ;
         separator
         -enable 1
-        -width 34
+        -width 10
         -height 35
         -manage 1
         -visible 1
@@ -522,7 +522,7 @@ global proc shelf_lightingTools () {
     ;
         separator
         -enable 1
-        -width 34
+        -width 10
         -height 35
         -manage 1
         -visible 1
@@ -630,7 +630,7 @@ global proc shelf_lightingTools () {
     ;
         separator
         -enable 1
-        -width 34
+        -width 10
         -height 35
         -manage 1
         -visible 1
@@ -834,7 +834,7 @@ global proc shelf_lightingTools () {
     ;
         separator
         -enable 1
-        -width 34
+        -width 10
         -height 35
         -manage 1
         -visible 1
@@ -1039,7 +1039,7 @@ global proc shelf_lightingTools () {
     ;
         separator
         -enable 1
-        -width 34
+        -width 10
         -height 35
         -manage 1
         -visible 1
@@ -1080,14 +1080,14 @@ global proc shelf_lightingTools () {
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
-        -mi "Select GEO transforms" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)" )
+        -mi "Select GEO" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)" )
         -mip 0
-        -mi "Select GEO and GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(transforms=1)" )
+        -mi "Select GEO & GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(transforms=1)" )
         -mip 1
     ;
         separator
         -enable 1
-        -width 34
+        -width 10
         -height 35
         -manage 1
         -visible 1
@@ -1116,7 +1116,7 @@ global proc shelf_lightingTools () {
         -flipY 0
         -useAlpha 1
         -font "plainLabelFont"
-        -imageOverlayLabel "ls"
+        -imageOverlayLabel "Renamer"
         -overlayLabelColor 0.8 0.8 0.8
         -overlayLabelBackColor 0 0 0 0.5
         -image "pythonFamily.png"
