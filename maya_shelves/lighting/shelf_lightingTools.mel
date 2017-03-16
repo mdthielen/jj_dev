@@ -36,6 +36,18 @@ global proc shelf_lightingTools () {
         -commandRepeatable 1
         -flat 1
     ;
+        separator
+        -enable 1
+        -width 34
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
+        -horizontal 0
+    ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -172,6 +184,18 @@ global proc shelf_lightingTools () {
         -mi "VRayOsd all Off" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.toggleVrayOsd(force_all=True, force_toggle=0)" )
         -mip 1
     ;
+        separator
+        -enable 1
+        -width 34
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
+        -horizontal 0
+    ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -203,6 +227,18 @@ global proc shelf_lightingTools () {
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
+    ;
+        separator
+        -enable 1
+        -width 34
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
+        -horizontal 0
     ;
     shelfButton
         -enableCommandRepeat 1
@@ -268,6 +304,18 @@ global proc shelf_lightingTools () {
         -commandRepeatable 1
         -flat 1
     ;
+        separator
+        -enable 1
+        -width 34
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
+        -horizontal 0
+    ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -331,6 +379,18 @@ global proc shelf_lightingTools () {
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
+    ;
+        separator
+        -enable 1
+        -width 34
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
+        -horizontal 0
     ;
     shelfButton
         -enableCommandRepeat 1
@@ -460,6 +520,18 @@ global proc shelf_lightingTools () {
         -commandRepeatable 1
         -flat 1
     ;
+        separator
+        -enable 1
+        -width 34
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
+        -horizontal 0
+    ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -555,6 +627,18 @@ global proc shelf_lightingTools () {
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
+    ;
+        separator
+        -enable 1
+        -width 34
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
+        -horizontal 0
     ;
     shelfButton
         -enableCommandRepeat 1
@@ -747,6 +831,18 @@ global proc shelf_lightingTools () {
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
+    ;
+        separator
+        -enable 1
+        -width 34
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
+        -horizontal 0
     ;
     shelfButton
         -enableCommandRepeat 1
@@ -941,6 +1037,18 @@ global proc shelf_lightingTools () {
         -commandRepeatable 1
         -flat 1
     ;
+        separator
+        -enable 1
+        -width 34
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
+        -horizontal 0
+    ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -977,7 +1085,18 @@ global proc shelf_lightingTools () {
         -mi "Select GEO and GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(transforms=1)" )
         -mip 1
     ;
-
+        separator
+        -enable 1
+        -width 34
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
+        -horizontal 0
+    ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -1006,6 +1125,38 @@ global proc shelf_lightingTools () {
         -marginWidth 1
         -marginHeight 1
         -command "import ccRenameReplace;reload(ccRenameReplace)"
+        -sourceType "python"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 34
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "shotCam"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "shotCam"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "shCam"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "import cameraTools;reload(cameraTools);cameraTools.createShotCam(camera_name='shotCam')"
         -sourceType "python"
         -commandRepeatable 1
         -flat 1
