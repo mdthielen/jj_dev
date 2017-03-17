@@ -56,38 +56,6 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "create light elements for selectedl lights (select locators, not shapes)" 
-        -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Light elements" 
-        -labelOffset 0
-        -rotation 0
-        -flipX 0
-        -flipY 0
-        -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "LE" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "pythonFamily.png" 
-        -image1 "pythonFamily.png" 
-        -style "iconOnly" 
-        -marginWidth 1
-        -marginHeight 1
-        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.autoCreateLightElem()" 
-        -sourceType "python" 
-        -commandRepeatable 1
-        -flat 1
-    ;
-    shelfButton
-        -enableCommandRepeat 1
-        -enable 1
-        -width 35
-        -height 35
-        -manage 1
-        -visible 1
-        -preventOverride 0
         -annotation "add VRay open subDiv to selection" 
         -enableBackground 0
         -highlightColor 0.321569 0.521569 0.65098 
@@ -239,6 +207,38 @@ global proc shelf_lightingTools () {
         -highlightColor 0.321569 0.521569 0.65098
         -style "shelf"
         -horizontal 0
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "create light elements for selectedl lights (select locators, not shapes)"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Light elements"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "LE"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.autoCreateLightElem()"
+        -sourceType "python"
+        -commandRepeatable 1
+        -flat 1
     ;
     shelfButton
         -enableCommandRepeat 1
@@ -852,210 +852,6 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Select Beep Geometry" 
-        -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Select Beep Geometry" 
-        -labelOffset 0
-        -rotation 0
-        -flipX 0
-        -flipY 0
-        -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "beep" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 1 0 0.5 
-        -image "commandButton.png" 
-        -image1 "commandButton.png" 
-        -style "iconOnly" 
-        -marginWidth 1
-        -marginHeight 1
-        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='beep')" 
-        -sourceType "python" 
-        -commandRepeatable 1
-        -flat 1
-    ;
-    shelfButton
-        -enableCommandRepeat 1
-        -enable 1
-        -width 35
-        -height 35
-        -manage 1
-        -visible 1
-        -preventOverride 0
-        -annotation "Select Bing Geometry" 
-        -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Select Bing Geometry" 
-        -labelOffset 0
-        -rotation 0
-        -flipX 0
-        -flipY 0
-        -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "bing" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 1 1 0 0.5 
-        -image "commandButton.png" 
-        -image1 "commandButton.png" 
-        -style "iconOnly" 
-        -marginWidth 1
-        -marginHeight 1
-        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bing')" 
-        -sourceType "python" 
-        -commandRepeatable 1
-        -flat 1
-    ;
-    shelfButton
-        -enableCommandRepeat 1
-        -enable 1
-        -width 35
-        -height 35
-        -manage 1
-        -visible 1
-        -preventOverride 0
-        -annotation "Select Bang Geometry" 
-        -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Select Bang Geometry" 
-        -labelOffset 0
-        -rotation 0
-        -flipX 0
-        -flipY 0
-        -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "bang" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0.25 1 0.5 
-        -image "commandButton.png" 
-        -image1 "commandButton.png" 
-        -style "iconOnly" 
-        -marginWidth 1
-        -marginHeight 1
-        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bang')" 
-        -sourceType "python" 
-        -commandRepeatable 1
-        -flat 1
-    ;
-    shelfButton
-        -enableCommandRepeat 1
-        -enable 1
-        -width 35
-        -height 35
-        -manage 1
-        -visible 1
-        -preventOverride 0
-        -annotation "Select Boop Geometry" 
-        -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Select Boop Geometry" 
-        -labelOffset 0
-        -rotation 0
-        -flipX 0
-        -flipY 0
-        -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "boop" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 1 0 0 0.5 
-        -image "commandButton.png" 
-        -image1 "commandButton.png" 
-        -style "iconOnly" 
-        -marginWidth 1
-        -marginHeight 1
-        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='boop')" 
-        -sourceType "python" 
-        -commandRepeatable 1
-        -flat 1
-    ;
-    shelfButton
-        -enableCommandRepeat 1
-        -enable 1
-        -width 35
-        -height 35
-        -manage 1
-        -visible 1
-        -preventOverride 0
-        -annotation "Select Bo Geometry" 
-        -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Select Bo Geometry" 
-        -labelOffset 0
-        -rotation 0
-        -flipX 0
-        -flipY 0
-        -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "bo" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0.250234 0 1 0.5 
-        -image "commandButton.png" 
-        -image1 "commandButton.png" 
-        -style "iconOnly" 
-        -marginWidth 1
-        -marginHeight 1
-        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bo')" 
-        -sourceType "python" 
-        -commandRepeatable 1
-        -flat 1
-    ;
-    shelfButton
-        -enableCommandRepeat 1
-        -enable 1
-        -width 35
-        -height 35
-        -manage 1
-        -visible 1
-        -preventOverride 0
-        -annotation "Select All Bots Geometry" 
-        -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Select All Bots Geometry" 
-        -labelOffset 0
-        -rotation 0
-        -flipX 0
-        -flipY 0
-        -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "ALL" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0.122 0.122 0.122 0.5 
-        -image "commandButton.png" 
-        -image1 "commandButton.png" 
-        -style "iconOnly" 
-        -marginWidth 1
-        -marginHeight 1
-        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='all')" 
-        -sourceType "python" 
-        -commandRepeatable 1
-        -flat 1
-    ;
-        separator
-        -enable 1
-        -width 10
-        -height 35
-        -manage 1
-        -visible 1
-        -preventOverride 0
-        -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098
-        -style "shelf"
-        -horizontal 0
-    ;
-    shelfButton
-        -enableCommandRepeat 1
-        -enable 1
-        -width 35
-        -height 35
-        -manage 1
-        -visible 1
-        -preventOverride 0
         -annotation "Select all GEOShape nodes - If nothing selected, searches scene. If items selected, searches through those hierarchies." 
         -enableBackground 0
         -highlightColor 0.321569 0.521569 0.65098 
@@ -1084,6 +880,19 @@ global proc shelf_lightingTools () {
         -mip 0
         -mi "Select GEO & GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(transforms=1)" )
         -mip 1
+        -mi  "Select beep GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='beep')" )
+        -mip 1
+        -mi  "Select bing GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bing')" )
+        -mip 1
+        -mi  "Select bang GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bang')" )
+        -mip 1
+        -mi  "Select boop GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='boop')" )
+        -mip 1
+        -mi  "Select bo GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bo')"  )
+        -mip 1
+        -mi  "Select all chars GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='all')"  )
+        -mip 1
+
     ;
         separator
         -enable 1
