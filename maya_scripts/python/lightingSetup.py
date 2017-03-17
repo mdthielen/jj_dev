@@ -11,8 +11,8 @@ Arguments: (requires all 3)
     episode, sequence, shot
 """
 
-# todo-mark clean up code that would be best inside a function and then called from __main__
 # REVIEW[mark] Test running lightingSetup on a sample shot to create new lighting file.
+# todo-mark clean up code that would be best inside a function and then called from __main__
 
 # shotDirMaya variable modified on 12/3/2015 to accomodate an inproperly named directory structure
 # changed again on 1/20/2016 to accomodate 01_maya directory of old 102/070 directory naming

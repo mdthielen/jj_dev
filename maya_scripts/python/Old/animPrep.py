@@ -32,7 +32,7 @@ except ValueError:
     ep, seq = raw_input('Enter episode, sequence as ### ###: ').split(' ')
 
 try:
-    shot = sys.argv[3]  # todo-mark this is failing
+    shot = sys.argv[3]  # this is failing
 except ValueError:
     pass
 

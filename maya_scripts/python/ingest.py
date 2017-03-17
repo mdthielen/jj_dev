@@ -17,6 +17,7 @@ Todo:
 
 import sys
 
+# REVIEW[mark] Test at studio
 # todo-mark repath textures
 # todo-mark add fuctionality to run from within Maya
 
