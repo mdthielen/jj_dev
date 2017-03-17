@@ -251,8 +251,9 @@ class Renamer:
             t = node.typeName()
             if t == "transform":
                 shapes = cmds.listRelatives(obj, s=True, f=True)
-                if len(shapes) > 0:
-                    t = cmds.objectType(shapes[0])
+                if shapes:
+                    if len(shapes) > 0:
+                        t = cmds.objectType(shapes[0])
             name = t.join(name.split('<ObjectType>'))
 
         if re.search('<ParentName>', name) and dag:
