@@ -1,5 +1,5 @@
 import os
-import re
+
 os.environ["MAYA_LOCATION"] = "C:\Program Files\Autodesk\Maya2015"
 
 import maya.standalone 
@@ -11,7 +11,7 @@ seq = sbtvInfo.SeqInfo(	'season_01', '101_rain', 'sq100_downpour')
 
 
 import pipelineTools
-import animCleanup
+from Old import animCleanup
 
 #test ma file:						
 ma = os.path.join( seq.seqPath, r'sh_020\03_maya\02_animation\sq100_020_downpour_anim_003.ma')

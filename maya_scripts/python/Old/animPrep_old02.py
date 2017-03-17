@@ -1,13 +1,12 @@
 import os
-import re
 import sys
-import sbtvInfo
+
+import maya.standalone
+
 import pipelineTools
-import animCleanup
+import sbtvInfo
+from Old import animCleanup
 
-#os.environ["MAYA_LOCATION"] = "C:\Program Files\Autodesk\Maya2015"
-
-import maya.standalone 
 maya.standalone.initialize( name = 'python' )
 import maya.cmds as mc
 

@@ -119,7 +119,9 @@ def lightingBasics(essid=None):  # essid = epNum/seqNum/sh_shotNum/<Layer>
     # on unix systems, the vray renderGlobals are not loading, therefore vraySettings cannot be set.
 
     # todo-mark update output directory
-    # set output directory
+    # set output directory - this is based on the maya project name is "ask_the_storybots"
+    # example of new location: (beauty is <layer>)
+    # ask_the_storybots/208_name/2_production/sq020_name/070/00_renders/_exr/beauty/v001/sq020_sh070_everestPUBLISH
     if essid:
         try:
             cmds.setAttr("vraySettings.fileNamePrefix", essid, type="string")

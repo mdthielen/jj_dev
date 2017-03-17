@@ -16,13 +16,12 @@ Todo:
 import os
 import sys
 
-# todo-mark not finding standalone. Does this need to be run from command line?
-import maya.standalone
 import maya.cmds as cmds
+import maya.standalone
 
-import animCleanup
 import pipelineTools
 import sbtvInfo
+from Old import animCleanup
 
 maya.standalone.initialize(name='python')
 
