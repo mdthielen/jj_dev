@@ -418,68 +418,71 @@ def lightingCleanup():
     cmds.hide('SHD_GEO_GRP')
 
 
-def selGEO(char='', shapes=True, transforms=False):
+def selGEO(prefix='', shapes=True, transforms=False, suffix='GEO'):
     """
-    Select characters transform or shape nodes.
+    Select transform or shape nodes.
     
-    :param char: None is default. Name of character can be passed. All or all can be passed to select all characters.
+    Can specify a character, all characters, selected nodes, or if nothing selected then the whole scene.
+    The search will go through the heirarchies of which ever is specified.
+    If a character is given, search will happen only with the prefix of that character.
+    
+    :type suffix: default is GEO. This would be the suffix of a transform node.
+    :param prefix: None is default. Name of character can be passed. All or all can be passed to select all characters.
     :param shapes: True is default. Select shape nodes of character.
     :param transforms: False is default. Select transforms of character.
     """
 
     print('\nJib Jab - selGEO:')
 
+    geo_type_shapes = '{}Shape\\b'.format(suffix)
+    geo_type_transforms = '{}\\b'.format(suffix)
 
-    if cmds.ls(sl=1) and char == '':
-        parents = []
-        for sel in cmds.ls(sl=1, l=1):
-            parent = sel.split('|')[1]
-            if parent not in parents:
-                parents.append(parent)
-    elif 'all' == char.lower():
+    parents = []
+    if 'all' == prefix.lower():
         parents = ['beep', 'bing', 'bang', 'boop', 'bo']
         print('Searching for all characters: {}'.format(parents))
+    elif prefix != '':
+        parents = [prefix]
+        print('Searching for: {}'.format(prefix))
+    elif cmds.ls(sl=1):
+        for sel in cmds.ls(sl=1, l=1):
+            parent = sel.split('|')[1]
+            if suffix in parent:
+                parent = parent.split(suffix)[0].rstrip('_')
+            if parent not in parents:
+                parents.append(parent)
     else:
-        parents = [char]
-        print('Searching for: {}'.format(char))
+        parents.append(prefix)
 
     cmds.select(cl=1)
-    if not parents:
-        parents = ['']
+    import re
 
     for parent in parents:
-        if shapes:
-            if 'GEO' not in parent:
-                # Root node name does not contain GEO
-                if cmds.objExists('{}*GEOShape'.format(parent)):
-                    cmds.select('{}*GEOShape'.format(parent), add=1)
-                    if parent:
-                        print('Selected GEOShape nodes for:   {}'.format(parent))
-                    else:
-                        print('Selected GEOShape nodes for:   All in scene')
-            else:
-                # Root node name contains GEO
-                if cmds.objExists('{}*Shape'.format(parent)):
-                    cmds.select('{}*Shape'.format(parent), add=1)
-                    if parent:
-                        print('Selected GEOShape nodes for:   {}'.format(parent))
-                    else:
-                        print('Selected GEOShape nodes for:   All in scene')
-        if transforms:
-            if 'GEO' not in parent:
-                if cmds.objExists('{}*GEO'.format(parent)):
-                    cmds.select('{}*GEO'.format(parent), add=1)
-                    if parent:
-                        print('Selected GEO nodes for:   {}'.format(parent))
-                    else:
-                        print('Selected GEO nodes for:   All in scene')
-            else:
-                if cmds.objExists('{}'.format(parent)):
-                    cmds.select('{}'.format(parent), add=1)
-                    if parent:
-                        print('Selected GEO nodes for:   {}'.format(parent))
-                    else:
-                        print('Selected GEO nodes for:   All in scene')
+        sel_added = False
+
+        # Setup regular expression search pattern
+        if cmds.listRelatives(cmds.ls('{}*:*{}'.format(parent, suffix), l=1) + cmds.ls('{}*{}'.format(parent, suffix), l=1), s=0, f=1):
+            if shapes:
+                regex_search_shapes = '{}[_:|A-Za-z].*({})'.format(parent, geo_type_shapes)
+                for item in cmds.listRelatives(cmds.ls('{}*:*{}'.format('', suffix), l=1) + cmds.ls('{}*{}'.format('', suffix), l=1), s=1, f=1):
+                    if re.search(regex_search_shapes, item):
+                        cmds.select(item, add=1)
+                        sel_added = True
+            if parent and sel_added:
+                print('Selected nodes under "{}" with suffix: {}Shape'.format(parent, suffix))
+            elif sel_added:
+                print('Selected nodes with suffix: {}Shape\tAll in scene'.format(suffix))
+            sel_added = False
+            if transforms:
+                regex_search_geo = '{}[_:|A-Za-z].*({})'.format(parent, geo_type_transforms)
+                for item in (cmds.ls('{}*:*{}'.format('', suffix), l=1) + cmds.ls('{}*{}'.format('', suffix), l=1)):
+                    if re.search(regex_search_geo, item):
+                        cmds.select(item, add=1)
+                        sel_added = True
+            if parent and sel_added:
+                print('Selected nodes under "{}" with suffix: {}'.format(parent, suffix))
+            elif sel_added:
+                print('Selected nodes with suffix: {}     \tAll in scene'.format(suffix))
 
     print('\nJib Jab - selGEO COMPLETE')
 

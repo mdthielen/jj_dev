@@ -871,7 +871,7 @@ global proc shelf_lightingTools () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(char='beep')" 
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='beep')" 
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -903,9 +903,8 @@ global proc shelf_lightingTools () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(char='bing')" 
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bing')" 
         -sourceType "python" 
-        -doubleClickCommand "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(char='bing')" 
         -commandRepeatable 1
         -flat 1
     ;
@@ -936,7 +935,7 @@ global proc shelf_lightingTools () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(char='bang')" 
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bang')" 
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -968,7 +967,7 @@ global proc shelf_lightingTools () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(char='boop')" 
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='boop')" 
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -1000,7 +999,7 @@ global proc shelf_lightingTools () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(char='bo')" 
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bo')" 
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -1032,7 +1031,7 @@ global proc shelf_lightingTools () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(char='all')" 
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='all')" 
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -1077,7 +1076,8 @@ global proc shelf_lightingTools () {
         -marginWidth 1
         -marginHeight 1
         -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO()" 
-        -sourceType "python" 
+        -sourceType "python"
+        -doubleClickCommand "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)"
         -commandRepeatable 1
         -flat 1
         -mi "Select GEO" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)" )
