@@ -813,7 +813,7 @@ global proc shelf_lightingTools () {
         -commandRepeatable 1
         -flat 1
         -mi "Select GEO" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)" )
-        -mip 0
+        -mip 1
         -mi "Select GEO and GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(transforms=1)" )
         -mip 1
         -mi  "Select beep GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='beep')" )
@@ -906,5 +906,4 @@ global proc shelf_lightingTools () {
         -commandRepeatable 1
         -flat 1
     ;
-
 } 
