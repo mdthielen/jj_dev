@@ -105,11 +105,14 @@ def maya_env(filepath, dev=False):
             lines = f.readlines()  # get all lines in file
             f.close()  # we opened it , we close it
             lines_replaced = []
+            sbtv_lines = []
+            maya_lines = []
+            python_lines = []
 
             for line in lines:
                 # sbtvtools
                 if line.startswith(sbtvtools_var):
-                    lines_replaced.append(sbtvtools_var + sbtvtools_path + '\n')
+                    sbtv_lines.append(sbtvtools_var + sbtvtools_path + '\n')
                     sbtvtools_replaced = True
                 # maya_script_path
                 elif line.startswith(maya_script_path_var):
@@ -121,14 +124,14 @@ def maya_env(filepath, dev=False):
                                 paths_replaced.append(maya_scripts_path)
                             else:
                                 paths_replaced.append(path)
-                        lines_replaced.append(maya_script_path_var + ':'.join(paths_replaced) + '\n')
+                        maya_lines.append(maya_script_path_var + ':'.join(paths_replaced) + '\n')
                         maya_script_path_replaced = True
                     elif '$SBTVTOOLS' in maya_script_path_old:
-                        lines_replaced.append(maya_script_path_var + maya_scripts_path + '\n')
+                        maya_lines.append(maya_script_path_var + maya_scripts_path + '\n')
                         maya_script_path_replaced = True
                     else:
-                        lines_replaced.append(maya_script_path_var + maya_scripts_path + ':' +
-                                              maya_script_path_old + '\n')
+                        maya_lines.append(maya_script_path_var + maya_scripts_path + ':' +
+                                          maya_script_path_old + '\n')
                         maya_script_path_replaced = True
 
                 # maya_shelf_path
@@ -141,14 +144,14 @@ def maya_env(filepath, dev=False):
                                 paths_replaced.append(maya_shelf_path)
                             else:
                                 paths_replaced.append(path)
-                        lines_replaced.append(maya_shelf_path_var + ':'.join(paths_replaced))
+                        maya_lines.append(maya_shelf_path_var + ':'.join(paths_replaced))
                         maya_shelf_path_replaced = True
                     elif '$SBTVTOOLS' in maya_shelf_path_old:
-                        lines_replaced.append(maya_shelf_path_var + maya_shelf_path + '\n')
+                        maya_lines.append(maya_shelf_path_var + maya_shelf_path + '\n')
                         maya_shelf_path_replaced = True
                     else:
-                        lines_replaced.append(maya_shelf_path_var + maya_shelf_path + ':' +
-                                              maya_shelf_path_old.rstrip() + '\n')
+                        maya_lines.append(maya_shelf_path_var + maya_shelf_path + ':' +
+                                          maya_shelf_path_old.rstrip() + '\n')
                         maya_shelf_path_replaced = True
 
                 # pythonpath
@@ -166,30 +169,39 @@ def maya_env(filepath, dev=False):
                                 paths_replaced.append(path)
                             elif not python_sbtvtools_replaced:
                                 paths_replaced.append(path)
-                        lines_replaced.append(pythonpath_var + ':'.join(paths_replaced) + '\n')
+                        python_lines.append(pythonpath_var + ':'.join(paths_replaced) + '\n')
                         pythonpath_replaced = True
                     elif '$SBTVTOOLS' in pythonpath_old:
-                        lines_replaced.append(pythonpath_var + pythonpath + '\n')
+                        python_lines.append(pythonpath_var + pythonpath + '\n')
                         pythonpath_replaced = True
                     else:
-                        lines_replaced.append(pythonpath_var + pythonpath + ':' + pythonpath_old + '\n')
+                        python_lines.append(pythonpath_var + pythonpath + ':' + pythonpath_old + '\n')
                         pythonpath_replaced = True
-
+                elif line != '\n' and '=' not in line and not line.startswith('#'):
+                    lines_replaced.append('# removed by maya_initialize --> {}'.format(line))
+                elif line.startswith('#') and 'Jib Jab' in line:
+                    pass
                 # any other lines
                 else:
                     lines_replaced.append(line)
             if not sbtvtools_replaced:
-                lines_replaced.insert(0, sbtvtools_var + sbtvtools_path + '\n')
+                sbtv_lines.insert(0, sbtvtools_var + sbtvtools_path + '\n')
             if not maya_script_path_replaced:
-                lines_replaced.insert(1, maya_script_path_var + maya_scripts_path + '\n')
+                maya_lines.insert(1, maya_script_path_var + maya_scripts_path + '\n')
 
             if not maya_shelf_path_replaced:
-                lines_replaced.insert(2, maya_shelf_path_var + maya_shelf_path + '\n')
+                maya_lines.insert(2, maya_shelf_path_var + maya_shelf_path + '\n')
 
             if not pythonpath_replaced:
-                lines_replaced.insert(3, pythonpath_var + pythonpath + '\n')
+                python_lines.insert(3, pythonpath_var + pythonpath + '\n')
 
             with open(filepath, 'w') as f2:
+                f2.writelines('## Jib Jab Studios - settings start\n\n')
+                f2.writelines(sbtv_lines)
+                f2.writelines(maya_lines)
+                f2.writelines(python_lines)
+                f2.writelines('\n## Jib Jab Studios - settings end')
+                f2.writelines('\n\n\n')
                 f2.writelines(lines_replaced)
                 f2.close()
                 return True
