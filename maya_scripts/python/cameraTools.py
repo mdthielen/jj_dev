@@ -11,7 +11,6 @@ Todo:
     
     
 """
-# REVIEW[mark] Test at studio
 import maya.cmds as cmds
 
 
@@ -36,7 +35,7 @@ def createShotCam(camera_name='shotCam'):
 
     cam_exists_dialog = ''
     new_shot_cam = False
-    modify_cam_attr_safe = True
+    modify_cam_attr_safe = False
     current_selection = None
 
     if len(cmds.ls(sl=1)) == 1:
@@ -49,15 +48,18 @@ def createShotCam(camera_name='shotCam'):
     else:
         camera_selected = False
 
-    if existsShotCam(camera_name):
+    camera_full_name = existsShotCam(camera_name)
+    use_selected_cam_dialog = 'Cancel'
+    if camera_full_name:
         cam_exists_dialog = cmds.confirmDialog(title='"{}" exists'.format(camera_name),
                                                message='Overwrite the following attributes that could effect rendering?\n'
                                                        'aspect ratio:\t{}\n'
                                                        'clip planes:\t{} to {}'.format(aspect_ratio, near_clip, far_clip),
                                                button=['Yes', 'No', 'Cancel'],
                                                defaultButton='No', cancelButton='Cancel', dismissString='No')
+        if cam_exists_dialog == 'Yes':
+            modify_cam_attr_safe = True
 
-        modify_cam_attr_safe = True
     elif camera_selected:
         if 'persp' == current_selection:
             sel_or_dup = 'a duplicated'
@@ -74,11 +76,17 @@ def createShotCam(camera_name='shotCam'):
                                                            'clip planes:\t{} to {}'.format(aspect_ratio, near_clip, far_clip),
                                                    button=['Yes', 'No', 'Cancel'],
                                                    defaultButton='No', cancelButton='Cancel', dismissString='No')
-            modify_cam_attr_safe = True
+            if cam_exists_dialog == 'Yes':
+                modify_cam_attr_safe = True
             if current_selection == 'persp':
-                cmds.duplicate(current_selection, name=camera_name)
+                cam_dup = cmds.duplicate(current_selection, name=camera_name)
+                if cmds.objExists('|shotCam'):
+                    cmds.rename('|shotCam', '|shotCam_NOT_A_CAMERA')
+                camera_full_name = cmds.rename(cam_dup, camera_name)
                 print('Duplicated persp to {}'.format(camera_name))
             else:
+                if cmds.objExists('|shotCam'):
+                    cmds.rename('|shotCam', '|shotCam_NOT_A_CAMERA')
                 cmds.rename(current_selection, camera_name)
                 print('Renamed {} to {}'.format(current_selection, camera_name))
         elif use_selected_cam_dialog == 'No':
@@ -93,37 +101,44 @@ def createShotCam(camera_name='shotCam'):
         if use_existing_cam_dialog == 'Yes':
             cmds.warning('Select 1 camera to use as "{}" and run again.'.format(camera_name))
             modify_cam_attr_safe = False
-        else:
+        elif use_existing_cam_dialog != 'Cancel':
             # Create new camera
             cam_generic = cmds.camera(focalLength=focal_length)
-            cmds.rename(cam_generic[0], camera_name)
+            if cmds.objExists('|shotCam'):
+                cmds.rename('|shotCam', '|shotCam_NOT_A_CAMERA')
+            camera_full_name = cmds.rename(cam_generic[0], camera_name)
             new_shot_cam = True
             modify_cam_attr_safe = True
             print('Created   "{}"'.format(camera_name))
 
-    if new_shot_cam or cam_exists_dialog == 'Yes':
-        cmds.setAttr('{}Shape.horizontalFilmAperture'.format(camera_name), cmds.getAttr('{}Shape.verticalFilmAperture'.format(camera_name)) * aspect_ratio)
-        cmds.setAttr('{}Shape.farClipPlane'.format(camera_name), far_clip)
-        cmds.setAttr('{}Shape.nearClipPlane'.format(camera_name), near_clip)
-        print('Modified focal length to {}'.format(focal_length))
-        print('Modified aspect ratio to {}'.format(aspect_ratio))
-        print('Modified near clip to    {}'.format(near_clip))
-        print('Modified far clip to     {}'.format(far_clip))
+    if cam_exists_dialog != 'Cancel' or use_selected_cam_dialog != 'Cancel':
+        camera_full_name_shape = cmds.listRelatives(camera_full_name, s=1, pa=1)[0]
+        if new_shot_cam or cam_exists_dialog == 'Yes':
+            cmds.setAttr('{}.horizontalFilmAperture'.format(camera_full_name_shape),
+                         cmds.getAttr('{}.verticalFilmAperture'.format(camera_full_name_shape)) * aspect_ratio)
+            cmds.setAttr('{}.farClipPlane'.format(camera_full_name_shape), far_clip)
+            cmds.setAttr('{}.nearClipPlane'.format(camera_full_name_shape), near_clip)
+            print('Modified focal length to {}'.format(focal_length))
+            print('Modified aspect ratio to {}'.format(aspect_ratio))
+            print('Modified near clip to    {}'.format(near_clip))
+            print('Modified far clip to     {}'.format(far_clip))
 
-    if modify_cam_attr_safe:
-        # change these to any shotCam
-        cmds.setAttr('{}Shape.displayGateMask'.format(camera_name), True)
-        cmds.setAttr('{}Shape.displayGateMaskOpacity'.format(camera_name), 0.95)
-        cmds.setAttr('{}Shape.displayGateMaskColor'.format(camera_name), 0, 0, 0)
-        cmds.setAttr('{}Shape.displayResolution'.format(camera_name), True)
-        cmds.setAttr('{}Shape.filmFit'.format(camera_name), film_fit)
-        cmds.setAttr('{}Shape.overscan'.format(camera_name), overscan)
-        cmds.setAttr('{}Shape.renderable'.format(camera_name), 1)
-        cmds.setAttr('{}.visibility'.format(camera_name), 1)
-        cmds.setAttr('perspShape.renderable', 0)
+        if modify_cam_attr_safe:
+            # change these to any shotCam
+            cmds.setAttr('{}.displayGateMask'.format(camera_full_name_shape), True)
+            cmds.setAttr('{}.displayGateMaskOpacity'.format(camera_full_name_shape), 0.95)
+            cmds.setAttr('{}.displayGateMaskColor'.format(camera_full_name_shape), 0, 0, 0)
+            cmds.setAttr('{}.displayResolution'.format(camera_full_name_shape), True)
+            cmds.setAttr('{}.filmFit'.format(camera_full_name_shape), film_fit)
+            cmds.setAttr('{}.overscan'.format(camera_full_name_shape), overscan)
+            cmds.setAttr('{}.renderable'.format(camera_full_name_shape), 1)
+            cmds.setAttr('{}.visibility'.format(camera_full_name), 1)
+            cmds.setAttr('perspShape.renderable', 0)
 
-        print('Set "{}" attributes renderable and display gates setup'.format(camera_name))
-        print('Set "persp" attribute renderable off')
+            print('Set "{}" attributes renderable and display gates setup'.format(camera_name))
+            print('Set "persp" attribute renderable off')
+    else:
+        print ('Caneled operation')
 
     print('\nJib Jab createShotCam COMPLETE')
 
@@ -136,7 +151,12 @@ def existsShotCam(camera):
     :param camera: name of shot camera transform node
     """
 
-    shot_cam_exists = cmds.objExists(camera)
+    shot_cam_exists = None
+    if cmds.objExists(camera):
+        cam_shapes_all = cmds.listRelatives(cmds.ls('shotCam', ap=1), c=1, pa=1)
+        for shape in cam_shapes_all:
+            if 'camera' == cmds.nodeType(shape):
+                shot_cam_exists = cmds.listRelatives(shape, p=1, pa=1)[0]
 
     return shot_cam_exists
 

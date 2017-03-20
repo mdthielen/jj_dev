@@ -88,7 +88,10 @@ def maya_env(filepath, dev=False):
     if dev:
         sbtvtools_path = '/Volumes/public/StoryBots/production/series/ask_the_storybots/03_shared_assets/01_cg/05_maya_tools/jj_dev/'
         if not os.path.exists(sbtvtools_path):
-            sbtvtools_path = os.path.expanduser('~/Documents/maya/scripts/JibJab/jj_dev')
+            if os.path.exists(os.path.expanduser('~/Documents/creating/projects/JibJab/ask_the_storybots/03_shared_assets/01_cg/05_maya_tools/jj_dev')):
+                sbtvtools_path = os.path.expanduser('~/Documents/creating/projects/JibJab/ask_the_storybots/03_shared_assets/01_cg/05_maya_tools/jj_dev')
+            elif os.path.exists(os.path.expanduser('~/Documents/maya/scripts/JibJab/jj_dev')):
+                sbtvtools_path = os.path.expanduser('~/Documents/maya/scripts/JibJab/jj_dev')
     if not os.path.exists(sbtvtools_path):
         os.makedirs(sbtvtools_path)
     maya_scripts_path = '$SBTVTOOLS/maya_scripts/mel'
@@ -108,6 +111,7 @@ def maya_env(filepath, dev=False):
             sbtv_lines = []
             maya_lines = []
             python_lines = []
+            jibjab_block_found = 0
 
             for line in lines:
                 # sbtvtools
@@ -180,6 +184,8 @@ def maya_env(filepath, dev=False):
                 elif line != '\n' and '=' not in line and not line.startswith('#'):
                     lines_replaced.append('# removed by maya_initialize --> {}'.format(line))
                 elif line.startswith('#') and 'Jib Jab' in line:
+                    jibjab_block_found = jibjab_block_found + 1
+                elif line == '\n' and jibjab_block_found <= 1:
                     pass
                 # any other lines
                 else:
@@ -198,10 +204,11 @@ def maya_env(filepath, dev=False):
             with open(filepath, 'w') as f2:
                 f2.writelines('## Jib Jab Studios - settings start\n\n')
                 f2.writelines(sbtv_lines)
+                f2.writelines('\n')
                 f2.writelines(maya_lines)
+                f2.writelines('\n')
                 f2.writelines(python_lines)
-                f2.writelines('\n## Jib Jab Studios - settings end')
-                f2.writelines('\n\n\n')
+                f2.writelines('\n## Jib Jab Studios - settings end\n')
                 f2.writelines(lines_replaced)
                 f2.close()
                 return True
