@@ -53,13 +53,16 @@ def publish(currentFile=None, saveCurrentFile=False):
         print('Saved %s' % currentFile)
 
     try:
-        if os.path.exists(pubFile):
-            if os.access(pubFile, os.W_OK):
-                cmds.file(pubFile, force=1, options="v=0;", type="mayaAscii", pr=1, ea=1)
+        if os.path.exists(os.path.dirname(pubFile)):
+            if os.path.exists(pubFile):
+                if os.access(pubFile, os.W_OK):
+                    cmds.file(pubFile, force=1, options="v=0;", type="mayaAscii", pr=1, ea=1)
+                else:
+                    print('FAILED TO EXPORT\n%s' % pubFile)
+                    print('Check user permissions\n')
+                    return
             else:
-                print('FAILED TO EXPORT\n%s' % pubFile)
-                print('Check user permissions\n')
-                return
+                cmds.file(pubFile, force=1, options="v=0;", type="mayaAscii", pr=1, ea=1)
         else:
             print('FAILED TO EXPORT\n%s' % pubFile)
             print('Check path exists\n')
