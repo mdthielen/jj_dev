@@ -7,8 +7,8 @@ global proc shelf_lightingTools () {
     shelfButton
         -enableCommandRepeat 1
         -enable 1
-        -width 35
-        -height 35
+        -width 23
+        -height 23
         -manage 1
         -visible 1
         -preventOverride 0
@@ -26,8 +26,8 @@ global proc shelf_lightingTools () {
         -imageOverlayLabel "pub" 
         -overlayLabelColor 1 1 1 
         -overlayLabelBackColor 0 0 0 0.2 
-        -image "pythonFamily.png" 
-        -image1 "pythonFamily.png" 
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -36,7 +36,7 @@ global proc shelf_lightingTools () {
         -commandRepeatable 1
         -flat 1
     ;
-    separator
+        separator
         -enable 1
         -width 10
         -height 35
@@ -44,8 +44,8 @@ global proc shelf_lightingTools () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -style "shelf" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
         -horizontal 0
     ;
     shelfButton
@@ -152,7 +152,7 @@ global proc shelf_lightingTools () {
         -mi "VRayOsd all Off" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.toggleVrayOsd(force_all=True, force_toggle=0)" )
         -mip 1
     ;
-    separator
+        separator
         -enable 1
         -width 10
         -height 35
@@ -160,8 +160,8 @@ global proc shelf_lightingTools () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -style "shelf" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
         -horizontal 0
     ;
     shelfButton
@@ -196,7 +196,7 @@ global proc shelf_lightingTools () {
         -commandRepeatable 1
         -flat 1
     ;
-    separator
+        separator
         -enable 1
         -width 10
         -height 35
@@ -204,8 +204,8 @@ global proc shelf_lightingTools () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -style "shelf" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
         -horizontal 0
     ;
     shelfButton
@@ -216,27 +216,27 @@ global proc shelf_lightingTools () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "create light elements for selectedl lights (select locators, not shapes)" 
+        -annotation "create light elements for selectedl lights (select locators, not shapes)"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Light elements" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Light elements"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "LE" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.2 
-        -image "pythonFamily.png" 
-        -image1 "pythonFamily.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "LE"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.2
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.autoCreateLightElem()" 
-        -sourceType "python" 
+        -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.autoCreateLightElem()"
+        -sourceType "python"
         -commandRepeatable 1
         -flat 1
     ;
@@ -304,7 +304,7 @@ global proc shelf_lightingTools () {
         -commandRepeatable 1
         -flat 1
     ;
-    separator
+        separator
         -enable 1
         -width 10
         -height 35
@@ -312,8 +312,8 @@ global proc shelf_lightingTools () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -style "shelf" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
         -horizontal 0
     ;
     shelfButton
@@ -380,7 +380,7 @@ global proc shelf_lightingTools () {
         -commandRepeatable 1
         -flat 1
     ;
-    separator
+        separator
         -enable 1
         -width 10
         -height 35
@@ -388,8 +388,8 @@ global proc shelf_lightingTools () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -style "shelf" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
         -horizontal 0
     ;
     shelfButton
@@ -520,7 +520,7 @@ global proc shelf_lightingTools () {
         -commandRepeatable 1
         -flat 1
     ;
-    separator
+        separator
         -enable 1
         -width 10
         -height 35
@@ -528,9 +528,73 @@ global proc shelf_lightingTools () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -style "shelf" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
         -horizontal 0
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Light Link Export (selected)" 
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "lightingSync export" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -imageOverlayLabel "LLE" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "pythonFamily.png" 
+        -image1 "pythonFamily.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import lightingSync\nlightingSync.storeLightLinks()\nlightingSync.exportLightRig()" 
+        -sourceType "python" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Light Link Apply (selected)" 
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "lightingSync apply" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -imageOverlayLabel "LLA" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "pythonFamily.png" 
+        -image1 "pythonFamily.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import lightingSync\nlightingSync.applyLightLinks()" 
+        -sourceType "python" 
+        -commandRepeatable 1
+        -flat 1
     ;
     shelfButton
         -enableCommandRepeat 1
@@ -564,7 +628,7 @@ global proc shelf_lightingTools () {
         -commandRepeatable 1
         -flat 1
     ;
-    separator
+        separator
         -enable 1
         -width 10
         -height 35
@@ -572,8 +636,8 @@ global proc shelf_lightingTools () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -style "shelf" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
         -horizontal 0
     ;
     shelfButton
@@ -768,7 +832,7 @@ global proc shelf_lightingTools () {
         -commandRepeatable 1
         -flat 1
     ;
-    separator
+        separator
         -enable 1
         -width 10
         -height 35
@@ -776,8 +840,8 @@ global proc shelf_lightingTools () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -style "shelf" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
         -horizontal 0
     ;
     shelfButton
@@ -808,28 +872,29 @@ global proc shelf_lightingTools () {
         -marginWidth 1
         -marginHeight 1
         -command "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO()" 
-        -sourceType "python" 
-        -doubleClickCommand "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)" 
+        -sourceType "python"
+        -doubleClickCommand "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)"
         -commandRepeatable 1
         -flat 1
         -mi "Select GEO" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)" )
         -mip 0
-        -mi "Select GEO and GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(transforms=1)" )
+        -mi "Select GEO & GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(transforms=1)" )
         -mip 1
-        -mi "Select beep GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='beep')" )
-        -mip 2
-        -mi "Select bing GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bing')" )
-        -mip 3
-        -mi "Select bang GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bang')" )
-        -mip 4
-        -mi "Select boop GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='boop')" )
-        -mip 5
-        -mi "Select bo GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bo')" )
-        -mip 6
-        -mi "Select all chars GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='all')" )
-        -mip 7
+        -mi  "Select beep GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='beep')" )
+        -mip 1
+        -mi  "Select bing GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bing')" )
+        -mip 1
+        -mi  "Select bang GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bang')" )
+        -mip 1
+        -mi  "Select boop GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='boop')" )
+        -mip 1
+        -mi  "Select bo GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bo')"  )
+        -mip 1
+        -mi  "Select all chars GEOShapes" ( "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='all')"  )
+        -mip 1
+
     ;
-    separator
+        separator
         -enable 1
         -width 10
         -height 35
@@ -837,71 +902,71 @@ global proc shelf_lightingTools () {
         -visible 1
         -preventOverride 0
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -style "shelf" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -style "shelf"
         -horizontal 0
     ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
-        -width 35
-        -height 35
+        -width 34
+        -height 34
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Renamer" 
+        -annotation "Renamer"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "Renamer" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "Renamer"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "Renamer" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.5 
-        -image "pythonFamily.png" 
-        -image1 "pythonFamily.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "Renamer"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "import ccRenameReplace;reload(ccRenameReplace)" 
-        -sourceType "python" 
+        -command "import ccRenameReplace;reload(ccRenameReplace)"
+        -sourceType "python"
         -commandRepeatable 1
         -flat 1
     ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
-        -width 19
-        -height 19
+        -width 34
+        -height 34
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "shotCam" 
+        -annotation "shotCam"
         -enableBackground 0
-        -highlightColor 0.321569 0.521569 0.65098 
-        -align "center" 
-        -label "shotCam" 
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "shotCam"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
-        -font "plainLabelFont" 
-        -imageOverlayLabel "shCam" 
-        -overlayLabelColor 0.8 0.8 0.8 
-        -overlayLabelBackColor 0 0 0 0.5 
-        -image "CameraAE.png" 
-        -image1 "CameraAE.png" 
-        -style "iconOnly" 
+        -font "plainLabelFont"
+        -imageOverlayLabel "shCam"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "pythonFamily.png"
+        -image1 "pythonFamily.png"
+        -style "iconOnly"
         -marginWidth 1
         -marginHeight 1
-        -command "import cameraTools;reload(cameraTools);cameraTools.createShotCam(camera_name='shotCam')" 
-        -sourceType "python" 
+        -command "import cameraTools;reload(cameraTools);cameraTools.createShotCam(camera_name='shotCam')"
+        -sourceType "python"
         -commandRepeatable 1
         -flat 1
     ;

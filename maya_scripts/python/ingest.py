@@ -17,9 +17,7 @@ Todo:
 
 import sys
 
-# REVIEW[mark] Test at studio
 # todo-mark repath textures
-# todo-mark add fuctionality to run from within Maya
 
 
 def fileDialogRemoveRenderers():
@@ -28,9 +26,14 @@ def fileDialogRemoveRenderers():
     
     """
     import maya.cmds as cmds
-    mafile = cmds.fileDialog2(fileMode=1, fileFilter='*.ma')[0]
-    print('Search for renderers to remove in:\n{}'.format(mafile))
-    removeRenderers(mafile)
+    try:
+        selection = cmds.fileDialog2(fileMode=1, fileFilter='*.ma')
+        if selection:
+            mayafile = selection[0]
+            print('Search for renderers to remove in:\n{}'.format(mayafile))
+            removeRenderers(mayafile)
+    except IOError:
+        print ('Operation canceled')
 
 
 def removeRenderers(mafile):

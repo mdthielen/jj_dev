@@ -17,7 +17,7 @@ global proc shelf_jjCleanUp () {
         -highlightColor 0.321569 0.521569 0.65098
         -align "center"
         -label "Publish"
-        -labelOffset 0
+        -labelOffset -10
         -rotation 0
         -flipX 0
         -flipY 0
@@ -44,18 +44,18 @@ global proc shelf_jjCleanUp () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "publish animation or lighting file"
+        -annotation "Ingest mayaAscii file - removes all renderers except VRay"
         -enableBackground 0
         -highlightColor 0.321569 0.521569 0.65098
         -align "center"
-        -label "Publish"
+        -label "Ingest"
         -labelOffset 0
         -rotation 0
         -flipX 0
         -flipY 0
         -useAlpha 1
         -font "plainLabelFont"
-        -imageOverlayLabel "pub"
+        -imageOverlayLabel "Ingest"
         -overlayLabelColor 1 1 1
         -overlayLabelBackColor 0 0 0 0.2
         -image "pythonFamily.png"
@@ -65,6 +65,38 @@ global proc shelf_jjCleanUp () {
         -marginHeight 1
         -command "try: reload(ingest)\nexcept: import ingest\ningest.fileDialogRemoveRenderers()"
         -sourceType "python"
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "File Path Editor"
+        -enableBackground 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "FPE"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -imageOverlayLabel "RE"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.25
+        -image "menuIconWindow.png"
+        -image1 "menuIconWindow.png"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "FileTextureManager"
+        -sourceType "mel"
         -commandRepeatable 1
         -flat 1
     ;
@@ -186,7 +218,7 @@ global proc shelf_jjCleanUp () {
         -highlightColor 0.321569 0.521569 0.65098
         -align "center"
         -label "shotCam"
-        -labelOffset 0
+        -labelOffset -10
         -rotation 0
         -flipX 0
         -flipY 0
