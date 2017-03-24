@@ -257,14 +257,16 @@ def characterEyes():
                                                                        dismissString='No')
                             if confirm_delete_lights == 'Yes':
                                 for light_old_del in eye_lights_old_char:
-                                    cmds.delete(light_old_del)
+                                    if cmds.objExists(light_old_del):
+                                        cmds.delete(light_old_del)
                                 old_groups = cmds.ls('*LGT_GRP', l=1)
 
                                 # Look for old Spec_LGT_GRP nodes in char to delete
                                 if old_groups:
                                     for group in old_groups:
                                         if char in group:
-                                            cmds.delete(group)
+                                            if cmds.objExists(group):
+                                                cmds.delete(group)
             # Create running list of all geo and lights for eye light
             if update_eye_lights == 'Yes':
                 if re.search('{}_L'.format(char), mesh, re.IGNORECASE):  # LEFT EYES
@@ -289,9 +291,10 @@ def createLightAndLink(mesh, lightName, dome=False, rect=True):  #
 
     lightShape = lightName + "Shape"
     char = lightName.split('_')[0]
-    eye_group = ('{}_eye_spec_LGT_GRP'.format(char))
+    eye_group = '{}_eye_spec_LGT_GRP'.format(char)
     if not cmds.objExists(eye_group):
-        cmds.group(empty=1, parent='{}_MainC'.format(char), name=eye_group)
+        cmds.group(empty=1, parent='{}'.format(char), name=eye_group)
+        cmds.parentConstraint('{}_ROOTC'.format(char), eye_group)
     eye_group_longname = cmds.ls(eye_group, l=1)[0]
     new_eye_light = None
 
@@ -333,36 +336,40 @@ def createLightAndLink(mesh, lightName, dome=False, rect=True):  #
         print('Set attributes for:   {}'.format(new_eye_light))
 
     elif rect:
+        # Create Groups for L and R eye light
+        light_group = cmds.group(empty=1, parent=eye_group, name='{}_GRP'.format(lightShape.split('Shape')[0]))
+
         # Create VRay Light Rect
         new_eye_light = cmds.shadingNode("VRayLightRectShape", asLight=True, name=lightShape)
-        cmds.parent(new_eye_light, eye_group_longname)
+        cmds.parent(new_eye_light, light_group)
+        cmds.xform(new_eye_light, t=[0, 0, 0], ro=[0, 0, 0], s=[1, 1, 1])
         print('Created VRay Light Rect:   {}'.format(new_eye_light))
 
         # set the rect attributes
 
         # Transform Left
-        if '_L_' in new_eye_light:
-            cmds.setAttr(new_eye_light + ".tx", -2.5)
-            cmds.setAttr(new_eye_light + ".ty", 10)
-            cmds.setAttr(new_eye_light + ".tz", 8)
-            cmds.setAttr(new_eye_light + ".rx", -5)
-            cmds.setAttr(new_eye_light + ".ry", -24)
-            cmds.setAttr(new_eye_light + ".rz", -0.75)
-            cmds.setAttr(new_eye_light + ".sx", 1.6)
-            cmds.setAttr(new_eye_light + ".sy", 1.6)
-            cmds.setAttr(new_eye_light + ".sz", 1.6)
+        if '_L_' in light_group:
+            cmds.setAttr(light_group + ".tx", -2.5, l=1)
+            cmds.setAttr(light_group + ".ty", 10, l=1)
+            cmds.setAttr(light_group + ".tz", 8, l=1)
+            cmds.setAttr(light_group + ".rx", -5, l=1)
+            cmds.setAttr(light_group + ".ry", -24, l=1)
+            cmds.setAttr(light_group + ".rz", -0.75, l=1)
+            cmds.setAttr(light_group + ".sx", 1.6, l=1)
+            cmds.setAttr(light_group + ".sy", 1.6, l=1)
+            cmds.setAttr(light_group + ".sz", 1.6, l=1)
 
         # Transform Right
-        if '_R_' in new_eye_light:
-            cmds.setAttr(new_eye_light + ".tx", -8)
-            cmds.setAttr(new_eye_light + ".ty", 10)
-            cmds.setAttr(new_eye_light + ".tz", 6)
-            cmds.setAttr(new_eye_light + ".rx", -5)
-            cmds.setAttr(new_eye_light + ".ry", -24)
-            cmds.setAttr(new_eye_light + ".rz", -3)
-            cmds.setAttr(new_eye_light + ".sx", 1.6)
-            cmds.setAttr(new_eye_light + ".sy", 1.6)
-            cmds.setAttr(new_eye_light + ".sz", 1.6)
+        if '_R_' in light_group:
+            cmds.setAttr(light_group + ".tx", -8, l=1)
+            cmds.setAttr(light_group + ".ty", 10, l=1)
+            cmds.setAttr(light_group + ".tz", 6, l=1)
+            cmds.setAttr(light_group + ".rx", -5, l=1)
+            cmds.setAttr(light_group + ".ry", -24, l=1)
+            cmds.setAttr(light_group + ".rz", -3, l=1)
+            cmds.setAttr(light_group + ".sx", 1.6, l=1)
+            cmds.setAttr(light_group + ".sy", 1.6, l=1)
+            cmds.setAttr(light_group + ".sz", 1.6, l=1)
 
         # Basic parameters
         cmds.setAttr(lightShape + ".intensityMult", 38.889)
