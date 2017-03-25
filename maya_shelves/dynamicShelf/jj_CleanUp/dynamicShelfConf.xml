@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptsShelf>
-	<shelfItem image = "publishAttributes.png" 
-			   command = "import lightingTools;reload(lightingTools);lightingTools.selGEO()"
-			   ann="Select GEOShape nodes" mi01="" mi02="" mip0="1"/>
-
-</scriptsShelf>

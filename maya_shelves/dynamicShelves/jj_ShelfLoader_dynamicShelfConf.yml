@@ -1,0 +1,24 @@
+01 toggle jj_CleanUp shelf:
+    label: "toggle jj_CleanUp shelf"
+    annotation: "toggle jj_CleanUp shelf"
+    image:
+        name: "shelf_CleanUp.png"
+        location: "custom"
+    command: "import pipelineTools;reload(pipelineTools);pipelineTools.toggleDynamicShelf('jj_CleanUp')"
+    sourceType: "python"
+02 toggle jj_Anim shelf:
+    label: "toggle jj_Anim shelf"
+    annotation: "toggle jj_Anim shelf"
+    image:
+        name: "shelf_anim.png"
+        location: "custom"
+    command: "import pipelineTools;reload(pipelineTools);pipelineTools.toggleDynamicShelf('jj_Anim')"
+    sourceType: "python"
+03 toggle jj_Lighting shelf:
+    label: "toggle jj_Lighting shelf"
+    annotation: "toggleDynamicShelf jj_Lighting"
+    image:
+        name: "shelf_lighting.png"
+        location: "custom"
+    command: "import pipelineTools;reload(pipelineTools);pipelineTools.toggleDynamicShelf('jj_Lighting')"
+    sourceType: "python"

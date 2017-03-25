@@ -1,0 +1,76 @@
+01 publish:
+    label: "publish"
+    annotation: "publish"
+    image:
+        name: "publish.png"
+        location: "custom"
+    command: "try: reload(pipelineTools)\nexcept: import pipelineTools\npipelineTools.publish()"
+    sourceType: "python"
+    separator: True
+02 File Path Editor:
+    label: "File Path Editor"
+    annotation: "File Path Editor"
+    image:
+        name: "editPCM.png"
+        location: "custom"
+    command: "FileTextureManager"
+    sourceType: "mel"
+03 Ingest:
+    label: "Ingest"
+    annotation: "Ingest mayaAscii file - removes all renderers except VRay"
+    image:
+        name: "ingest.png"
+        location: "custom"
+    command: "try: reload(ingest)\nexcept: import ingest\ningest.fileDialogRemoveRenderers()"
+    sourceType: "python"
+    separator: True
+04 selGEO:
+    label: "selGEO"
+    annotation: "Select all GEOShape nodes. If nothing selected, searches scene. If items selected, searches through those hierarchies."
+    image:
+        name: "selGEO.png"
+        location: "custom"
+    command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO()"
+    sourceType: "python"
+    doubleClickCommand: '"try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)"'
+    mip 0:
+        label: "Select GEO"
+        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)"
+    mip 1:
+        label: "Select GEO and GEOShapes"
+        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(transforms=1)"
+    mip 2:
+        label: "Select beep GEOShapes"
+        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='beep')"
+    mip 3:
+        label: "Select bing GEOShapes"
+        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix=\"bing\")"
+    mip 4:
+        label: "Select bang GEOShapes"
+        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix=\"bang\")"
+    mip 5:
+        label: "Select boop GEOShapes"
+        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix=\"boop\")"
+    mip 6:
+        label: "Select bo GEOShapes"
+        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix=\"bo\")"
+    mip 7:
+        label: "Select all chars GEOShapes"
+        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix=\"all\")"
+    separator: True
+05 Renamer:
+    label: "Renamer"
+    annotation: "Renamer"
+    image:
+        name: "ccRenameReplace.png"
+        location: "custom"
+    sourceType: "python"
+06 shotCam:
+    label: "shotCam"
+    annotation: "shotCam"
+    image:
+        name: "createShotCam.png"
+        location: "custom"
+    command: "import cameraTools;reload(cameraTools);cameraTools.createShotCam(camera_name='shotCam')"
+    sourceType: "python"
+

@@ -1,0 +1,27 @@
+01 publish:
+    label: "publish"
+    annotation: "publish"
+    image:
+        name: "publish.png"
+        location: "custom"
+    command: "try: reload(pipelineTools)\nexcept: import pipelineTools\npipelineTools.publish()"
+    sourceType: "python"
+    separator: True
+02 ReferenceEditor:
+    label: "ReferenceEditor"
+    annotation: "Edit the references for the current scene"
+    image:
+        name: "refEdFileList.png"
+        location: "maya"
+    command: "ReferenceEditor"
+    sourceType: "mel"
+    separator: True
+03 createShotCam:
+    label: "createShotCam"
+    annotation: "create standardized shotCam for shot"
+    image:
+        name: "createShotCam.png"
+        location: "custom"
+    command: "import cameraTools;reload(cameraTools);cameraTools.createShotCam(camera_name='shotCam')"
+    sourceType: "python"
+

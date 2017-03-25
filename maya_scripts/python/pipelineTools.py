@@ -15,6 +15,9 @@ Todo:
 import os
 import re
 import maya.cmds as cmds
+import maya.mel
+import yaml
+# from xml.dom import minidom
 
 
 def pubName(currentFile):  # = cmds.file(q=1, l=1)[0] ):
@@ -168,6 +171,91 @@ def loadRef(sourcePath):
         cmds.file(srcPubFP, mergeNamespacesOnClash=1, reference=1, namespace=':')
     else:
         raise NameError('could not find:\n    ' + srcPubFP)
+
+
+def loadDynamicShelf(shelfname):
+    # Get icons path from the Maya.env ICONS_PATH variable
+    iconsPath = os.environ.get('ICONS_PATH', None)
+
+    # Get the CONFIGS_PATH from the Maya.env file and get the configuration files for the specified project
+    configsPath = os.environ.get('CONFIGS_PATH', None)
+
+    print('Loading shelf: {}'.format(shelfname))
+    shelfConfFile = os.path.join(configsPath, '{}_dynamicShelfConf.yml'.format(shelfname))
+    # shelfConfFile = os.path.join(configsPath, '{}_dynamicShelfConf.xml'.format(shelfname))
+    # Check if the file exist befor continuing
+    if os.path.exists(shelfConfFile):
+        # This is a fix for the automatically saved shelf function
+        # It will delete a previously shelf named dynamicShelf created with the plugin if any exist
+        removeDynamicShelf(shelfname)
+
+        # Create a new shelfLayout in $gShelfTopLevel
+        maya.mel.eval('${0} = `shelfLayout -cellWidth 33 -cellHeight 33 -p $gShelfTopLevel {0}`;'.format(shelfname))
+
+        # Load yml config file
+        yml_shelf = yaml.load(file(shelfConfFile, 'r'))
+
+        if yml_shelf:
+            # Loop trough each shelfItem entry in the shelfConfFile
+            for button in sorted(yml_shelf.keys()):
+                # Create the actual shelf button with the above parameters
+                separator = False
+                shelf_params = {}
+                for param in sorted(yml_shelf[button].keys()):
+                    if param == 'image':
+                        if yml_shelf[button]['image']['location'] == 'custom':
+                            shelf_params['image'] = '{}'.format(os.path.join(iconsPath, yml_shelf[button]['image']['name']))
+                        else:
+                            shelf_params['image'] = '{}'.format(yml_shelf[button]['image']['name'])
+                    elif param == 'separator':
+                        separator = True
+                    elif param.startswith('mip'):
+                        shelf_params['mi'] = '{}'.format(yml_shelf[button][param]['label']), '{}'.format(yml_shelf[button][param]['command'])
+                        shelf_params[param.split(' ')[0]] = int(param.split(' ')[1])
+                    else:
+                        shelf_params[param] = '{}'.format(yml_shelf[button][param])
+                cmds.shelfButton(**shelf_params)
+
+                if separator:
+                    cmds.separator(enable=1, width=10, height=35, style="shelf",
+                                   manage=1, visible=1, preventOverride=0, enableBackground=0, horizontal=0)
+
+        # Rename the shelfLayout with the shelfname
+        maya.mel.eval('tabLayout -edit -tabLabel ${0} "'.format(shelfname) + shelfname + '" $gShelfTopLevel;')
+
+        print('{} shelf successfully loaded'.format(shelfname))
+
+
+def reloadDynamicShelf(shelfname):
+    # Delete the dynamicShelf if it exist
+    """
+    Delete shelf.
+    """
+    # todo-mark figure out a way to remember which shelves are loaded from last time.
+    # todo-mark Maybe write out a setting file. Also want to override based on task.
+    if maya.mel.eval('shelfLayout -exists {0}'.format(shelfname)):
+        removeDynamicShelf(shelfname)
+        loadDynamicShelf(shelfname)
+
+
+def toggleDynamicShelf(shelfname):
+    # Delete the dynamicShelf if it exist
+    """
+    Delete shelf.
+    """
+    if maya.mel.eval('shelfLayout -exists {0}'.format(shelfname)):
+        removeDynamicShelf(shelfname)
+    else:
+        loadDynamicShelf(shelfname)
+
+
+def removeDynamicShelf(shelfname):
+    # Delete the dynamicShelf if it exist
+    """
+    Delete shelf.
+    """
+    maya.mel.eval('if (`shelfLayout -exists {0} `) deleteUI {0};'.format(shelfname))
+    print('{} shelf successfully unloaded'.format(shelfname))
 
 __author__ = "Robert Showalter"
 __copyright__ = "Copyright 2017, Jib Jab Studios"
