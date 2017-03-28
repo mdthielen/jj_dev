@@ -79,9 +79,9 @@ def createShotCam(camera_name='shotCam'):
             if cam_exists_dialog == 'Yes':
                 modify_cam_attr_safe = True
             if current_selection == 'persp':
-                cam_dup = cmds.duplicate(current_selection, name=camera_name)
                 if cmds.objExists('|shotCam'):
                     cmds.rename('|shotCam', '|shotCam_NOT_A_CAMERA')
+                cam_dup = cmds.duplicate(current_selection, name=camera_name)
                 camera_full_name = cmds.rename(cam_dup, camera_name)
                 print('Duplicated persp to {}'.format(camera_name))
             else:
