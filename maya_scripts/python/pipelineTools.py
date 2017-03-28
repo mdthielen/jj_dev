@@ -10,8 +10,6 @@ Todo:
     
 """
 
-# REVIEW[mark] test and clean
-
 import os
 import re
 import maya.cmds as cmds
@@ -222,6 +220,7 @@ def loadDynamicShelf(shelfname):
 
         # Rename the shelfLayout with the shelfname
         maya.mel.eval('tabLayout -edit -tabLabel ${0} "'.format(shelfname) + shelfname + '" $gShelfTopLevel;')
+        writeDynamicShelfPrefs(shelfname, True)
 
         print('{} shelf successfully loaded'.format(shelfname))
 
@@ -229,13 +228,70 @@ def loadDynamicShelf(shelfname):
 def reloadDynamicShelf(shelfname):
     # Delete the dynamicShelf if it exist
     """
-    Delete shelf.
+    Reload shelves in the saved state for the user.
     """
-    # todo-mark figure out a way to remember which shelves are loaded from last time.
-    # todo-mark Maybe write out a setting file. Also want to override based on task.
-    if maya.mel.eval('shelfLayout -exists {0}'.format(shelfname)):
+    if readDynamicShelfPrefs(shelfname):
         removeDynamicShelf(shelfname)
         loadDynamicShelf(shelfname)
+    elif not readDynamicShelfPrefs(shelfname):
+        removeDynamicShelf(shelfname)
+
+
+def writeDynamicShelfPrefs(shelfname, state):
+    """
+    Write out yaml file preferences to user Maya prefs folder to save which shelves are opened and closed. 
+    
+    :param state: bool the shelf is True (on) or False (off)
+    :param shelfname: name of shelf to write out
+    """
+    with open(prefsFileDynamicShelf(), 'r') as yaml_file:
+        shelves = yaml.load(yaml_file)
+        shelves[shelfname] = state
+
+    with open(prefsFileDynamicShelf(), 'w') as yaml_file:
+        yaml.dump(shelves, yaml_file, default_flow_style=False)
+
+
+def readDynamicShelfPrefs(shelfname):
+    """
+    Read yaml file preferences to user Maya prefs folder to save which shelves are opened and closed. 
+
+    :rtype: state: None, True, or False is the state of the saved shelf.
+    :param shelfname: name of shelf to read out
+    """
+
+    state = None
+    with open(prefsFileDynamicShelf(), 'r') as yaml_file:
+        shelves = yaml.load(yaml_file)
+        if shelfname in shelves.keys():
+            state = shelves[shelfname]
+
+    return state
+
+
+def prefsFileDynamicShelf(maya_version='2017'):
+    """
+    Location of jj_dynamicShelfs_prefs.yml
+    :param maya_version: default to 2017
+    :rtype: prefs_file: location of prefs file for the current operating system
+    
+    """
+    import sys
+
+    prefs_file = ''
+    if sys.platform == 'darwin':
+        prefs_file = os.path.expanduser('~/Library/Preferences/Autodesk/maya/{}/prefs/jj_dynamicShelves_prefs.yml'.format(maya_version))
+    elif sys.platform == 'win32':
+        prefs_file = os.path.expanduser('~\Documents\maya\{}\prefs\jj_dynamicShelves_prefs.yml'.format(maya_version))
+    elif sys.platform == 'linux2':
+        prefs_file = os.path.expanduser('~/maya/{}/prefs/jj_dynamicShelves_prefs.yml'.format(maya_version))
+
+    if not os.path.exists(prefs_file):
+        with open(prefs_file, 'w') as yaml_file:
+            empty = {'JJ': 'Dynamic Shelves Prefs', 'jj_ShelfLoader': True}
+            yaml.dump(empty, yaml_file, default_flow_style=False)
+
+    return prefs_file
 
 
 def toggleDynamicShelf(shelfname):
@@ -245,8 +301,10 @@ def toggleDynamicShelf(shelfname):
     """
     if maya.mel.eval('shelfLayout -exists {0}'.format(shelfname)):
         removeDynamicShelf(shelfname)
+        writeDynamicShelfPrefs(shelfname, False)
     else:
         loadDynamicShelf(shelfname)
+        writeDynamicShelfPrefs(shelfname, True)
 
 
 def removeDynamicShelf(shelfname):
