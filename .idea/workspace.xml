@@ -4,8 +4,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60660b26-05be-49d9-832a-fac41afd6d86" name="Default" comment="save dynamicShelves prefs file">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="60660b26-05be-49d9-832a-fac41afd6d86" name="Default" comment="try to importing yaml until yaml is installed">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maya_scripts/python/pipelineTools.py" afterPath="$PROJECT_DIR$/maya_scripts/python/pipelineTools.py" />
     </list>
@@ -28,9 +27,11 @@
       <file leaf-file-name="pipelineTools.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/maya_scripts/python/pipelineTools.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="9" lean-forward="true" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
-              <folding />
+            <state relative-caret-position="192">
+              <caret line="323" column="0" lean-forward="false" selection-start-line="323" selection-start-column="0" selection-end-line="323" selection-end-column="0" />
+              <folding>
+                <element signature="e#119#128#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -46,7 +47,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>shotC</find>
       <find>dev</find>
       <find>\n</find>
       <find>dupl</find>
@@ -76,6 +76,7 @@
       <find>shelfItem</find>
       <find>l</find>
       <find>linux</find>
+      <find>yaml</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -658,13 +659,6 @@
       <option name="presentableId" value="Default" />
       <updated>1488828244297</updated>
     </task>
-    <task id="LOCAL-00011" summary="creates userSetup.py if not exists&#10;edits userSetup.py&#10;creates Maya.env if not exists&#10;edits Maya.env with sbtvtools locations and keeps existing paths&#10;edits userPlugins.mel for vray plugin&#10;currently set to dev on which points to the jj_dev folder">
-      <created>1488925528695</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1488925528695</updated>
-    </task>
     <task id="LOCAL-00012" summary="feedback for running shell command">
       <created>1488925856263</created>
       <option name="number" value="00012" />
@@ -1001,7 +995,14 @@
       <option name="project" value="LOCAL" />
       <updated>1490718441562</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="save dynamicShelvesPrefs file">
+      <created>1490722827869</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1490722827869</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1047,8 +1048,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="add self back into statements" />
-    <MESSAGE value="add todo for maya_initialize&#10;basic clean up lightingSetup&#10;change name of function importRef to loadRef to reflect what the function does&#10;clean up pipelineTools&#10;basic setup of dynamicShelfConf.xml" />
     <MESSAGE value="add todo for render settings and output folder" />
     <MESSAGE value="change header&#10;fix duplicate use of i and now using j for second loop" />
     <MESSAGE value="createShotCam to cover the majority of contexts and set camera settings." />
@@ -1072,7 +1071,9 @@
     <MESSAGE value="add icons folder and icons for dynamicShelves" />
     <MESSAGE value="fix persp cam dup to shotCam" />
     <MESSAGE value="save dynamicShelves prefs file" />
-    <option name="LAST_COMMIT_MESSAGE" value="save dynamicShelves prefs file" />
+    <MESSAGE value="save dynamicShelvesPrefs file" />
+    <MESSAGE value="try to importing yaml until yaml is installed" />
+    <option name="LAST_COMMIT_MESSAGE" value="try to importing yaml until yaml is installed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1390,9 +1391,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/maya_scripts/python/pipelineTools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="9" lean-forward="true" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
-          <folding />
+        <state relative-caret-position="192">
+          <caret line="323" column="0" lean-forward="false" selection-start-line="323" selection-start-column="0" selection-end-line="323" selection-end-column="0" />
+          <folding>
+            <element signature="e#119#128#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

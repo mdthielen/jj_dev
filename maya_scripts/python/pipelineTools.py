@@ -14,7 +14,6 @@ import os
 import re
 import maya.cmds as cmds
 import maya.mel
-import yaml
 # from xml.dom import minidom
 
 
@@ -171,58 +170,65 @@ def loadRef(sourcePath):
         raise NameError('could not find:\n    ' + srcPubFP)
 
 
+# noinspection PyUnresolvedReferences
 def loadDynamicShelf(shelfname):
-    # Get icons path from the Maya.env ICONS_PATH variable
-    iconsPath = os.environ.get('ICONS_PATH', None)
+    try:
+        import yaml
 
-    # Get the CONFIGS_PATH from the Maya.env file and get the configuration files for the specified project
-    configsPath = os.environ.get('CONFIGS_PATH', None)
+        # Get icons path from the Maya.env ICONS_PATH variable
+        iconsPath = os.environ.get('ICONS_PATH', None)
 
-    print('Loading shelf: {}'.format(shelfname))
-    shelfConfFile = os.path.join(configsPath, '{}_dynamicShelfConf.yml'.format(shelfname))
-    # shelfConfFile = os.path.join(configsPath, '{}_dynamicShelfConf.xml'.format(shelfname))
-    # Check if the file exist befor continuing
-    if os.path.exists(shelfConfFile):
-        # This is a fix for the automatically saved shelf function
-        # It will delete a previously shelf named dynamicShelf created with the plugin if any exist
-        removeDynamicShelf(shelfname)
+        # Get the CONFIGS_PATH from the Maya.env file and get the configuration files for the specified project
+        configsPath = os.environ.get('CONFIGS_PATH', None)
 
-        # Create a new shelfLayout in $gShelfTopLevel
-        maya.mel.eval('${0} = `shelfLayout -cellWidth 33 -cellHeight 33 -p $gShelfTopLevel {0}`;'.format(shelfname))
+        print('Loading shelf: {}'.format(shelfname))
+        shelfConfFile = os.path.join(configsPath, '{}_dynamicShelfConf.yml'.format(shelfname))
+        # shelfConfFile = os.path.join(configsPath, '{}_dynamicShelfConf.xml'.format(shelfname))
+        # Check if the file exist befor continuing
+        if os.path.exists(shelfConfFile):
+            # This is a fix for the automatically saved shelf function
+            # It will delete a previously shelf named dynamicShelf created with the plugin if any exist
+            removeDynamicShelf(shelfname)
 
-        # Load yml config file
-        yml_shelf = yaml.load(file(shelfConfFile, 'r'))
+            # Create a new shelfLayout in $gShelfTopLevel
+            maya.mel.eval('${0} = `shelfLayout -cellWidth 33 -cellHeight 33 -p $gShelfTopLevel {0}`;'.format(shelfname))
 
-        if yml_shelf:
-            # Loop trough each shelfItem entry in the shelfConfFile
-            for button in sorted(yml_shelf.keys()):
-                # Create the actual shelf button with the above parameters
-                separator = False
-                shelf_params = {}
-                for param in sorted(yml_shelf[button].keys()):
-                    if param == 'image':
-                        if yml_shelf[button]['image']['location'] == 'custom':
-                            shelf_params['image'] = '{}'.format(os.path.join(iconsPath, yml_shelf[button]['image']['name']))
+            # Load yml config file
+            yml_shelf = yaml.load(file(shelfConfFile, 'r'))
+
+            if yml_shelf:
+                # Loop trough each shelfItem entry in the shelfConfFile
+                for button in sorted(yml_shelf.keys()):
+                    # Create the actual shelf button with the above parameters
+                    separator = False
+                    shelf_params = {}
+                    for param in sorted(yml_shelf[button].keys()):
+                        if param == 'image':
+                            if yml_shelf[button]['image']['location'] == 'custom':
+                                shelf_params['image'] = '{}'.format(os.path.join(iconsPath, yml_shelf[button]['image']['name']))
+                            else:
+                                shelf_params['image'] = '{}'.format(yml_shelf[button]['image']['name'])
+                        elif param == 'separator':
+                            separator = True
+                        elif param.startswith('mip'):
+                            shelf_params['mi'] = '{}'.format(yml_shelf[button][param]['label']), '{}'.format(yml_shelf[button][param]['command'])
+                            shelf_params[param.split(' ')[0]] = int(param.split(' ')[1])
                         else:
-                            shelf_params['image'] = '{}'.format(yml_shelf[button]['image']['name'])
-                    elif param == 'separator':
-                        separator = True
-                    elif param.startswith('mip'):
-                        shelf_params['mi'] = '{}'.format(yml_shelf[button][param]['label']), '{}'.format(yml_shelf[button][param]['command'])
-                        shelf_params[param.split(' ')[0]] = int(param.split(' ')[1])
-                    else:
-                        shelf_params[param] = '{}'.format(yml_shelf[button][param])
-                cmds.shelfButton(**shelf_params)
+                            shelf_params[param] = '{}'.format(yml_shelf[button][param])
+                    cmds.shelfButton(**shelf_params)
 
-                if separator:
-                    cmds.separator(enable=1, width=10, height=35, style="shelf",
-                                   manage=1, visible=1, preventOverride=0, enableBackground=0, horizontal=0)
+                    if separator:
+                        cmds.separator(enable=1, width=10, height=35, style="shelf",
+                                       manage=1, visible=1, preventOverride=0, enableBackground=0, horizontal=0)
 
-        # Rename the shelfLayout with the shelfname
-        maya.mel.eval('tabLayout -edit -tabLabel ${0} "'.format(shelfname) + shelfname + '" $gShelfTopLevel;')
-        writeDynamicShelfPrefs(shelfname, True)
+            # Rename the shelfLayout with the shelfname
+            maya.mel.eval('tabLayout -edit -tabLabel ${0} "'.format(shelfname) + shelfname + '" $gShelfTopLevel;')
+            writeDynamicShelfPrefs(shelfname, True)
 
-        print('{} shelf successfully loaded'.format(shelfname))
+            print('{} shelf successfully loaded'.format(shelfname))
+
+    except ImportError:
+        pass
 
 
 def reloadDynamicShelf(shelfname):
@@ -237,6 +243,7 @@ def reloadDynamicShelf(shelfname):
         removeDynamicShelf(shelfname)
 
 
+# noinspection PyUnresolvedReferences
 def writeDynamicShelfPrefs(shelfname, state):
     """
     Write out yaml file preferences to user Maya prefs folder to save which shelves are opened and closed. 
@@ -244,14 +251,21 @@ def writeDynamicShelfPrefs(shelfname, state):
     :param state: bool the shelf is True (on) or False (off)
     :param shelfname: name of shelf to write out
     """
-    with open(prefsFileDynamicShelf(), 'r') as yaml_file:
-        shelves = yaml.load(yaml_file)
-        shelves[shelfname] = state
+    try:
+        import yaml
 
-    with open(prefsFileDynamicShelf(), 'w') as yaml_file:
-        yaml.dump(shelves, yaml_file, default_flow_style=False)
+        with open(prefsFileDynamicShelf(), 'r') as yaml_file:
+            shelves = yaml.load(yaml_file)
+            shelves[shelfname] = state
+
+        with open(prefsFileDynamicShelf(), 'w') as yaml_file:
+            yaml.dump(shelves, yaml_file, default_flow_style=False)
+
+    except ImportError:
+        pass
 
 
+# noinspection PyUnresolvedReferences
 def readDynamicShelfPrefs(shelfname):
     """
     Read yaml file preferences to user Maya prefs folder to save which shelves are opened and closed. 
@@ -260,15 +274,22 @@ def readDynamicShelfPrefs(shelfname):
     :param shelfname: name of shelf to read out
     """
 
-    state = None
-    with open(prefsFileDynamicShelf(), 'r') as yaml_file:
-        shelves = yaml.load(yaml_file)
-        if shelfname in shelves.keys():
-            state = shelves[shelfname]
+    try:
+        import yaml
 
-    return state
+        state = None
+        with open(prefsFileDynamicShelf(), 'r') as yaml_file:
+            shelves = yaml.load(yaml_file)
+            if shelfname in shelves.keys():
+                state = shelves[shelfname]
+
+        return state
+
+    except ImportError:
+        pass
 
 
+# noinspection PyUnresolvedReferences
 def prefsFileDynamicShelf(maya_version='2017'):
     """
     Location of jj_dynamicShelfs_prefs.yml
@@ -278,20 +299,26 @@ def prefsFileDynamicShelf(maya_version='2017'):
     """
     import sys
 
-    prefs_file = ''
-    if sys.platform == 'darwin':
-        prefs_file = os.path.expanduser('~/Library/Preferences/Autodesk/maya/{}/prefs/jj_dynamicShelves_prefs.yml'.format(maya_version))
-    elif sys.platform == 'win32':
-        prefs_file = os.path.expanduser('~\Documents\maya\{}\prefs\jj_dynamicShelves_prefs.yml'.format(maya_version))
-    elif sys.platform == 'linux2':
-        prefs_file = os.path.expanduser('~/maya/{}/prefs/jj_dynamicShelves_prefs.yml'.format(maya_version))
+    try:
+        import yaml
 
-    if not os.path.exists(prefs_file):
-        with open(prefs_file, 'w') as yaml_file:
-            empty = {'JJ': 'Dynamic Shelves Prefs', 'jj_ShelfLoader': True}
-            yaml.dump(empty, yaml_file, default_flow_style=False)
+        prefs_file = ''
+        if sys.platform == 'darwin':
+            prefs_file = os.path.expanduser('~/Library/Preferences/Autodesk/maya/{}/prefs/jj_dynamicShelves_prefs.yml'.format(maya_version))
+        elif sys.platform == 'win32':
+            prefs_file = os.path.expanduser('~\Documents\maya\{}\prefs\jj_dynamicShelves_prefs.yml'.format(maya_version))
+        elif sys.platform == 'linux2':
+            prefs_file = os.path.expanduser('~/maya/{}/prefs/jj_dynamicShelves_prefs.yml'.format(maya_version))
 
-    return prefs_file
+        if not os.path.exists(prefs_file):
+            with open(prefs_file, 'w') as yaml_file:
+                empty = {'JJ': 'Dynamic Shelves Prefs', 'jj_ShelfLoader': True}
+                yaml.dump(empty, yaml_file, default_flow_style=False)
+
+        return prefs_file
+
+    except ImportError:
+        pass
 
 
 def toggleDynamicShelf(shelfname):
