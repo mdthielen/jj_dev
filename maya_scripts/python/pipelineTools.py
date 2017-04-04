@@ -179,11 +179,11 @@ def loadDynamicShelf(shelfname):
         iconsPath = os.environ.get('ICONS_PATH', None)
 
         # Get the CONFIGS_PATH from the Maya.env file and get the configuration files for the specified project
-        configsPath = os.environ.get('CONFIGS_PATH', None)
+        configsPath = os.environ.get('DYNAMIC_SHELF_PATH', None)
 
         print('Loading shelf: {}'.format(shelfname))
         shelfConfFile = os.path.join(configsPath, '{}_dynamicShelfConf.yml'.format(shelfname))
-        # shelfConfFile = os.path.join(configsPath, '{}_dynamicShelfConf.xml'.format(shelfname))
+        # shelfConfFile = os.path.join(dynamicShelfPath, '{}_dynamicShelfConf.xml'.format(shelfname))
         # Check if the file exist befor continuing
         if os.path.exists(shelfConfFile):
             # This is a fix for the automatically saved shelf function

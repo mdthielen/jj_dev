@@ -84,6 +84,8 @@ def createShotCam(camera_name='shotCam'):
                 cam_dup = cmds.duplicate(current_selection, name=camera_name)
                 camera_full_name = cmds.rename(cam_dup, camera_name)
                 print('Duplicated persp to {}'.format(camera_name))
+                perspPanel = cmds.getPanel(withLabel='Persp View')
+                cmds.modelPanel(perspPanel, edit=True, camera=camera_name)
             else:
                 if cmds.objExists('|shotCam'):
                     cmds.rename('|shotCam', '|shotCam_NOT_A_CAMERA')
@@ -103,10 +105,18 @@ def createShotCam(camera_name='shotCam'):
             modify_cam_attr_safe = False
         elif use_existing_cam_dialog != 'Cancel':
             # Create new camera
-            cam_generic = cmds.camera(focalLength=focal_length)
-            if cmds.objExists('|shotCam'):
-                cmds.rename('|shotCam', '|shotCam_NOT_A_CAMERA')
-            camera_full_name = cmds.rename(cam_generic[0], camera_name)
+            if cmds.objExists('|persp'):
+                cam_dup = cmds.duplicate('|persp', name=camera_name)
+                camera_full_name = cmds.rename(cam_dup, camera_name)
+                print('Duplicated persp to {}'.format(camera_name))
+            else:
+                cam_generic = cmds.camera(focalLength=focal_length)
+                if cmds.objExists('|shotCam'):
+                    cmds.rename('|shotCam', '|shotCam_NOT_A_CAMERA')
+                camera_full_name = cmds.rename(cam_generic[0], camera_name)
+
+            perspPanel = cmds.getPanel(withLabel='Persp View')
+            cmds.modelPanel(perspPanel, edit=True, camera=camera_name)
             new_shot_cam = True
             modify_cam_attr_safe = True
             print('Created   "{}"'.format(camera_name))

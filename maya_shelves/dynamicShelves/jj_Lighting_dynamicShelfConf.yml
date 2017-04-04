@@ -250,7 +250,7 @@
     image:
         name: "createShotCam.png"
         location: "custom"
-    command: "mport cameraTools;reload(cameraTools);cameraTools.createShotCam(camera_name='shotCam')"
+    command: "import cameraTools;reload(cameraTools);cameraTools.createShotCam(camera_name='shotCam')"
     sourceType: "python"
 
 

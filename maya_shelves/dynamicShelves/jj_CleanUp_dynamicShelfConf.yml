@@ -13,7 +13,7 @@
     image:
         name: "editPCM.png"
         location: "custom"
-    command: "FileTextureManager"
+    command: "FilePathEditor"
     sourceType: "mel"
 03 Ingest:
     label: "Ingest"
@@ -58,12 +58,13 @@
         label: "Select all chars GEOShapes"
         command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix=\"all\")"
     separator: True
-05 Renamer:
-    label: "Renamer"
-    annotation: "Renamer"
+05 ccRenameReplace:
+    label: "ccRenameReplace"
+    annotation: "Rename and Replace Dialog Tool"
     image:
         name: "ccRenameReplace.png"
         location: "custom"
+    command: "import ccRenameReplace;reload(ccRenameReplace)"
     sourceType: "python"
 06 shotCam:
     label: "shotCam"

@@ -20,11 +20,9 @@ import pipelineTools
 # Get scripts path from the Maya.env SCRIPTS_PATH variable
 scriptsPath = os.environ.get('MAYA_SCRIPT_PATH', None)
 
-# Get the CONFIGS_PATH from the Maya.env file and get the configuration files for the specified project
-configsPath = os.environ.get('CONFIGS_PATH', None)
+# Get the DYNAMIC_SHELF_PATH from the Maya.env file and get the configuration files for the specified project
+dynamicShelfPath = os.environ.get('DYNAMIC_SHELF_PATH', None)
 
-# Get project name from the Maya.env PRJ_NAME variable
-prjName = os.environ.get('PRJ_NAME', None)
 
 # Append the scriptsPath
 sys.path.append(scriptsPath)
@@ -40,12 +38,11 @@ def initializePlugin(mobject):
     import pipelineTools
     # shelfConfFile = os.path.join(prjConfFiles, 'dynamicShelfConf.xml')
     maya.mel.eval('global string $gShelfTopLevel;')
-    # dynamic_shelves = prjName.split(':')
 
     jj_shelf_loader = 'jj_ShelfLoader'
     pipelineTools.loadDynamicShelf(jj_shelf_loader)
 
-    dynamic_shelves = [shelf.split('_dynamicShelfConf.yml')[0] for shelf in os.listdir(configsPath)
+    dynamic_shelves = [shelf.split('_dynamicShelfConf.yml')[0] for shelf in os.listdir(dynamicShelfPath)
                        if 'dynamicShelfConf.yml' in shelf and 'ShelfLoader' not in shelf]
 
     for dynamic_shelf in dynamic_shelves:
@@ -57,7 +54,7 @@ def uninitializePlugin(mobject):
     """
     Un-Initialize plug-in and delete shelf.
     """
-    dynamic_shelves = [shelf.split('_dynamicShelfConf.yml')[0] for shelf in os.listdir(configsPath)
+    dynamic_shelves = [shelf.split('_dynamicShelfConf.yml')[0] for shelf in os.listdir(dynamicShelfPath)
                        if 'dynamicShelfConf.yml' in shelf]
     for dynamic_shelf in dynamic_shelves:
         pipelineTools.removeDynamicShelf(dynamic_shelf)
