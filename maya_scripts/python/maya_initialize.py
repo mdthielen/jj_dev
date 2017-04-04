@@ -91,11 +91,11 @@ def maya_env(filepath, dev=False):
     maya_plug_in_path_var = 'MAYA_PLUG_IN_PATH = '
     icons_path_var = 'ICONS_PATH = '
 
-    sbtvtools_path = '/Volumes/public/StoryBots/production/series/ask_the_storybots/03_shared_assets/01_cg/05_maya_tools/'
+    sbtvtools_path = '/Volumes/public/StoryBots/production/series/ask_the_storybots/03_shared_assets/01_cg/05_maya_tools'
     if not os.path.exists(sbtvtools_path):
         sbtvtools_path = os.path.expanduser('~/Documents/maya/scripts/JibJab/')
     if dev:
-        sbtvtools_path = '/Volumes/public/StoryBots/production/series/ask_the_storybots/03_shared_assets/01_cg/05_maya_tools/jj_dev/'
+        sbtvtools_path = '/Volumes/public/StoryBots/production/series/ask_the_storybots/03_shared_assets/01_cg/05_maya_tools/jj_dev'
         if not os.path.exists(sbtvtools_path):
             if os.path.exists(os.path.expanduser('~/Documents/creating/projects/JibJab/ask_the_storybots/03_shared_assets/01_cg/05_maya_tools/jj_dev')):
                 sbtvtools_path = os.path.expanduser('~/Documents/creating/projects/JibJab/ask_the_storybots/03_shared_assets/01_cg/05_maya_tools/jj_dev')
@@ -104,10 +104,10 @@ def maya_env(filepath, dev=False):
     if not os.path.exists(sbtvtools_path):
         os.makedirs(sbtvtools_path)
     maya_scripts_path = '$SBTVTOOLS/maya_scripts/mel'
-    dynamic_shelf_path = '$SBTVTOOLS/maya_shelves/dynamicShelves/'
+    dynamic_shelf_path = '$SBTVTOOLS/maya_shelves/dynamicShelves'
     python_path = '$SBTVTOOLS/maya_scripts/python'
     icons_path = '$SBTVTOOLS/maya_shelves/icons'
-    maya_plug_in_path = '$SBTVTOOLS/maya_scripts/python/plugins'
+    maya_plug_in_path = '$SBTVTOOLS/maya_scripts/python/plug-ins'
     maya_shelf_path = ''
 
     sbtvtools_replaced = False
