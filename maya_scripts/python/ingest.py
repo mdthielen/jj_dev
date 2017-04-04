@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-Ingest maya files from external sources such as contractors and remove any plugins or fix paths.
+Ingest maya files from external sources such as contractors and remove any plug-ins or fix paths.
 Read in maya file.
 Search for RenderMan or Turtle "requires" statements. (multiple lines - ends with ;)
 If any exist:   search for createNode with those renderers and remove. (multiple lines)
