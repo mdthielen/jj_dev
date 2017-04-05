@@ -173,7 +173,10 @@ def loadRef(sourcePath):
 # noinspection PyUnresolvedReferences
 def loadDynamicShelf(shelfname):
     try:
+        import sys
+        sys.path.append('/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages')
         import yaml
+        print ('Dynamic Shelf Loader')
 
         # Get icons path from the Maya.env ICONS_PATH variable
         iconsPath = os.environ.get('ICONS_PATH', None)
@@ -191,7 +194,7 @@ def loadDynamicShelf(shelfname):
             removeDynamicShelf(shelfname)
 
             # Create a new shelfLayout in $gShelfTopLevel
-            maya.mel.eval('${0} = `shelfLayout -cellWidth 33 -cellHeight 33 -p $gShelfTopLevel {0}`;'.format(shelfname))
+            maya.mel.eval('${0} = `shelfLayout -cellWidth 33 -cellHeight 33 -visible 1 -p $gShelfTopLevel {0}`;'.format(shelfname))
 
             # Load yml config file
             yml_shelf = yaml.load(file(shelfConfFile, 'r'))
@@ -216,19 +219,18 @@ def loadDynamicShelf(shelfname):
                         else:
                             shelf_params[param] = '{}'.format(yml_shelf[button][param])
                     cmds.shelfButton(**shelf_params)
-
                     if separator:
                         cmds.separator(enable=1, width=10, height=35, style="shelf",
                                        manage=1, visible=1, preventOverride=0, enableBackground=0, horizontal=0)
 
             # Rename the shelfLayout with the shelfname
-            maya.mel.eval('tabLayout -edit -tabLabel ${0} "'.format(shelfname) + shelfname + '" $gShelfTopLevel;')
+            maya.mel.eval('tabLayout -edit -visible 1 -tabLabel ${0} "'.format(shelfname) + shelfname + '" $gShelfTopLevel;')
             writeDynamicShelfPrefs(shelfname, True)
 
             print('{} shelf successfully loaded'.format(shelfname))
 
     except ImportError:
-        pass
+        print('No "yaml" module installed. Contact admin to install "yaml".')
 
 
 def reloadDynamicShelf(shelfname):

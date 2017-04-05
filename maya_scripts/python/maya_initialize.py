@@ -30,7 +30,7 @@ def main():
         print('Added VRay plugin')
 
     # dynamicShelf plugin
-    dynamicShelf_plugin_line = 'evalDeferred("autoLoadPlugin(\\\"\\\", \\\"dynamicShelf\\\", \\\"dynamicShelf.py\\\")");'
+    dynamicShelf_plugin_line = 'evalDeferred("autoLoadPlugin(\\\"\\\", \\\"dynamicShelf.py\\\", \\\"dynamicShelf\\\")");'
     replaced_dynamicShelf = fixLineInFile(maya_prefs_path + maya_plugin_prefs_file, 'dynamicShelf', dynamicShelf_plugin_line)
     if replaced_dynamicShelf:
         print('Added dynamicShelf plugin')
@@ -53,6 +53,10 @@ def main():
     replaced_userPrefs_mel_vray = fixLineInFile(maya_prefs_path + 'prefs/userPrefs.mel', ' -sv "preferredRenderer" "', ' -sv "preferredRenderer" "vray"\n')
     if replaced_userPrefs_mel_vray:
         print('Updated userPrefs.mel  --> default VRay renderer')
+
+    replaced_userPrefs_mel_quicktime = addAppPrefs(maya_prefs_path + 'prefs/userPrefs.mel', 'rvpush')
+    if replaced_userPrefs_mel_quicktime:
+        print('Updated userPrefs.mel  --> Quicktime player is RV and image editor is Photoshop')
 
 
 def maya_env(filepath, dev=False):
@@ -263,7 +267,7 @@ def maya_env(filepath, dev=False):
                 elif line != '\n' and '=' not in line and not line.startswith('#'):
                     lines_replaced.append('# removed by maya_initialize --> {}'.format(line))
                 elif line.startswith('#') and 'Jib Jab' in line:
-                    jibjab_block_found = jibjab_block_found + 1
+                    jibjab_block_found += 1
                 elif line == '\n' and jibjab_block_found <= 1:
                     pass
 
@@ -272,31 +276,31 @@ def maya_env(filepath, dev=False):
                     lines_replaced.append(line)
             if not sbtvtools_replaced:
                 if not sbtvtools_path.endswith('\n'):
-                    sbtvtools_path = sbtvtools_path + '\n'
+                    sbtvtools_path += '\n'
                 sbtv_lines.insert(0, sbtvtools_var + sbtvtools_path)
             if not maya_script_path_replaced:
                 if not maya_scripts_path.endswith('\n'):
-                    maya_scripts_path = maya_scripts_path + '\n'
+                    maya_scripts_path += '\n'
                 maya_lines.insert(1, maya_script_path_var + maya_scripts_path)
             if not dynamic_shelf_path_replaced:
                 if not dynamic_shelf_path.endswith('\n'):
-                    dynamic_shelf_path = dynamic_shelf_path + '\n'
+                    dynamic_shelf_path += '\n'
                 maya_lines.insert(2, dynamic_shelf_path_var + dynamic_shelf_path)
             if not icons_path_replaced:
                 if not icons_path.endswith('\n'):
-                    icons_path = icons_path + '\n'
+                    icons_path += '\n'
                 maya_lines.insert(3, icons_path_var + icons_path + '')
             if not maya_plug_in_path_replaced:
                 if not maya_plug_in_path.endswith('\n'):
-                    maya_plug_in_path = maya_plug_in_path + '\n'
+                    maya_plug_in_path += '\n'
                 maya_lines.insert(3, maya_plug_in_path_var + maya_plug_in_path + '')
             if not pythonpath_replaced:
                 if not python_path.endswith('\n'):
-                    python_path = python_path + '\n'
+                    python_path += '\n'
                 python_lines.insert(5, pythonpath_var + python_path + '')
             if not maya_shelf_path_replaced and maya_shelf_path != '':
                 if not maya_shelf_path.endswith('\n'):
-                    maya_shelf_path = maya_shelf_path + '\n'
+                    maya_shelf_path += '\n'
                 maya_lines.insert(6, maya_shelf_path_var + maya_shelf_path + '')
 
             with open(filepath, 'w') as f2:
@@ -309,11 +313,60 @@ def maya_env(filepath, dev=False):
                 f2.writelines('\n## Jib Jab Studios - settings end\n')
                 f2.writelines(lines_replaced)
                 f2.close()
-                return True
+
+                with open(filepath, 'r') as f3:
+                    lines_from_new_file = f3.readlines()
+                    f3.close()
+                    if lines == lines_from_new_file:
+                        return False
+                    else:
+                        return True
 
     except IOError, ioe:
         print("ERROR", ioe)
         return False
+
+
+def addAppPrefs(filepath, line_keyword):
+    """replace a line in a temporary file, then copy it over into the original file if everything goes well
+    Attributes:
+        filepath file to change
+        line_keyword keyword to search
+        newline new line to replace
+    """
+
+    # quick parameter checks
+    if not os.path.exists(filepath):
+        with open(filepath, 'w') as f:
+            f.close()
+    assert (line_keyword and str(line_keyword))  # is not empty and is a string
+
+    try:
+        with open(filepath, 'r') as f:  # open for read/write -- alias to f
+            lines = f.readlines()  # get all lines in file
+            f.close()  # we opened it , we close it
+            for line in lines:
+                if line_keyword in line:
+                    return False
+
+            lines.append('optionVar\n')
+            lines.append(' -sv "PhotoshopDir" "/Applications/Adobe Photoshop CC 2017/Adobe Photoshop CC 2017.app/Contents/MacOS/Adobe Photoshop CC 2017"\n')
+            lines.append(' -sv "PlayblastCmdAvi" "/Applications/RV64.app/Contents/MacOS/rvpush"\n')
+            lines.append(' -sv "PlayblastCmdFormatAvi" "-tag playblast merge [ %f.mov -fps %r ]"\n')
+            lines.append(' -sv "PlayblastCmdQuicktime" "/Applications/RV64.app/Contents/MacOS/rvpush"\n')
+            lines.append(' -sv "PlayblastCmdFormatQuicktime" "-tag playblast merge [ %f.mov -fps %r ]"\n')
+            lines.append(' -sv "ViewSequenceDir" "/Applications/RV64.app/Contents/MacOS/rvpush"\n')
+            lines.append(' -sv "ViewSequenceCmdFormat" "-tag playblast merge [ %f.mov -fps %r ]"\n')
+            lines.append(' -sv "ViewImageDir" "/Applications/RV64.app/Contents/MacOS/rvpush"\n')
+            lines.append(' -sv "ViewImageCmdFormat" "%f";\n')
+
+            with open(filepath, 'w') as f2:
+                f2.writelines(lines)
+                f2.close()
+            return True
+
+    except IOError:
+        pass
 
 
 def fixLineInFile(filepath, line_keyword, newline, search_replace=False):
@@ -344,19 +397,30 @@ def fixLineInFile(filepath, line_keyword, newline, search_replace=False):
                     if search_replace:
                         lines_replaced.append(line.replace(line_keyword, newline))
                         written = True
-                    elif 'Plugin' not in line:
-                        lines_replaced.append(newline)
-                        written = True
+                    elif 'Plugin' in line:
+                        if newline != line.rstrip('\n'):
+                            lines_replaced.append(newline)
+                            written = True
                         found_plugin = True
-                    else:
+                    elif line == newline:
                         found_plugin = True
                 elif line.startswith('#'):
                     lines_replaced.append(line.rstrip() + '\n')
                 else:
                     lines_replaced.append(line.rstrip() + '\n')
             if not found_plugin and not search_replace:
-                lines_replaced.append(newline)
-                written = True
+                if lines_replaced:
+                    if newline.startswith(' -sv '):
+                        lines_replaced.append('optionVar\n')
+                        lines_replaced.append('{};\n'.format(newline))
+                        written = True
+                    else:
+                        lines_replaced.append(newline)
+                        written = True
+                else:
+                    lines_replaced.append(newline)
+                    written = True
+
             if written:
                 with open(filepath, 'w') as f2:
                     f2.writelines(lines_replaced)
