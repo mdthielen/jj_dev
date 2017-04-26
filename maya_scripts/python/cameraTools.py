@@ -12,6 +12,7 @@ Todo:
     
 """
 import maya.cmds as cmds
+import re
 
 
 def createShotCam(camera_name='shotCam'):
@@ -33,7 +34,6 @@ def createShotCam(camera_name='shotCam'):
     focal_length = 35.0
     near_clip = 0.01
 
-    cam_exists_dialog = ''
     new_shot_cam = False
     modify_cam_attr_safe = False
     current_selection = None
@@ -49,7 +49,9 @@ def createShotCam(camera_name='shotCam'):
         camera_selected = False
 
     camera_full_name = existsShotCam(camera_name)
-    use_selected_cam_dialog = 'Cancel'
+    # use_selected_cam_dialog = None
+    cam_exists_dialog = None
+
     if camera_full_name:
         cam_exists_dialog = cmds.confirmDialog(title='"{}" exists'.format(camera_name),
                                                message='Overwrite the following attributes that could effect rendering?\n'
@@ -59,6 +61,11 @@ def createShotCam(camera_name='shotCam'):
                                                defaultButton='No', cancelButton='Cancel', dismissString='No')
         if cam_exists_dialog == 'Yes':
             modify_cam_attr_safe = True
+        elif cam_exists_dialog == 'No':
+            modify_cam_attr_safe = False
+        elif cam_exists_dialog == 'Cancel':
+            print ('Caneled operation')
+            return
 
     elif camera_selected:
         if 'persp' == current_selection:
@@ -89,11 +96,16 @@ def createShotCam(camera_name='shotCam'):
             else:
                 if cmds.objExists('|shotCam'):
                     cmds.rename('|shotCam', '|shotCam_NOT_A_CAMERA')
-                cmds.rename(current_selection, camera_name)
+                camera_full_name = cmds.rename(current_selection, camera_name)
+                perspPanel = cmds.getPanel(withLabel='Persp View')
+                cmds.modelPanel(perspPanel, edit=True, camera=camera_name)
                 print('Renamed {} to {}'.format(current_selection, camera_name))
         elif use_selected_cam_dialog == 'No':
             cmds.warning('Select 1 camera to use as "{}" and run again.'.format(camera_name))
             modify_cam_attr_safe = False
+        elif cam_exists_dialog == 'Cancel':
+            print ('Caneled operation')
+            return
 
     else:
         use_existing_cam_dialog = cmds.confirmDialog(title='No "{}" exists!'.format(camera_name),
@@ -103,7 +115,7 @@ def createShotCam(camera_name='shotCam'):
         if use_existing_cam_dialog == 'Yes':
             cmds.warning('Select 1 camera to use as "{}" and run again.'.format(camera_name))
             modify_cam_attr_safe = False
-        elif use_existing_cam_dialog != 'Cancel':
+        elif use_existing_cam_dialog == 'No':
             # Create new camera
             if cmds.objExists('|persp'):
                 cam_dup = cmds.duplicate('|persp', name=camera_name)
@@ -120,8 +132,11 @@ def createShotCam(camera_name='shotCam'):
             new_shot_cam = True
             modify_cam_attr_safe = True
             print('Created   "{}"'.format(camera_name))
+        elif cam_exists_dialog == 'Cancel':
+            print ('Caneled operation - test 1')
+            return
 
-    if cam_exists_dialog != 'Cancel' or use_selected_cam_dialog != 'Cancel':
+    if new_shot_cam or modify_cam_attr_safe:
         camera_full_name_shape = cmds.listRelatives(camera_full_name, s=1, pa=1)[0]
         if new_shot_cam or cam_exists_dialog == 'Yes':
             cmds.setAttr('{}.horizontalFilmAperture'.format(camera_full_name_shape),
@@ -162,11 +177,13 @@ def existsShotCam(camera):
     """
 
     shot_cam_exists = None
-    if cmds.objExists(camera):
-        cam_shapes_all = cmds.listRelatives(cmds.ls('shotCam', ap=1), c=1, pa=1)
-        for shape in cam_shapes_all:
-            if 'camera' == cmds.nodeType(shape):
-                shot_cam_exists = cmds.listRelatives(shape, p=1, pa=1)[0]
+    cameras = cmds.listCameras(perspective=True)
+    for cam in cameras:
+        if re.search(camera, cam):
+            cam_shapes_all = cmds.listRelatives(cmds.ls(cam, ap=1), c=1, pa=1)
+            for shape in cam_shapes_all:
+                if 'camera' == cmds.nodeType(shape):
+                    shot_cam_exists = cmds.listRelatives(shape, p=1, pa=1)[0]
 
     return shot_cam_exists
 

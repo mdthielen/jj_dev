@@ -252,5 +252,13 @@
         location: "custom"
     command: "import cameraTools;reload(cameraTools);cameraTools.createShotCam(camera_name='shotCam')"
     sourceType: "python"
+24 deadlineSubmit:
+    label: "deadlineSubmit"
+    annotation: "Submit to Deadline"
+    image:
+        name: "deadlineSubmit.png"
+        location: "custom"
+    command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.deadlineSubmit()"
+    sourceType: "python"
 
 

@@ -494,6 +494,57 @@ def selGEO(prefix='', shapes=True, transforms=False, suffix='GEO'):
     print('\nJib Jab - selGEO COMPLETE')
 
 
+def deadlineSubmit():
+    """ wrapper for SubmitJobToDeadline found on Deadline shelf.
+    This is a wrapper function to call Deadline submit with extra settings for render globals and Deadline
+
+    Attributes:
+
+    Returns:
+
+    Todo:
+
+    """
+
+    import maya.OpenMaya as OpenMaya
+    import os
+    import maya.mel as mel
+    # Set VRay settings w/o using render settings json file
+    try:
+        mel.eval('fixRenderLayerOutAdjustmentErrors')  # request for layer errors
+        cmds.setAttr('vraySettings.fnprx', lock=0)
+        cmds.setAttr('vraySettings.fnprx', '<Layer>/<Version>/<Scene>.<Layer>', type='string')  # vray File Name Prefix
+        cmds.setAttr('vraySettings.fnprx', lock=1)
+        current_file = cmds.file(q=1, sn=1)
+        if os.path.basename(current_file).split('.')[-2]:
+            version = os.path.basename(current_file).split('.')[-2]
+        else:
+            version = '000'
+        if 'v' not in version:
+            version = 'v{}'.format(version)
+        cmds.setAttr('defaultRenderGlobals.renderVersion', lock=0)
+        cmds.setAttr('defaultRenderGlobals.renderVersion', '{}'.format(version), type='string')
+        cmds.setAttr('defaultRenderGlobals.renderVersion', lock=1)
+        cmds.setAttr('vraySettings.imageFormatStr', 'exr (multichannel)', type='string')  # vray Image Format
+        cmds.setAttr('vraySettings.animType', 1)  # vray Animation Standard
+        cmds.setAttr('vraySettings.animBatchOnly', 1)  # vray Render animation only in batch mode
+        cmds.setAttr('vraySettings.aspl', 1)  # vray Resolution Maintain Weidth/Height Ratio
+        cmds.setAttr('defaultResolution.ldar', 1)  # Maintain Ratio
+        cmds.setAttr('vraySettings.wi', 1920)  # vray Resolution Width
+        cmds.setAttr('vraySettings.he', 1080)  # vray Resolution Height
+        cmds.setAttr('vraySettings.aspr', 1.778)  # vray Resolution Device Aspect Ratio
+        cmds.setAttr('vraySettings.pxa', 1.0)  # vray Resolution Pixel Aspect Ratio
+        try:
+            step = current_file.split('02_maya')[1].split('/')[1]
+            cmds.setAttr('defaultRenderGlobals.deadlineDepartment', step, type='string')
+        except Exception, e:
+            print ('Could not load department into Deadline. Please set. Exception: {}'.format(e))
+        mel.eval('SubmitJobToDeadline')
+        mel.eval('SetJobName')
+    except Exception, e:
+        OpenMaya.MGlobal.displayError('Could not load: {}'.format(e))
+
+
 __author__ = "Robert Showalter"
 __copyright__ = "Copyright 2017, Jib Jab Studios"
 __date__ = "3/6/2017"
