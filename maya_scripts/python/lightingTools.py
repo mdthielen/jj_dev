@@ -512,9 +512,7 @@ def deadlineSubmit():
     # Set VRay settings w/o using render settings json file
     try:
         mel.eval('fixRenderLayerOutAdjustmentErrors')  # request for layer errors
-        cmds.setAttr('vraySettings.fnprx', lock=0)
-        cmds.setAttr('vraySettings.fnprx', '<Layer>/<Version>/<Scene>.<Layer>', type='string')  # vray File Name Prefix
-        cmds.setAttr('vraySettings.fnprx', lock=1)
+        cmds.setAttr('vraySettings.fnprx', '<Camera>/<Layer>/<Version>/<Scene>.<Layer>', type='string')  # vray File Name Prefix
         current_file = cmds.file(q=1, sn=1)
         if os.path.basename(current_file).split('.')[-2]:
             version = os.path.basename(current_file).split('.')[-2]
@@ -522,9 +520,9 @@ def deadlineSubmit():
             version = '000'
         if 'v' not in version:
             version = 'v{}'.format(version)
-        cmds.setAttr('defaultRenderGlobals.renderVersion', lock=0)
+        if 'vray' != cmds.getAttr('defaultRenderGlobals.ren'):
+            mel.eval('loadPreferredRenderGlobalsPreset("vray")')
         cmds.setAttr('defaultRenderGlobals.renderVersion', '{}'.format(version), type='string')
-        cmds.setAttr('defaultRenderGlobals.renderVersion', lock=1)
         cmds.setAttr('vraySettings.imageFormatStr', 'exr (multichannel)', type='string')  # vray Image Format
         cmds.setAttr('vraySettings.animType', 1)  # vray Animation Standard
         cmds.setAttr('vraySettings.animBatchOnly', 1)  # vray Render animation only in batch mode
@@ -534,6 +532,27 @@ def deadlineSubmit():
         cmds.setAttr('vraySettings.he', 1080)  # vray Resolution Height
         cmds.setAttr('vraySettings.aspr', 1.778)  # vray Resolution Device Aspect Ratio
         cmds.setAttr('vraySettings.pxa', 1.0)  # vray Resolution Pixel Aspect Ratio
+        try:
+            import sgtk
+            engine = sgtk.platform.current_engine()
+            sfr = engine.apps['tk-multi-setframerange']
+            (new_in, new_out) = sfr.get_frame_range_from_shotgun()
+            # (current_in, current_out) = sfr.get_current_frame_range(engine.name)
+            current_in = cmds.getAttr('defaultRenderGlobals.startFrame')
+            current_out = cmds.getAttr('defaultRenderGlobals.endFrame')
+            if new_in != int(current_in) or new_out != int(current_out):
+                frame_range_dialog = cmds.confirmDialog(title='Scene and Shotgun frame range mismatch!',
+                                                        message='Current render in:  {}\n'
+                                                                'Shotgun head in:    {}\n\n'
+                                                                'Current render out: {}\n'
+                                                                'Shotgun tail out:   {}\n\n'
+                                                                'Update to match?'.format(current_in, new_in, current_out, new_out),
+                                                        button=['Update', 'No'],
+                                                        defaultButton='Update', dismissString='No')
+                if frame_range_dialog == 'Update':
+                    sfr.set_frame_range(engine.name, new_in, new_out)
+        except ImportError, e:
+            print ('Could not import {}'.format(e))
         try:
             step = current_file.split('02_maya')[1].split('/')[1]
             cmds.setAttr('defaultRenderGlobals.deadlineDepartment', step, type='string')

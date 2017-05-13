@@ -25,12 +25,9 @@
     imageOverlayLabel: "VRay"
     command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.addVrayOsd(3)"
     sourceType: "python"
-    mip 0:
+    mip0:
         label: "VRayOsd level 2"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.addVrayOsd(2)"
-    mip 1:
-        label: "VRay Osd level 1"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.addVrayOsd(1)"
+        command: 'python("try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.addVrayOsd(2)")'
 04 selVrayOsd:
     label: "selVrayOsd"
     annotation: "select all VRay osd"
@@ -49,12 +46,9 @@
     imageOverlayLabel: "VRay"
     command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.toggleVrayOsd()"
     sourceType: "python"
-    mip 0:
-        label: "VRayOsd all On"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.toggleVrayOsd(force_all=True)"
-    mip 1:
+    mip0:
         label: "VRayOsd all Off"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.toggleVrayOsd(force_all=True, force_toggle=0)"
+        command: 'python("try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.toggleVrayOsd(force_all=True, force_toggle=0)")'
     separator: True
 06 buildEyeLights:
     label: "buildEyeLights"
@@ -204,37 +198,16 @@
     separator: True
 21 selGEO:
     label: "selGEO"
-    annotation: "selGEO"
+    annotation: "selGEOShapes"
     image:
         name: "selGEO.png"
         location: "custom"
     command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO()"
     sourceType: "python"
-    doubleClickCommand: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)"
-    mip 0:
+    doubleClickCommand: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=False, transforms=True)"
+    mip0:
         label: "Select GEO"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)"
-    mip 1:
-        label: "Select GEO & GEOShapes"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(transforms=1)"
-    mip 2:
-        label: "Select beep GEOShapes"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='beep')"
-    mip 3:
-        label: "Select bing GEOShapes"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bing')"
-    mip 4:
-        label: "Select bang GEOShapes"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bang')"
-    mip 5:
-        label: "Select boop GEOShapes"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='boop')"
-    mip 6:
-        label: "Select bo GEOShapes"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='bo')"
-    mip 7:
-        label: "Select all chars GEOShapes"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='all')"
+        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=False, transforms=True)"
     separator: True
 22 ccRenameReplace:
     label: "ccRenameReplace"

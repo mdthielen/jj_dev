@@ -54,7 +54,7 @@ def main():
     if replaced_userPrefs_mel_vray:
         print('Updated userPrefs.mel  --> default VRay renderer')
 
-    replaced_userPrefs_mel_quicktime = addAppPrefs(maya_prefs_path + 'prefs/userPrefs.mel', 'rvpush')
+    replaced_userPrefs_mel_quicktime = addAppPrefs(maya_prefs_path + 'prefs/userPrefs.mel', ['rvpush', 'Photoshop'])
     if replaced_userPrefs_mel_quicktime:
         print('Updated userPrefs.mel  --> Quicktime player is RV and image editor is Photoshop')
 
@@ -327,7 +327,7 @@ def maya_env(filepath, dev=False):
         return False
 
 
-def addAppPrefs(filepath, line_keyword):
+def addAppPrefs(filepath, line_keywords):
     """replace a line in a temporary file, then copy it over into the original file if everything goes well
     Attributes:
         filepath file to change
@@ -339,15 +339,17 @@ def addAppPrefs(filepath, line_keyword):
     if not os.path.exists(filepath):
         with open(filepath, 'w') as f:
             f.close()
-    assert (line_keyword and str(line_keyword))  # is not empty and is a string
+    assert (line_keywords)  # is not empty and is a string
 
     try:
         with open(filepath, 'r') as f:  # open for read/write -- alias to f
             lines = f.readlines()  # get all lines in file
             f.close()  # we opened it , we close it
-            for line in lines:
-                if line_keyword in line:
-                    return False
+
+            # new_lines = []
+            # for line in lines:
+            #     if any(keyword in line for keyword in line_keywords):
+
 
             lines.append('optionVar\n')
             lines.append(' -sv "PhotoshopDir" "/Applications/Adobe Photoshop CC 2017/Adobe Photoshop CC 2017.app/Contents/MacOS/Adobe Photoshop CC 2017"\n')

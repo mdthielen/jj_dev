@@ -215,9 +215,11 @@ def loadDynamicShelf(shelfname):
                             separator = True
                         elif param.startswith('mip'):
                             shelf_params['mi'] = '{}'.format(yml_shelf[button][param]['label']), '{}'.format(yml_shelf[button][param]['command'])
-                            shelf_params[param.split(' ')[0]] = int(param.split(' ')[1])
+                            if yml_shelf[button][param]['command'].startswith("'python"):
+                                shelf_params['mip'] = int(param.split('mip')[1])
                         else:
                             shelf_params[param] = '{}'.format(yml_shelf[button][param])
+                    print('db: shelf_params: {}'.format(shelf_params))
                     cmds.shelfButton(**shelf_params)
                     if separator:
                         cmds.separator(enable=1, width=10, height=35, style="shelf",

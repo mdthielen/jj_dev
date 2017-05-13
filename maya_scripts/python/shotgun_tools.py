@@ -44,10 +44,10 @@ def batch(shots, execute=False, verbose=True):
         for shot_change in batch_log:
             print ('Changed shot {} to: {}'.format(shots[i]['code'], shot_change['code']))
             i += 1
-        print ('Total shots: {}'.format(len(shots)))
+    print ('Total shots: {}'.format(len(shots)))
 
 
-def find(project_id=153):
+def find(project_id=154):
     # http://developer.shotgunsoftware.com/python-api/cookbook/usage_tips.html?highlight=big%20buck%20bunny
     # sequence_id = 384  # Sequence "100_FOO"
     # for finding a seq by id
@@ -70,7 +70,7 @@ if __name__ == '__main__':
     print ('Jib Jab Studios Start')
     print ('---------------------')
     project_shots = find()
-    batch(project_shots, execute=True)
+    batch(project_shots, execute=False)
     print ('---------------------')
     print ('\nJib Jab Studios End')
 

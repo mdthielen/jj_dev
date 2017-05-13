@@ -33,30 +33,9 @@
     command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO()"
     sourceType: "python"
     doubleClickCommand: '"try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)"'
-    mip 0:
+    mip0:
         label: "Select GEO"
         command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)"
-    mip 1:
-        label: "Select GEO and GEOShapes"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(transforms=1)"
-    mip 2:
-        label: "Select beep GEOShapes"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix='beep')"
-    mip 3:
-        label: "Select bing GEOShapes"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix=\"bing\")"
-    mip 4:
-        label: "Select bang GEOShapes"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix=\"bang\")"
-    mip 5:
-        label: "Select boop GEOShapes"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix=\"boop\")"
-    mip 6:
-        label: "Select bo GEOShapes"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix=\"bo\")"
-    mip 7:
-        label: "Select all chars GEOShapes"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(prefix=\"all\")"
     separator: True
 05 ccRenameReplace:
     label: "ccRenameReplace"
