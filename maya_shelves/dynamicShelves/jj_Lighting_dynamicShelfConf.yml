@@ -1,13 +1,4 @@
-01 publish:
-    label: "publish"
-    annotation: "publish animation or lighting file"
-    image:
-        name: "publish.png"
-        location: "custom"
-    command: "try: reload(pipelineTools)\nexcept: import pipelineTools\npipelineTools.publish()"
-    sourceType: "python"
-    separator: True
-02 Reference Editor:
+01 Reference Editor:
     label: "Reference Editor"
     annotation: "Reference Editor"
     image:
@@ -15,42 +6,68 @@
         location: "maya"
     command: "ReferenceEditor"
     sourceType: "mel"
+02 Outliner Editor:
+    label: "Outliner Editor"
+    annotation: "Outliner Editor"
+    image:
+        name: "outliner.png"
+        location: "maya"
+    command: "OutlinerWindow"
+    sourceType: "mel"
+03 Hypershade Editor:
+    label: "Hypershade Editor"
+    annotation: "Hypershade Editor"
+    image:
+        name: "hypershadeIcon.png"
+        location: "maya"
+    command: "HypershadeWindow"
+    sourceType: "mel"
+04 SpreadSheetEditor:
+    label: "SpreadSheetEditor"
+    annotation: "Spreadsheet Edit the attributes of the selected object(s)"
+    image:
+        name: "menuIconWindow.png"
+        location: "maya"
+    imageOverlayLabel: "Sheet"
+    command: "SpreadSheetEditor"
+    sourceType: "mel"
+05 SetEditor:
+    label: "SetEditor"
+    annotation: "Edit set membership"
+    image:
+        name: "menuIconWindow.png"
+        location: "maya"
+    imageOverlayLabel: "Set"
+    command: "SetEditor"
+    sourceType: "mel"
+06 GraphEditor:
+    label: "GraphEditor"
+    annotation: "Edit animation curves"
+    image:
+        name: "animateSnapshot.png"
+        location: "maya"
+    imageOverlayLabel: "graph"
+    command: "GraphEditor"
+    sourceType: "mel"
     separator: True
-03 addVrayOSD:
-    label: "addVrayOSD"
-    annotation: "add VRay open subDiv to selection - right click for more options"
+07 Select Hierarchy:
+    label: "Select Hierarchy"
+    annotation: "Select Hierarchy"
     image:
-        name: "addVrayOSD.png"
-        location: "custom"
-    imageOverlayLabel: "VRay"
-    command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.addVrayOsd(3)"
-    sourceType: "python"
-    mip0:
-        label: "VRayOsd level 2"
-        command: 'python("try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.addVrayOsd(2)")'
-04 selVrayOsd:
-    label: "selVrayOsd"
-    annotation: "select all VRay osd"
+        name: "selectByHierarchy.png"
+        location: "maya"
+    command: "SelectHierarchy"
+    sourceType: "mel"
+08 SelectAllPolygonGeometry:
+    label: "SelectAllPolygonGeometry"
+    annotation: "Select All Polygon Geometry"
     image:
-        name: "selVrayOsd.png"
-        location: "custom"
-    imageOverlayLabel: "VRay"
-    command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selVrayOsd()"
-    sourceType: "python"
-05 toggleVrayOsd:
-    label: "toggleVrayOsd"
-    annotation: "toggleVrayOsd on/off - right click for more options"
-    image:
-        name: "toggleVrayOsd.png"
-        location: "custom"
-    imageOverlayLabel: "VRay"
-    command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.toggleVrayOsd()"
-    sourceType: "python"
-    mip0:
-        label: "VRayOsd all Off"
-        command: 'python("try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.toggleVrayOsd(force_all=True, force_toggle=0)")'
+        name: "polySelectEdgeBorder.png"
+        location: "maya"
+    command: "SelectAllPolygonGeometry"
+    sourceType: "mel"
     separator: True
-06 buildEyeLights:
+09 buildEyeLights:
     label: "buildEyeLights"
     annotation: "buildEyeLights for main character"
     image:
@@ -58,7 +75,7 @@
         location: "custom"
     command: "import lightingTools\nreload(lightingTools)\nlightingTools.buildEyeLights()"
     sourceType: "python"
-07 autoCreateLightElem:
+10 autoCreateLightElem:
     label: "autoCreateLightElem"
     annotation: "create light elements for selectedl lights (select locators, not shapes)"
     image:
@@ -66,7 +83,7 @@
         location: "custom"
     command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.autoCreateLightElem()"
     sourceType: "python"
-08 VRayLightRectShape:
+11 VRayLightRectShape:
     label: "VRayLightRectShape"
     annotation: "Create a V-Ray Rect Light"
     image:
@@ -75,7 +92,7 @@
     imageOverlayLabel: "VRay"
     command: "select -r `shadingNode -asLight VRayLightRectShape`"
     sourceType: "mel"
-09 VRayObjectProperties:
+12 VRayObjectProperties:
     label: "VRayObjectProperties"
     annotation: "Apply vray object properties node to selection"
     image:
@@ -85,26 +102,7 @@
     command: "vray objectProperties add_single"
     sourceType: "mel"
     separator: True
-10 SpreadSheetEditor:
-    label: "SpreadSheetEditor"
-    annotation: "Edit the attributes of the selected object(s)"
-    image:
-        name: "menuIconWindow.png"
-        location: "maya"
-    imageOverlayLabel: "Sheet"
-    command: "SpreadSheetEditor"
-    sourceType: "mel"
-11 SetEditor:
-    label: "SetEditor"
-    annotation: "Edit set membership"
-    image:
-        name: "menuIconWindow.png"
-        location: "maya"
-    imageOverlayLabel: "Set"
-    command: "SetEditor"
-    sourceType: "mel"
-    separator: True
-12 setTestResolutionVar 100:
+13 setTestResolutionVar 100:
     label: "setTestResolutionVar 100"
     annotation: "Set test resolution to 100% (1920x1080)"
     image:
@@ -113,7 +111,7 @@
     imageOverlayLabel: "r100"
     command: "setTestResolutionVar(1)"
     sourceType: "mel"
-13 setTestResolutionVar 50:
+14 setTestResolutionVar 50:
     label: "setTestResolutionVar 50"
     annotation: "Set test resolution to 50% (960x540)"
     image:
@@ -122,7 +120,7 @@
     imageOverlayLabel: "r050"
     command: "setTestResolutionVar(4)"
     sourceType: "mel"
-13 setTestResolutionVar 25:
+15 setTestResolutionVar 25:
     label: "setTestResolutionVar 25"
     annotation: "Set test resolution to 25% (480x270)"
     image:
@@ -131,7 +129,7 @@
     imageOverlayLabel: "r025"
     command: "setTestResolutionVar(3)"
     sourceType: "mel"
-14 vrayShowVFB:
+16 vrayShowVFB:
     label: "vrayShowVFB"
     annotation: "show vray framebuffer"
     image:
@@ -140,7 +138,16 @@
     command: "vrayShowVFB()"
     sourceType: "mel"
     separator: True
-15 LightCentricLightLinkingEditor:
+17 fixRenderLayerOutAdjustmentErrors:
+    label: "fixRenderLayerOutAdjustmentErrors"
+    annotation: "fix Render Layer Out Adjustment Errors"
+    image:
+        name: "render_layeredTexture.png"
+        location: "maya"
+    command: "fixRenderLayerOutAdjustmentErrors"
+    sourceType: "mel"
+    separator: True
+18 LightCentricLightLinkingEditor:
     label: "LightCentricLightLinkingEditor"
     annotation: "Light-Centric - Light Links"
     image:
@@ -149,7 +156,7 @@
     imageOverlayLabel: "LC-LL"
     command: "LightCentricLightLinkingEditor"
     sourceType: "mel"
-16 ObjectCentricLightLinkingEditor:
+19 ObjectCentricLightLinkingEditor:
     label: "ObjectCentricLightLinkingEditor"
     annotation: "Object Centric - Lightlinks"
     image:
@@ -159,7 +166,7 @@
     command: "ObjectCentricLightLinkingEditor"
     sourceType: "mel"
     separator: True
-17 MakeLightLinks:
+20 MakeLightLinks:
     label: "MakeLightLinks"
     annotation: "Make light links between selected lights and selected objects"
     image:
@@ -168,7 +175,7 @@
     imageOverlayLabel: "MakeLL"
     command: "MakeLightLinks"
     sourceType: "mel"
-18 BreakLightLinks:
+21 BreakLightLinks:
     label: "BreakLightLinks"
     annotation: "Break light links between selected lights and selected objects"
     image:
@@ -177,7 +184,7 @@
     imageOverlayLabel: "BLL"
     command: "BreakLightLinks"
     sourceType: "mel"
-19 MakeShadowLinks:
+22 MakeShadowLinks:
     label: "MakeShadowLinks"
     annotation: "MakeShadowLinks"
     image:
@@ -186,7 +193,7 @@
     imageOverlayLabel: "MSL"
     command: "MakeShadowLinks"
     sourceType: "mel"
-20 BreakShadowLinks:
+23 BreakShadowLinks:
     label: "BreakShadowLinks"
     annotation: "BreakShadowLinks"
     image:
@@ -196,7 +203,7 @@
     command: "BreakShadowLinks"
     sourceType: "mel"
     separator: True
-21 selGEO:
+24 selGEO:
     label: "selGEO"
     annotation: "selGEOShapes"
     image:
@@ -207,9 +214,9 @@
     doubleClickCommand: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=False, transforms=True)"
     mip0:
         label: "Select GEO"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=False, transforms=True)"
+        command: 'python("try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=False, transforms=True)")'
     separator: True
-22 ccRenameReplace:
+25 ccRenameReplace:
     label: "ccRenameReplace"
     annotation: "Rename and Replace Dialog Tool"
     image:
@@ -217,7 +224,7 @@
         location: "custom"
     command: "import ccRenameReplace;reload(ccRenameReplace)"
     sourceType: "python"
-23 createShotCam:
+26 createShotCam:
     label: "createShotCam"
     annotation: "create standardized shotCam for shot"
     image:
@@ -225,7 +232,7 @@
         location: "custom"
     command: "import cameraTools;reload(cameraTools);cameraTools.createShotCam(camera_name='shotCam')"
     sourceType: "python"
-24 deadlineSubmit:
+27 deadlineSubmit:
     label: "deadlineSubmit"
     annotation: "Submit to Deadline"
     image:

@@ -219,7 +219,6 @@ def loadDynamicShelf(shelfname):
                                 shelf_params['mip'] = int(param.split('mip')[1])
                         else:
                             shelf_params[param] = '{}'.format(yml_shelf[button][param])
-                    print('db: shelf_params: {}'.format(shelf_params))
                     cmds.shelfButton(**shelf_params)
                     if separator:
                         cmds.separator(enable=1, width=10, height=35, style="shelf",

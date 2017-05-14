@@ -35,7 +35,7 @@
     doubleClickCommand: '"try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)"'
     mip0:
         label: "Select GEO"
-        command: "try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)"
+        command: 'python("try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)")'
     separator: True
 05 ccRenameReplace:
     label: "ccRenameReplace"
