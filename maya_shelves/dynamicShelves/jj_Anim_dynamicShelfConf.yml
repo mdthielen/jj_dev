@@ -1,13 +1,5 @@
-01 publish:
-    label: "publish"
-    annotation: "publish"
-    image:
-        name: "publish.png"
-        location: "custom"
-    command: "try: reload(pipelineTools)\nexcept: import pipelineTools\npipelineTools.publish()"
-    sourceType: "python"
-    separator: True
-02 ReferenceEditor:
+
+01 ReferenceEditor:
     label: "ReferenceEditor"
     annotation: "Edit the references for the current scene"
     image:
@@ -16,7 +8,7 @@
     command: "ReferenceEditor"
     sourceType: "mel"
     separator: True
-03 createShotCam:
+02 createShotCam:
     label: "createShotCam"
     annotation: "create standardized shotCam for shot"
     image:
@@ -24,4 +16,11 @@
         location: "custom"
     command: "import cameraTools;reload(cameraTools);cameraTools.createShotCam(camera_name='shotCam')"
     sourceType: "python"
-
+03 loadAudio:
+    label: "audio"
+    annotation: "load audio for shot"
+    image:
+        name: "loadAudio.png"
+        location: "custom"
+    command: "import pipelineTools;reload(pipelineTools);pipelineTools.loadAudio()"
+    sourceType: "python"

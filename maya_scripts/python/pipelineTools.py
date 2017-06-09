@@ -345,6 +345,35 @@ def removeDynamicShelf(shelfname):
     maya.mel.eval('if (`shelfLayout -exists {0} `) deleteUI {0};'.format(shelfname))
     print('{} shelf successfully unloaded'.format(shelfname))
 
+def loadAudio():
+    """Load audio for shot if workspace is set
+
+    Attributes:
+
+    Returns:
+
+    Todo:
+
+    """
+
+    current_workspace = cmds.workspace(q=True, rd=True)
+    if 'maya' in current_workspace:
+        current_workspace_folders = current_workspace.split('/')
+        shot_folders = []
+        for folder in current_workspace_folders:
+            if '02_maya' != folder:
+                shot_folders.append(folder)
+            else:
+                break
+        audio_folder = '/'.join(shot_folders) + '/06_audio'
+        if os.path.isdir(audio_folder):
+            wavs = os.listdir(audio_folder)
+            for wav in wavs:
+                # cmds.file('{}/{}'.format(audio_folder, wav), i=True, type="audio", ns='ep')
+                sound_import = cmds.sound(file='{}/{}'.format(audio_folder, wav), offset=0, name='ep{}'.format(wav))
+                cmds.setAttr('{}.silence'.format(sound_import), 1)
+
+
 __author__ = "Robert Showalter"
 __copyright__ = "Copyright 2017, Jib Jab Studios"
 __date__ = "3/9/17"

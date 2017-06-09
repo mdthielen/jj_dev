@@ -1,13 +1,4 @@
-01 publish:
-    label: "publish"
-    annotation: "publish"
-    image:
-        name: "publish.png"
-        location: "custom"
-    command: "try: reload(pipelineTools)\nexcept: import pipelineTools\npipelineTools.publish()"
-    sourceType: "python"
-    separator: True
-02 File Path Editor:
+01 File Path Editor:
     label: "File Path Editor"
     annotation: "File Path Editor"
     image:
@@ -15,7 +6,7 @@
         location: "custom"
     command: "FilePathEditor"
     sourceType: "mel"
-03 Ingest:
+02 Ingest:
     label: "Ingest"
     annotation: "Ingest mayaAscii file - removes all renderers except VRay"
     image:
@@ -24,7 +15,7 @@
     command: "try: reload(ingest)\nexcept: import ingest\ningest.fileDialogRemoveRenderers()"
     sourceType: "python"
     separator: True
-04 selGEO:
+03 selGEO:
     label: "selGEO"
     annotation: "Select all GEOShape nodes. If nothing selected, searches scene. If items selected, searches through those hierarchies."
     image:
@@ -37,7 +28,7 @@
         label: "Select GEO"
         command: 'python("try: reload(lightingTools)\nexcept: import lightingTools\nlightingTools.selGEO(shapes=0, transforms=1)")'
     separator: True
-05 ccRenameReplace:
+04 ccRenameReplace:
     label: "ccRenameReplace"
     annotation: "Rename and Replace Dialog Tool"
     image:
@@ -45,7 +36,7 @@
         location: "custom"
     command: "import ccRenameReplace;reload(ccRenameReplace)"
     sourceType: "python"
-06 shotCam:
+05 shotCam:
     label: "shotCam"
     annotation: "shotCam"
     image:
